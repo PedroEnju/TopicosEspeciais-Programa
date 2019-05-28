@@ -90,7 +90,6 @@ object F_Cliente: TF_Cliente
     Height = 32
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = -8
     ExplicitWidth = 600
     inherited btnNovo: TBitBtn
       OnClick = Frame_Button1btnNovoClick
@@ -126,7 +125,7 @@ object F_Cliente: TF_Cliente
   object DBEdit3: TDBEdit
     Left = 8
     Top = 96
-    Width = 584
+    Width = 576
     Height = 21
     CharCase = ecUpperCase
     DataField = 'NOMECLIENTE'
