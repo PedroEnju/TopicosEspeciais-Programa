@@ -58,7 +58,19 @@ end;
 procedure TF_Cidade.Frame_Button1btnExcluirClick(Sender: TObject);
 begin
   Frame_Button1.btnExcluirClick(Sender);
-  DM.TB_Cidade.Delete;
+
+  if DM.TB_Cidade.RecordCount = 0 then
+    ShowMessage('Tabela vazia!')
+  else if DM.TB_Cliente.Locate('idCidade', DM.TB_Cidade.FieldByName('idCidade')
+    .AsInteger, []) then
+    ShowMessage
+      ('Esta Cidade possui relação com outra tabela e não pode ser excluído!,' +
+      #13 + 'Por favor realocá-lo antes de deletar.')
+  else if MessageDLG('Tem certeza que deseja remover a Cidade: ' + #13 +
+    DM.TB_Cidade.FieldByName('nomeCidade').AsString + ' ?', mtConfirmation,
+    [mbYes, mbNo], 0) = mrYes then
+    DM.TB_Cidade.Delete;
+
 end;
 
 procedure TF_Cidade.Frame_Button1btnFecharClick(Sender: TObject);

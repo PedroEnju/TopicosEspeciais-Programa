@@ -20,10 +20,10 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Onyx Blue');
-  Application.CreateForm(TF_Cliente, F_Cliente);
-  Application.CreateForm(TF_PesquisaCidade, F_PesquisaCidade);
   Application.CreateForm(TF_Menu, F_Menu);
   Application.CreateForm(TF_Cidade, F_Cidade);
+  Application.CreateForm(TF_Cliente, F_Cliente);
+  Application.CreateForm(TF_PesquisaCidade, F_PesquisaCidade);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TF_Fornecedor, F_Fornecedor);
   Application.CreateForm(TF_Funcionario, F_Funcionario);

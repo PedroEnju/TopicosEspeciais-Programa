@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, System.ImageList,
+  Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.Imaging.jpeg, Vcl.ExtCtrls;
 
 type
   TF_Menu = class(TForm)
@@ -16,6 +17,19 @@ type
     Fornecedor1: TMenuItem;
     Funcionrio1: TMenuItem;
     Produto1: TMenuItem;
+    ToolBar1: TToolBar;
+    StatusBar1: TStatusBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
+    ToolButton9: TToolButton;
+    ImageList1: TImageList;
+    Image1: TImage;
     procedure Cidade1Click(Sender: TObject);
     procedure Cliente1Click(Sender: TObject);
     procedure Fornecedor1Click(Sender: TObject);
