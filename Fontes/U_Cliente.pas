@@ -98,12 +98,12 @@ end;
 
 procedure TF_Cliente.Frame_Button1btnLastClick(Sender: TObject);
 begin
-  DM.TB_Cidade.Last;
+  DM.TB_Cliente.Last;
 end;
 
 procedure TF_Cliente.Frame_Button1btnNextClick(Sender: TObject);
 begin
-  DM.TB_Cidade.Next;
+  DM.TB_Cliente.Next;
 end;
 
 procedure TF_Cliente.Frame_Button1btnNovoClick(Sender: TObject);
@@ -114,7 +114,7 @@ end;
 
 procedure TF_Cliente.Frame_Button1btnPreviousClick(Sender: TObject);
 begin
-  DM.TB_Cidade.Prior;
+  DM.TB_Cliente.Prior;
 end;
 
 procedure TF_Cliente.Frame_Button1btnSalvarClick(Sender: TObject);

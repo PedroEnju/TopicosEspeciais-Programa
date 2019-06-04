@@ -14,7 +14,7 @@ object Frame_Button: TFrame_Button
     OnClick = btnNovoClick
   end
   object btnEditar: TBitBtn
-    Left = 86
+    Left = 78
     Top = 3
     Width = 75
     Height = 25
@@ -23,7 +23,7 @@ object Frame_Button: TFrame_Button
     OnClick = btnEditarClick
   end
   object btnExcluir: TBitBtn
-    Left = 252
+    Left = 228
     Top = 3
     Width = 75
     Height = 25
@@ -32,7 +32,7 @@ object Frame_Button: TFrame_Button
     OnClick = btnExcluirClick
   end
   object btnCancelar: TBitBtn
-    Left = 335
+    Left = 303
     Top = 3
     Width = 75
     Height = 25
@@ -42,7 +42,7 @@ object Frame_Button: TFrame_Button
     OnClick = btnCancelarClick
   end
   object btnSalvar: TBitBtn
-    Left = 169
+    Left = 153
     Top = 3
     Width = 75
     Height = 25
@@ -52,7 +52,7 @@ object Frame_Button: TFrame_Button
     OnClick = btnSalvarClick
   end
   object btnFechar: TBitBtn
-    Left = 418
+    Left = 378
     Top = 3
     Width = 75
     Height = 25
@@ -60,7 +60,7 @@ object Frame_Button: TFrame_Button
     TabOrder = 5
   end
   object btnLast: TBitBtn
-    Left = 568
+    Left = 528
     Top = 3
     Width = 25
     Height = 25
@@ -68,7 +68,7 @@ object Frame_Button: TFrame_Button
     TabOrder = 6
   end
   object btnNext: TBitBtn
-    Left = 545
+    Left = 505
     Top = 3
     Width = 25
     Height = 25
@@ -76,7 +76,7 @@ object Frame_Button: TFrame_Button
     TabOrder = 7
   end
   object btnPrevious: TBitBtn
-    Left = 522
+    Left = 482
     Top = 3
     Width = 25
     Height = 25
@@ -84,11 +84,18 @@ object Frame_Button: TFrame_Button
     TabOrder = 8
   end
   object btnFirst: TBitBtn
-    Left = 499
+    Left = 459
     Top = 3
     Width = 25
     Height = 25
     Caption = '|<'
     TabOrder = 9
+  end
+  object btn_pesquisar: TBitBtn
+    Left = 559
+    Top = 3
+    Width = 34
+    Height = 25
+    TabOrder = 10
   end
 end

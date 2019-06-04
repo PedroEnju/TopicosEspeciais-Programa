@@ -19,6 +19,7 @@ type
     btnNext: TBitBtn;
     btnPrevious: TBitBtn;
     btnFirst: TBitBtn;
+    btn_pesquisar: TBitBtn;
     procedure btnNovoClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
