@@ -1,9 +1,9 @@
-object F_PesquisaCliente: TF_PesquisaCliente
+object F_PesquisarFornecedor: TF_PesquisarFornecedor
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Pesquisar Cliente'
+  Caption = 'Pesquisar Fornecedor'
   ClientHeight = 420
   ClientWidth = 600
   Color = clBtnFace
@@ -16,36 +16,23 @@ object F_PesquisaCliente: TF_PesquisaCliente
   Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object edt_pesquisa: TEdit
-    Left = 95
-    Top = 18
-    Width = 416
-    Height = 21
-    CharCase = ecUpperCase
-    TabOrder = 0
-    OnKeyPress = edt_pesquisaKeyPress
-  end
   object btn_pesquisa: TBitBtn
     Left = 517
     Top = 16
     Width = 75
     Height = 25
     Caption = 'Pesquisar'
-    TabOrder = 1
+    TabOrder = 0
     OnClick = btn_pesquisaClick
   end
-  object Grid_Pesquisa: TDBGrid
-    Left = 8
-    Top = 136
-    Width = 584
-    Height = 276
-    DataSource = DM.DS_Pesquisa
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
+  object edt_pesquisa: TEdit
+    Left = 95
+    Top = 18
+    Width = 416
+    Height = 21
+    CharCase = ecUpperCase
+    TabOrder = 1
+    OnKeyPress = edt_pesquisaKeyPress
   end
   object rg_pesquisa: TRadioGroup
     Left = 8
@@ -59,9 +46,21 @@ object F_PesquisaCliente: TF_PesquisaCliente
       'Tudo'
       'C'#243'digo'
       'Nome'
-      'Cidade'
       'Status')
     ParentBiDiMode = False
+    TabOrder = 2
+  end
+  object Grid_Pesquisa: TDBGrid
+    Left = 8
+    Top = 136
+    Width = 584
+    Height = 276
+    DataSource = DM.DS_Pesquisa
     TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
 end

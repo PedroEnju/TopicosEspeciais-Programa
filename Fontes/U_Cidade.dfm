@@ -1,9 +1,11 @@
 object F_Cidade: TF_Cidade
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Cidade'
-  ClientHeight = 480
-  ClientWidth = 600
+  ClientHeight = 490
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -48,7 +50,7 @@ object F_Cidade: TF_Cidade
   inline Frame_Button1: TFrame_Button
     Left = 0
     Top = 0
-    Width = 600
+    Width = 610
     Height = 34
     Align = alTop
     TabOrder = 2
@@ -84,6 +86,9 @@ object F_Cidade: TF_Cidade
     inherited btnFirst: TBitBtn
       OnClick = Frame_Button1btnFirstClick
     end
+    inherited btn_pesquisar: TBitBtn
+      OnClick = Frame_Button1btn_pesquisarClick
+    end
   end
   object DBEdit2: TDBEdit
     Left = 8
@@ -107,6 +112,28 @@ object F_Cidade: TF_Cidade
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'IDCIDADE'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOMECIDADE'
+        Title.Caption = 'Nome da Cidade'
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'STATUSCIDADE'
+        Title.Alignment = taCenter
+        Title.Caption = 'Status'
+        Visible = True
+      end>
   end
   object DBComboBox1: TDBComboBox
     Left = 8

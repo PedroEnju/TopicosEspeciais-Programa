@@ -144,6 +144,18 @@
             <Form>F_PesquisaCliente</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="U_PesquisaFornecedor.pas">
+            <Form>F_PesquisarFornecedor</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="U_PesquisaFuncionario.pas">
+            <Form>F_PesquisaFuncionario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="U_PesquisaProduto.pas">
+            <Form>F_PesquisaProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -1,9 +1,11 @@
 object F_Funcionario: TF_Funcionario
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Funcion'#225'rio'
-  ClientHeight = 480
-  ClientWidth = 600
+  ClientHeight = 490
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,32 +26,32 @@ object F_Funcionario: TF_Funcionario
   object Label2: TLabel
     Left = 128
     Top = 44
-    Width = 39
+    Width = 44
     Height = 13
-    Caption = '*Cidade'
+    Caption = '*CIDADE'
   end
   object Label3: TLabel
     Left = 8
     Top = 96
-    Width = 100
+    Width = 122
     Height = 13
-    Caption = 'Nome do Funcion'#225'rio'
+    Caption = 'NOME DO FUNCION'#193'RIO'
     FocusControl = DBEdit3
   end
   object Label4: TLabel
     Left = 8
     Top = 136
-    Width = 32
+    Width = 44
     Height = 13
-    Caption = 'Sal'#225'rio'
+    Caption = 'SAL'#193'RIO'
     FocusControl = DBEdit4
   end
   object Label5: TLabel
     Left = 8
     Top = 176
-    Width = 86
+    Width = 92
     Height = 13
-    Caption = 'Data de Admiss'#227'o'
+    Caption = 'DATA DE AMISS'#195'O'
     FocusControl = DBEdit5
   end
   object DBText1: TDBText
@@ -64,7 +66,7 @@ object F_Funcionario: TF_Funcionario
   inline Frame_Button1: TFrame_Button
     Left = 0
     Top = 0
-    Width = 600
+    Width = 610
     Height = 33
     Align = alTop
     TabOrder = 5
@@ -83,7 +85,9 @@ object F_Funcionario: TF_Funcionario
       OnClick = Frame_Button1btnCancelarClick
     end
     inherited btnSalvar: TBitBtn
+      Top = -301
       OnClick = Frame_Button1btnSalvarClick
+      ExplicitTop = -301
     end
     inherited btnFechar: TBitBtn
       OnClick = Frame_Button1btnFecharClick
@@ -99,6 +103,9 @@ object F_Funcionario: TF_Funcionario
     end
     inherited btnFirst: TBitBtn
       OnClick = Frame_Button1btnFirstClick
+    end
+    inherited btn_pesquisar: TBitBtn
+      OnClick = Frame_Button1btn_pesquisarClick
     end
   end
   object DBEdit3: TDBEdit
@@ -158,6 +165,7 @@ object F_Funcionario: TF_Funcionario
       item
         Expanded = False
         FieldName = 'IDFUNCIONARIO'
+        Title.Alignment = taCenter
         Title.Caption = 'ID'
         Visible = True
       end

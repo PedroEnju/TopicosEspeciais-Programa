@@ -1,9 +1,11 @@
 object F_Produto: TF_Produto
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Produto'
-  ClientHeight = 480
-  ClientWidth = 600
+  ClientHeight = 490
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -72,7 +74,7 @@ object F_Produto: TF_Produto
   inline Frame_Button1: TFrame_Button
     Left = 0
     Top = 0
-    Width = 600
+    Width = 610
     Height = 32
     Align = alTop
     TabOrder = 6
@@ -106,6 +108,9 @@ object F_Produto: TF_Produto
     end
     inherited btnFirst: TBitBtn
       OnClick = Frame_Button1btnFirstClick
+    end
+    inherited btn_pesquisar: TBitBtn
+      OnClick = Frame_Button1btn_pesquisarClick
     end
   end
   object DBEdit2: TDBEdit

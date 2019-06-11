@@ -1,11 +1,11 @@
-object F_PesquisaCliente: TF_PesquisaCliente
+object F_PesquisaFuncionario: TF_PesquisaFuncionario
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Pesquisar Cliente'
-  ClientHeight = 420
-  ClientWidth = 600
+  Caption = 'Pesquisar Funcion'#225'rio'
+  ClientHeight = 430
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,37 +16,6 @@ object F_PesquisaCliente: TF_PesquisaCliente
   Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object edt_pesquisa: TEdit
-    Left = 95
-    Top = 18
-    Width = 416
-    Height = 21
-    CharCase = ecUpperCase
-    TabOrder = 0
-    OnKeyPress = edt_pesquisaKeyPress
-  end
-  object btn_pesquisa: TBitBtn
-    Left = 517
-    Top = 16
-    Width = 75
-    Height = 25
-    Caption = 'Pesquisar'
-    TabOrder = 1
-    OnClick = btn_pesquisaClick
-  end
-  object Grid_Pesquisa: TDBGrid
-    Left = 8
-    Top = 136
-    Width = 584
-    Height = 276
-    DataSource = DM.DS_Pesquisa
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-  end
   object rg_pesquisa: TRadioGroup
     Left = 8
     Top = 8
@@ -59,9 +28,39 @@ object F_PesquisaCliente: TF_PesquisaCliente
       'Tudo'
       'C'#243'digo'
       'Nome'
-      'Cidade'
       'Status')
     ParentBiDiMode = False
+    TabOrder = 0
+  end
+  object edt_pesquisa: TEdit
+    Left = 95
+    Top = 18
+    Width = 416
+    Height = 21
+    CharCase = ecUpperCase
+    TabOrder = 1
+    OnKeyPress = edt_pesquisaKeyPress
+  end
+  object btn_pesquisa: TBitBtn
+    Left = 517
+    Top = 16
+    Width = 75
+    Height = 25
+    Caption = 'Pesquisar'
+    TabOrder = 2
+    OnClick = btn_pesquisaClick
+  end
+  object Grid_Pesquisa: TDBGrid
+    Left = 8
+    Top = 136
+    Width = 584
+    Height = 276
+    DataSource = DM.DS_Pesquisa
     TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
 end

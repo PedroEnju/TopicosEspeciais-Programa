@@ -1,4 +1,4 @@
-unit U_PesquisaCidade;
+unit U_PesquisaProduto;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
-  TF_PesquisaCidade = class(TForm)
+  TF_PesquisaProduto = class(TForm)
     rg_pesquisa: TRadioGroup;
     edt_pesquisa: TEdit;
     btn_pesquisa: TBitBtn;
@@ -23,7 +23,7 @@ type
   end;
 
 var
-  F_PesquisaCidade: TF_PesquisaCidade;
+  F_PesquisaProduto: TF_PesquisaProduto;
 
 implementation
 
@@ -31,7 +31,7 @@ implementation
 
 uses U_DM;
 
-procedure TF_PesquisaCidade.btn_pesquisaClick(Sender: TObject);
+procedure TF_PesquisaProduto.btn_pesquisaClick(Sender: TObject);
 begin
   with DM.Query_Pesquisa do
   begin
@@ -40,7 +40,7 @@ begin
     begin
       case rg_pesquisa.ItemIndex of
         0:
-          SQL.Add('select * from cidade');
+          SQL.Add('select * from produto');
         1:
           if (edt_pesquisa.Text = '') then
           begin
@@ -50,14 +50,14 @@ begin
           end
           else
           begin
-            SQL.Add('select * from cidade where idCidade = ' +
+            SQL.Add('select * from produto where idProduto = ' +
               edt_pesquisa.Text);
           end;
         2:
-          SQL.Add('select * from cidade where nomeCidade like ' + #39 + '%' +
+          SQL.Add('select * from produto where nomeProduto like ' + #39 + '%' +
             edt_pesquisa.Text + '%' + #39);
         3:
-          SQL.Add('select * from cidade where statusCidade like ' + #39 +
+          SQL.Add('select * from produto where statusProduto like ' + #39 +
             edt_pesquisa.Text + '%' + #39);
       end;
     end;
@@ -66,7 +66,7 @@ begin
   Grid_Pesquisa.SetFocus;
 end;
 
-procedure TF_PesquisaCidade.edt_pesquisaKeyPress(Sender: TObject;
+procedure TF_PesquisaProduto.edt_pesquisaKeyPress(Sender: TObject;
   var Key: Char);
 begin
   if rg_pesquisa.ItemIndex = 1 then
@@ -75,6 +75,7 @@ begin
 
   if Key = #13 then
     btn_pesquisa.Click;
+
 end;
 
 end.

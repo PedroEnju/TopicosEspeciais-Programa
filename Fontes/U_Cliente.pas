@@ -41,6 +41,7 @@ type
     procedure Frame_Button1btnPreviousClick(Sender: TObject);
     procedure Frame_Button1btnNextClick(Sender: TObject);
     procedure Frame_Button1btnLastClick(Sender: TObject);
+    procedure Frame_Button1btn_pesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,7 +55,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM, U_Cidade;
+uses U_DM, U_Cidade, U_PesquisaCliente;
 
 procedure TF_Cliente.btnCidadeClick(Sender: TObject);
 begin
@@ -119,22 +120,22 @@ end;
 
 procedure TF_Cliente.Frame_Button1btnSalvarClick(Sender: TObject);
 begin
-  if (DBEdit3.Text = '') then
+  if (DBEdit3.Text = EmptyStr) then
   begin
     ShowMessage('Nome do Cliente não pode ser em branco!');
     DBEdit3.SetFocus;
   end
-  else if (DBLookupComboBox1.Text = '') then
+  else if (DBLookupComboBox1.Text = EmptyStr) then
   begin
     ShowMessage('Cidade não pode ser em branco!');
     DBLookupComboBox1.SetFocus;
   end
-  else if (DBEdit4.Text = '') then
+  else if (DBEdit4.Text = EmptyStr) then
   begin
     ShowMessage('CPF não pode ser em branco!');
     DBEdit4.SetFocus;
   end
-  else if (DBComboBox1.Text = '') then
+  else if (DBComboBox1.Text = EmptyStr) then
   begin
     ShowMessage('Sexo não pode ser em branco!');
     DBComboBox1.SetFocus;
@@ -144,6 +145,11 @@ begin
     Frame_Button1.btnSalvarClick(Sender);
     DM.TB_Cliente.Post;
   end;
+end;
+
+procedure TF_Cliente.Frame_Button1btn_pesquisarClick(Sender: TObject);
+begin
+  F_PesquisaCliente.ShowModal;
 end;
 
 end.

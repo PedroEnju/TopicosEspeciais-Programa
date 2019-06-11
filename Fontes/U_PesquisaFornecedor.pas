@@ -1,4 +1,4 @@
-unit U_PesquisaCidade;
+unit U_PesquisaFornecedor;
 
 interface
 
@@ -6,13 +6,13 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons;
 
 type
-  TF_PesquisaCidade = class(TForm)
-    rg_pesquisa: TRadioGroup;
-    edt_pesquisa: TEdit;
+  TF_PesquisarFornecedor = class(TForm)
     btn_pesquisa: TBitBtn;
+    edt_pesquisa: TEdit;
+    rg_pesquisa: TRadioGroup;
     Grid_Pesquisa: TDBGrid;
     procedure btn_pesquisaClick(Sender: TObject);
     procedure edt_pesquisaKeyPress(Sender: TObject; var Key: Char);
@@ -23,7 +23,7 @@ type
   end;
 
 var
-  F_PesquisaCidade: TF_PesquisaCidade;
+  F_PesquisarFornecedor: TF_PesquisarFornecedor;
 
 implementation
 
@@ -31,7 +31,7 @@ implementation
 
 uses U_DM;
 
-procedure TF_PesquisaCidade.btn_pesquisaClick(Sender: TObject);
+procedure TF_PesquisarFornecedor.btn_pesquisaClick(Sender: TObject);
 begin
   with DM.Query_Pesquisa do
   begin
@@ -40,7 +40,7 @@ begin
     begin
       case rg_pesquisa.ItemIndex of
         0:
-          SQL.Add('select * from cidade');
+          SQL.Add('select * from fornecedor');
         1:
           if (edt_pesquisa.Text = '') then
           begin
@@ -50,15 +50,15 @@ begin
           end
           else
           begin
-            SQL.Add('select * from cidade where idCidade = ' +
+            SQL.Add('select * from fornecedor where idFornecedor = ' +
               edt_pesquisa.Text);
           end;
         2:
-          SQL.Add('select * from cidade where nomeCidade like ' + #39 + '%' +
-            edt_pesquisa.Text + '%' + #39);
+          SQL.Add('select * from fornecedor where nomeFornecedor like ' + #39 +
+            '%' + edt_pesquisa.Text + '%' + #39);
         3:
-          SQL.Add('select * from cidade where statusCidade like ' + #39 +
-            edt_pesquisa.Text + '%' + #39);
+          SQL.Add('select * from fornecedor where statusFornecedor like ' + #39
+            + edt_pesquisa.Text + '%' + #39);
       end;
     end;
     Open;
@@ -66,7 +66,7 @@ begin
   Grid_Pesquisa.SetFocus;
 end;
 
-procedure TF_PesquisaCidade.edt_pesquisaKeyPress(Sender: TObject;
+procedure TF_PesquisarFornecedor.edt_pesquisaKeyPress(Sender: TObject;
   var Key: Char);
 begin
   if rg_pesquisa.ItemIndex = 1 then

@@ -30,6 +30,12 @@ type
     ToolButton9: TToolButton;
     ImageList1: TImageList;
     Image1: TImage;
+    Consultas1: TMenuItem;
+    Cidade2: TMenuItem;
+    Cliente2: TMenuItem;
+    Fornecedor2: TMenuItem;
+    Funcionrio2: TMenuItem;
+    Produto2: TMenuItem;
     procedure Cidade1Click(Sender: TObject);
     procedure Cliente1Click(Sender: TObject);
     procedure Fornecedor1Click(Sender: TObject);
@@ -40,6 +46,11 @@ type
     procedure ToolButton5Click(Sender: TObject);
     procedure ToolButton7Click(Sender: TObject);
     procedure ToolButton9Click(Sender: TObject);
+    procedure Cidade2Click(Sender: TObject);
+    procedure Cliente2Click(Sender: TObject);
+    procedure Fornecedor2Click(Sender: TObject);
+    procedure Funcionrio2Click(Sender: TObject);
+    procedure Produto2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,11 +64,18 @@ implementation
 
 {$R *.dfm}
 
-uses U_Cidade, U_Cliente, U_Fornecedor, U_Funcionario, U_Produto;
+uses U_Cidade, U_Cliente, U_Fornecedor, U_Funcionario, U_Produto,
+  U_PesquisaCidade, U_PesquisaCliente, U_PesquisaFornecedor,
+  U_PesquisaFuncionario, U_PesquisaProduto;
 
 procedure TF_Menu.Cidade1Click(Sender: TObject);
 begin
   F_Cidade.ShowModal;
+end;
+
+procedure TF_Menu.Cidade2Click(Sender: TObject);
+begin
+  F_PesquisaCidade.ShowModal;
 end;
 
 procedure TF_Menu.Cliente1Click(Sender: TObject);
@@ -65,9 +83,19 @@ begin
   F_Cliente.ShowModal;
 end;
 
+procedure TF_Menu.Cliente2Click(Sender: TObject);
+begin
+  F_PesquisaCliente.ShowModal;
+end;
+
 procedure TF_Menu.Fornecedor1Click(Sender: TObject);
 begin
   F_Fornecedor.ShowModal;
+end;
+
+procedure TF_Menu.Fornecedor2Click(Sender: TObject);
+begin
+  F_PesquisarFornecedor.ShowModal;
 end;
 
 procedure TF_Menu.Funcionrio1Click(Sender: TObject);
@@ -75,9 +103,19 @@ begin
   F_Funcionario.ShowModal;
 end;
 
+procedure TF_Menu.Funcionrio2Click(Sender: TObject);
+begin
+  F_PesquisaFuncionario.ShowModal;
+end;
+
 procedure TF_Menu.Produto1Click(Sender: TObject);
 begin
   F_Produto.ShowModal;
+end;
+
+procedure TF_Menu.Produto2Click(Sender: TObject);
+begin
+  F_PesquisaProduto.ShowModal;
 end;
 
 procedure TF_Menu.ToolButton1Click(Sender: TObject);

@@ -1,9 +1,11 @@
 object F_Cliente: TF_Cliente
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Cliente'
-  ClientHeight = 480
-  ClientWidth = 600
+  ClientHeight = 490
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -54,7 +56,7 @@ object F_Cliente: TF_Cliente
   end
   object Label7: TLabel
     Left = 119
-    Top = 242
+    Top = 248
     Width = 38
     Height = 13
     Caption = 'STATUS'
@@ -77,7 +79,7 @@ object F_Cliente: TF_Cliente
   end
   object Label8: TLabel
     Left = 8
-    Top = 202
+    Top = 208
     Width = 30
     Height = 13
     Caption = 'EMAIL'
@@ -86,7 +88,7 @@ object F_Cliente: TF_Cliente
   inline Frame_Button1: TFrame_Button
     Left = 0
     Top = 0
-    Width = 600
+    Width = 610
     Height = 32
     Align = alTop
     TabOrder = 0
@@ -120,6 +122,9 @@ object F_Cliente: TF_Cliente
     end
     inherited btnFirst: TBitBtn
       OnClick = Frame_Button1btnFirstClick
+    end
+    inherited btn_pesquisar: TBitBtn
+      OnClick = Frame_Button1btn_pesquisarClick
     end
   end
   object DBEdit3: TDBEdit
@@ -212,6 +217,7 @@ object F_Cliente: TF_Cliente
       item
         Expanded = False
         FieldName = 'IDCLIENTE'
+        Title.Alignment = taCenter
         Title.Caption = 'ID'
         Visible = True
       end
@@ -249,8 +255,10 @@ object F_Cliente: TF_Cliente
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'STATUSCLIENTE'
+        Title.Alignment = taCenter
         Title.Caption = 'Status'
         Visible = True
       end>

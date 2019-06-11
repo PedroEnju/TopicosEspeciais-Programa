@@ -34,6 +34,7 @@ type
     procedure Frame_Button1btnPreviousClick(Sender: TObject);
     procedure Frame_Button1btnNextClick(Sender: TObject);
     procedure Frame_Button1btnLastClick(Sender: TObject);
+    procedure Frame_Button1btn_pesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +48,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM, U_Cidade;
+uses U_DM, U_Cidade, U_PesquisaFornecedor;
 
 procedure TF_Fornecedor.btnCidadeClick(Sender: TObject);
 begin
@@ -106,12 +107,43 @@ end;
 procedure TF_Fornecedor.Frame_Button1btnSalvarClick(Sender: TObject);
 begin
 
-  ShowMessage(DBLookupComboBox1.Text = EmptyStr);
-
+  if (DBLookupComboBox1.Text = EmptyStr) then
+  begin
+    ShowMessage('Cidade é um campo obrigatório! Por favor verifique!');
+    DBLookupComboBox1.SetFocus;
+  end
+  else if (DBEdit3.Text = EmptyStr) then
+  begin
+    ShowMessage
+      ('Nome do Fornecedor é um campo obrigatório! Por favor verifique!');
+    DBEdit3.SetFocus;
+  end
+  else if (DBEdit4.Text = EmptyStr) then
+  begin
+    ShowMessage('CNPJ é um campo obrigatório! Por favor verifique!');
+    DBEdit4.SetFocus;
+  end
+  else if (DBComboBox1.Text = EmptyStr) then
+  begin
+    ShowMessage('Status é um campo obrigatório! Por favor verifique!');
+    DBComboBox1.SetFocus;
+  end
+  else if ((DBComboBox1.Text <> 'A') and (DBComboBox1.Text <> 'I')) then
+  begin
+    ShowMessage('Status incorreto! Por favor verifique!');
+    DBComboBox1.SetFocus;
+  end
+  else
   begin
     Frame_Button1.btnSalvarClick(Sender);
-    // DM.TB_Fornecedor.Post;
+    DM.TB_Fornecedor.Post;
   end;
+
+end;
+
+procedure TF_Fornecedor.Frame_Button1btn_pesquisarClick(Sender: TObject);
+begin
+  F_PesquisarFornecedor.ShowModal;
 end;
 
 end.

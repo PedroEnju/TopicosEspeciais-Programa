@@ -28,6 +28,7 @@ type
     procedure Frame_Button1btnSalvarClick(Sender: TObject);
     procedure Frame_Button1btnExcluirClick(Sender: TObject);
     procedure Frame_Button1btnCancelarClick(Sender: TObject);
+    procedure Frame_Button1btn_pesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +42,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM;
+uses U_DM, U_PesquisaCidade;
 
 procedure TF_Cidade.Frame_Button1btnCancelarClick(Sender: TObject);
 begin
@@ -117,32 +118,32 @@ end;
 procedure TF_Cidade.Frame_Button1btnSalvarClick(Sender: TObject);
 begin
 
-  if (DBEdit2.Text <> EmptyStr) then
-  begin
-    if (DBComboBox1.Text <> EmptyStr) then
-    begin
-      if ((DBComboBox1.Text = 'A') or (DBComboBox1.Text = 'I')) then
-      begin
-        Frame_Button1.btnSalvarClick(Sender);
-        DM.TB_Cidade.Post;
-      end
-      else
-      begin
-        ShowMessage('Status incorreto! Por favor verifique!');
-        DBComboBox1.SetFocus;
-      end;
-    end
-    else
-    begin
-      ShowMessage('Status é um campo obrigatório! Por favor verifique!');
-      DBComboBox1.SetFocus;
-    end;
-  end
-  else
+  if (DBEdit2.Text = EmptyStr) then
   begin
     ShowMessage('Nome da Cidade é um campo obrigatório! Por favor verifique!');
     DBEdit2.SetFocus;
+  end
+  else if (DBComboBox1.Text = EmptyStr) then
+  begin
+    ShowMessage('Status é um campo obrigatório! Por favor verifique!');
+    DBComboBox1.SetFocus;
+  end
+  else if ((DBComboBox1.Text <> 'A') and (DBComboBox1.Text <> 'I')) then
+  begin
+    ShowMessage('Status incorreto! Por favor verifique!');
+    DBComboBox1.SetFocus;
+  end
+  else
+  begin
+    Frame_Button1.btnSalvarClick(Sender);
+    DM.TB_Cidade.Post;
+
   end;
+end;
+
+procedure TF_Cidade.Frame_Button1btn_pesquisarClick(Sender: TObject);
+begin
+  F_PesquisaCidade.ShowModal;
 end;
 
 end.

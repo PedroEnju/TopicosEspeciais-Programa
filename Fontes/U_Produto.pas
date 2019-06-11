@@ -34,6 +34,7 @@ type
     procedure Frame_Button1btnPreviousClick(Sender: TObject);
     procedure Frame_Button1btnNextClick(Sender: TObject);
     procedure Frame_Button1btnLastClick(Sender: TObject);
+    procedure Frame_Button1btn_pesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +48,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM;
+uses U_DM, U_PesquisaProduto;
 
 procedure TF_Produto.Frame_Button1btnCancelarClick(Sender: TObject);
 begin
@@ -100,8 +101,48 @@ end;
 
 procedure TF_Produto.Frame_Button1btnSalvarClick(Sender: TObject);
 begin
-  Frame_Button1.btnSalvarClick(Sender);
-  DM.TB_Produto.Post;
+
+  if (DBEdit2.Text = EmptyStr) then
+  begin
+    ShowMessage('Nome do Produto é um campo obrigatório! Por favor verifique!');
+    DBEdit2.SetFocus;
+  end
+  else if (DBEdit3.Text = EmptyStr) then
+  begin
+    ShowMessage('Quantidade obrigatório! Por favor verifique!');
+    DBEdit3.SetFocus;
+  end
+  else if (DBEdit4.Text = EmptyStr) then
+  begin
+    ShowMessage('Preço de Custo é um campo obrigatório! Por favor verifique!');
+    DBEdit4.SetFocus;
+  end
+  else if (DBEdit5.Text = EmptyStr) then
+  begin
+    ShowMessage('Preço de Venda é um campo obrigatório! Por favor verifique!');
+    DBEdit5.SetFocus;
+  end
+  else if (DBComboBox1.Text = EmptyStr) then
+  begin
+    ShowMessage('Status é um campo obrigatório! Por favor verifique!');
+    DBComboBox1.SetFocus;
+  end
+  else if ((DBComboBox1.Text <> 'A') and (DBComboBox1.Text <> 'I')) then
+  begin
+    ShowMessage('Status incorreto! Por favor verifique!');
+    DBComboBox1.SetFocus;
+  end
+  else
+  begin
+    Frame_Button1.btnSalvarClick(Sender);
+    DM.TB_Produto.Post;
+  end;
+
+end;
+
+procedure TF_Produto.Frame_Button1btn_pesquisarClick(Sender: TObject);
+begin
+  F_PesquisaProduto.ShowModal;
 end;
 
 end.

@@ -1,6 +1,8 @@
 object F_PesquisaCidade: TF_PesquisaCidade
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Pesquisar Cidade'
   ClientHeight = 420
   ClientWidth = 600

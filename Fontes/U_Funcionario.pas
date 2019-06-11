@@ -34,6 +34,7 @@ type
     procedure Frame_Button1btnPreviousClick(Sender: TObject);
     procedure Frame_Button1btnNextClick(Sender: TObject);
     procedure Frame_Button1btnLastClick(Sender: TObject);
+    procedure Frame_Button1btn_pesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +48,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM, U_Cidade;
+uses U_DM, U_Cidade, U_PesquisaFuncionario;
 
 procedure TF_Funcionario.btnCidadeClick(Sender: TObject);
 begin
@@ -105,8 +106,40 @@ end;
 
 procedure TF_Funcionario.Frame_Button1btnSalvarClick(Sender: TObject);
 begin
-  Frame_Button1.btnSalvarClick(Sender);
-  DM.TB_Funcionario.Post;
+
+  if (DBLookupComboBox1.Text = EmptyStr) then
+  begin
+    ShowMessage('Cidade é um campo obrigatório! Por favor verifique!');
+    DBLookupComboBox1.SetFocus;
+  end
+  else if (DBEdit3.Text = EmptyStr) then
+  begin
+    ShowMessage
+      ('Nome do Funcionário é um campo obrigatório! Por favor verifique!');
+    DBEdit3.SetFocus;
+  end
+  else if (DBEdit4.Text = EmptyStr) then
+  begin
+    ShowMessage('Salário é um campo obrigatório! Por favor verifique!');
+    DBEdit4.SetFocus;
+  end
+  else if (DBEdit5.Text = EmptyStr) then
+  begin
+    ShowMessage
+      ('Data de Admissão é um campo obrigatório! Por favor verifique!');
+    DBEdit5.SetFocus;
+  end
+  else
+  begin
+    Frame_Button1.btnSalvarClick(Sender);
+    DM.TB_Funcionario.Post;
+  end;
+
+end;
+
+procedure TF_Funcionario.Frame_Button1btn_pesquisarClick(Sender: TObject);
+begin
+  F_PesquisaFuncionario.ShowModal;
 end;
 
 end.

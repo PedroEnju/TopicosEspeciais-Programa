@@ -1,9 +1,11 @@
 object F_Fornecedor: TF_Fornecedor
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Fornecedor'
-  ClientHeight = 480
-  ClientWidth = 600
+  ClientHeight = 490
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,16 +26,16 @@ object F_Fornecedor: TF_Fornecedor
   object Label2: TLabel
     Left = 124
     Top = 50
-    Width = 39
+    Width = 44
     Height = 13
-    Caption = '*Cidade'
+    Caption = '*CIDADE'
   end
   object Label3: TLabel
     Left = 8
     Top = 101
-    Width = 100
+    Width = 119
     Height = 13
-    Caption = 'Nome do Fornecedor'
+    Caption = 'NOME DO FORNECEDOR'
     FocusControl = DBEdit3
   end
   object Label4: TLabel
@@ -47,9 +49,9 @@ object F_Fornecedor: TF_Fornecedor
   object Label5: TLabel
     Left = 8
     Top = 187
-    Width = 31
+    Width = 38
     Height = 13
-    Caption = 'Status'
+    Caption = 'STATUS'
   end
   object DBText1: TDBText
     Left = 8
@@ -63,7 +65,7 @@ object F_Fornecedor: TF_Fornecedor
   inline Frame_Button1: TFrame_Button
     Left = 0
     Top = 0
-    Width = 600
+    Width = 610
     Height = 32
     Align = alTop
     TabOrder = 5
@@ -97,6 +99,9 @@ object F_Fornecedor: TF_Fornecedor
     end
     inherited btnFirst: TBitBtn
       OnClick = Frame_Button1btnFirstClick
+    end
+    inherited btn_pesquisar: TBitBtn
+      OnClick = Frame_Button1btn_pesquisarClick
     end
   end
   object DBEdit3: TDBEdit
@@ -158,6 +163,7 @@ object F_Fornecedor: TF_Fornecedor
       item
         Expanded = False
         FieldName = 'IDFORNECEDOR'
+        Title.Alignment = taCenter
         Title.Caption = 'ID'
         Visible = True
       end
@@ -179,8 +185,10 @@ object F_Fornecedor: TF_Fornecedor
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'STATUSFORNECEDOR'
+        Title.Alignment = taCenter
         Title.Caption = 'Status'
         Visible = True
       end>
