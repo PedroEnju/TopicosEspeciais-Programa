@@ -4,7 +4,7 @@ object F_Menu: TF_Menu
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Menu'
-  ClientHeight = 430
+  ClientHeight = 410
   ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object F_Menu: TF_Menu
     Left = 3
     Top = 32
     Width = 604
-    Height = 376
+    Height = 356
     Align = alClient
     ParentShowHint = False
     Picture.Data = {
@@ -5114,9 +5114,6 @@ object F_Menu: TF_Menu
     Caption = 'ToolBar1'
     Images = ImageList1
     TabOrder = 0
-    ExplicitLeft = 176
-    ExplicitTop = 368
-    ExplicitWidth = 150
     object ToolButton1: TToolButton
       Left = 0
       Top = 0
@@ -5125,6 +5122,7 @@ object F_Menu: TF_Menu
       ImageIndex = 0
       ParentShowHint = False
       ShowHint = True
+      OnClick = ToolButton1Click
     end
     object ToolButton2: TToolButton
       Left = 23
@@ -5142,6 +5140,7 @@ object F_Menu: TF_Menu
       ImageIndex = 1
       ParentShowHint = False
       ShowHint = True
+      OnClick = ToolButton3Click
     end
     object ToolButton4: TToolButton
       Left = 54
@@ -5159,6 +5158,7 @@ object F_Menu: TF_Menu
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
+      OnClick = ToolButton5Click
     end
     object ToolButton6: TToolButton
       Left = 85
@@ -5176,6 +5176,7 @@ object F_Menu: TF_Menu
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
+      OnClick = ToolButton7Click
     end
     object ToolButton8: TToolButton
       Left = 116
@@ -5193,11 +5194,12 @@ object F_Menu: TF_Menu
       ImageIndex = 4
       ParentShowHint = False
       ShowHint = True
+      OnClick = ToolButton9Click
     end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 411
+    Top = 391
     Width = 610
     Height = 19
     Hint = 'Programa Version 1.0 by Pedro Enju'
@@ -5214,8 +5216,6 @@ object F_Menu: TF_Menu
       end>
     ParentShowHint = False
     ShowHint = True
-    ExplicitTop = 401
-    ExplicitWidth = 600
   end
   object MainMenu1: TMainMenu
     Images = ImageList1
@@ -5255,7 +5255,7 @@ object F_Menu: TF_Menu
     Left = 544
     Top = 80
     Bitmap = {
-      494C010106001800440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106001800480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

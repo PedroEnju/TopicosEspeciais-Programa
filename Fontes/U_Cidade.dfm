@@ -17,24 +17,24 @@ object F_Cidade: TF_Cidade
   object Label1: TLabel
     Left = 8
     Top = 40
-    Width = 49
+    Width = 11
     Height = 13
-    Caption = 'IDCIDADE'
+    Caption = 'ID'
   end
   object Label2: TLabel
     Left = 8
     Top = 80
-    Width = 67
+    Width = 87
     Height = 13
-    Caption = 'NOMECIDADE'
+    Caption = 'NOME DA CIDADE'
     FocusControl = DBEdit2
   end
   object Label3: TLabel
     Left = 8
     Top = 120
-    Width = 76
+    Width = 38
     Height = 13
-    Caption = 'STATUSCIDADE'
+    Caption = 'STATUS'
   end
   object DBText1: TDBText
     Left = 8

@@ -105,8 +105,13 @@ end;
 
 procedure TF_Fornecedor.Frame_Button1btnSalvarClick(Sender: TObject);
 begin
-  Frame_Button1.btnSalvarClick(Sender);
-  DM.TB_Fornecedor.Post;
+
+  ShowMessage(DBLookupComboBox1.Text = EmptyStr);
+
+  begin
+    Frame_Button1.btnSalvarClick(Sender);
+    // DM.TB_Fornecedor.Post;
+  end;
 end;
 
 end.

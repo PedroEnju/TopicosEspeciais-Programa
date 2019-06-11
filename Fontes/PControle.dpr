@@ -12,7 +12,8 @@ uses
   U_Fornecedor in 'U_Fornecedor.pas' {F_Fornecedor},
   U_Funcionario in 'U_Funcionario.pas' {F_Funcionario},
   U_Produto in 'U_Produto.pas' {F_Produto},
-  U_PesquisaCidade in 'U_PesquisaCidade.pas' {F_PesquisaCidade};
+  U_PesquisaCidade in 'U_PesquisaCidade.pas' {F_PesquisaCidade},
+  U_PesquisaCliente in 'U_PesquisaCliente.pas' {F_PesquisaCliente};
 
 {$R *.res}
 
@@ -21,6 +22,7 @@ begin
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Onyx Blue');
   Application.CreateForm(TF_Menu, F_Menu);
+  Application.CreateForm(TF_PesquisaCliente, F_PesquisaCliente);
   Application.CreateForm(TF_Cidade, F_Cidade);
   Application.CreateForm(TF_Cliente, F_Cliente);
   Application.CreateForm(TF_PesquisaCidade, F_PesquisaCidade);

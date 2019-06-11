@@ -35,6 +35,11 @@ type
     procedure Fornecedor1Click(Sender: TObject);
     procedure Funcionrio1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure ToolButton3Click(Sender: TObject);
+    procedure ToolButton5Click(Sender: TObject);
+    procedure ToolButton7Click(Sender: TObject);
+    procedure ToolButton9Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,6 +76,31 @@ begin
 end;
 
 procedure TF_Menu.Produto1Click(Sender: TObject);
+begin
+  F_Produto.ShowModal;
+end;
+
+procedure TF_Menu.ToolButton1Click(Sender: TObject);
+begin
+  F_Cidade.ShowModal;
+end;
+
+procedure TF_Menu.ToolButton3Click(Sender: TObject);
+begin
+  F_Cliente.ShowModal;
+end;
+
+procedure TF_Menu.ToolButton5Click(Sender: TObject);
+begin
+  F_Fornecedor.ShowModal;
+end;
+
+procedure TF_Menu.ToolButton7Click(Sender: TObject);
+begin
+  F_Funcionario.ShowModal;
+end;
+
+procedure TF_Menu.ToolButton9Click(Sender: TObject);
 begin
   F_Produto.ShowModal;
 end;

@@ -99,6 +99,8 @@ type
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);
+    procedure TB_CidadeNewRecord(DataSet: TDataSet);
+    procedure TB_FuncionarioNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -113,6 +115,11 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
 
+procedure TDM.TB_CidadeNewRecord(DataSet: TDataSet);
+begin
+  DM.TB_CidadeSTATUSCIDADE.AsString := 'A';
+end;
+
 procedure TDM.TB_ClienteNewRecord(DataSet: TDataSet);
 begin
   DM.TB_ClienteSTATUSCLIENTE.AsString := 'A';
@@ -120,6 +127,11 @@ begin
 end;
 
 procedure TDM.TB_FornecedorNewRecord(DataSet: TDataSet);
+begin
+  DM.TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
+end;
+
+procedure TDM.TB_FuncionarioNewRecord(DataSet: TDataSet);
 begin
   DM.TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
 end;

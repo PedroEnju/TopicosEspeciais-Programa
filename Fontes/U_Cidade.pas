@@ -66,6 +66,16 @@ begin
     ShowMessage
       ('Esta Cidade possui relação com outra tabela e não pode ser excluído!,' +
       #13 + 'Por favor realocá-lo antes de deletar.')
+  else if DM.TB_Fornecedor.Locate('idCidade',
+    DM.TB_Cidade.FieldByName('idCidade').AsInteger, []) then
+    ShowMessage
+      ('Esta Cidade possui relação com outra tabela e não pode ser excluído!,' +
+      #13 + 'Por favor realocá-lo antes de deletar.')
+  else if DM.TB_Funcionario.Locate('idCidade',
+    DM.TB_Cidade.FieldByName('idCidade').AsInteger, []) then
+    ShowMessage
+      ('Esta Cidade possui relação com outra tabela e não pode ser excluído!,' +
+      #13 + 'Por favor realocá-lo antes de deletar.')
   else if MessageDLG('Tem certeza que deseja remover a Cidade: ' + #13 +
     DM.TB_Cidade.FieldByName('nomeCidade').AsString + ' ?', mtConfirmation,
     [mbYes, mbNo], 0) = mrYes then
@@ -106,8 +116,33 @@ end;
 
 procedure TF_Cidade.Frame_Button1btnSalvarClick(Sender: TObject);
 begin
-  Frame_Button1.btnSalvarClick(Sender);
-  DM.TB_Cidade.Post;
+
+  if (DBEdit2.Text <> EmptyStr) then
+  begin
+    if (DBComboBox1.Text <> EmptyStr) then
+    begin
+      if ((DBComboBox1.Text = 'A') or (DBComboBox1.Text = 'I')) then
+      begin
+        Frame_Button1.btnSalvarClick(Sender);
+        DM.TB_Cidade.Post;
+      end
+      else
+      begin
+        ShowMessage('Status incorreto! Por favor verifique!');
+        DBComboBox1.SetFocus;
+      end;
+    end
+    else
+    begin
+      ShowMessage('Status é um campo obrigatório! Por favor verifique!');
+      DBComboBox1.SetFocus;
+    end;
+  end
+  else
+  begin
+    ShowMessage('Nome da Cidade é um campo obrigatório! Por favor verifique!');
+    DBEdit2.SetFocus;
+  end;
 end;
 
 end.

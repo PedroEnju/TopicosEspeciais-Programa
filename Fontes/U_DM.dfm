@@ -24,6 +24,7 @@ object DM: TDM
   object TB_Cidade: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_CidadeNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -210,6 +211,7 @@ object DM: TDM
     Database = DB_Principal
     Transaction = DB_Transaction
     OnNewRecord = TB_FornecedorNewRecord
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -261,6 +263,8 @@ object DM: TDM
   object TB_Funcionario: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_FuncionarioNewRecord
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -315,6 +319,7 @@ object DM: TDM
     Database = DB_Principal
     Transaction = DB_Transaction
     OnNewRecord = TB_ProdutoNewRecord
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
