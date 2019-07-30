@@ -319,6 +319,7 @@ object DM: TDM
     Database = DB_Principal
     Transaction = DB_Transaction
     OnNewRecord = TB_ProdutoNewRecord
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -368,6 +369,7 @@ object DM: TDM
   object TB_Venda: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -423,13 +425,68 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
+    object TB_VendatotalVenda: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'totalVenda'
+      Calculated = True
+    end
+    object TB_VendaqtdProduto: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'qtdProduto'
+      Calculated = True
+    end
+    object TB_VendaqtdItemVenda: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'qtdItemVenda'
+      Calculated = True
+    end
   end
-  object IBQuery5: TIBQuery
+  object TB_ItemVenda: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
+    SQL.Strings = (
+      'select * from ITEMVENDA')
+    UpdateObject = SQL_ItemVenda
+    GeneratorField.Field = 'IDITEMVENDA'
+    GeneratorField.Generator = 'GEN_ITEMVENDA_ID'
     Left = 520
     Top = 208
+    object TB_ItemVendaIDITEMVENDA: TIntegerField
+      FieldName = 'IDITEMVENDA'
+      Origin = '"ITEMVENDA"."IDITEMVENDA"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_ItemVendaIDVENDA: TIntegerField
+      FieldName = 'IDVENDA'
+      Origin = '"ITEMVENDA"."IDVENDA"'
+      Required = True
+    end
+    object TB_ItemVendaIDPRODUTO: TIntegerField
+      FieldName = 'IDPRODUTO'
+      Origin = '"ITEMVENDA"."IDPRODUTO"'
+      Required = True
+    end
+    object TB_ItemVendaQUANTIDADE: TIntegerField
+      FieldName = 'QUANTIDADE'
+      Origin = '"ITEMVENDA"."QUANTIDADE"'
+    end
+    object TB_ItemVendaVALOR: TIBBCDField
+      FieldName = 'VALOR'
+      Origin = '"ITEMVENDA"."VALOR"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ItemVendaTOTAL: TIBBCDField
+      FieldName = 'TOTAL'
+      Origin = '"ITEMVENDA"."TOTAL"'
+      Precision = 9
+      Size = 2
+    end
   end
   object IBQuery6: TIBQuery
     BufferChunks = 1000
@@ -438,12 +495,65 @@ object DM: TDM
     Left = 264
     Top = 392
   end
-  object IBQuery7: TIBQuery
+  object TB_Compra: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
+    SQL.Strings = (
+      'select * from COMPRA')
+    UpdateObject = SQL_Compra
+    GeneratorField.Field = 'IDCOMPRA'
+    GeneratorField.Generator = 'GEN_COMPRA_ID'
     Left = 608
     Top = 208
+    object TB_CompraIDCOMPRA: TIntegerField
+      FieldName = 'IDCOMPRA'
+      Origin = '"COMPRA"."IDCOMPRA"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_CompraIDFUNCIONARIO: TIntegerField
+      FieldName = 'IDFUNCIONARIO'
+      Origin = '"COMPRA"."IDFUNCIONARIO"'
+      Required = True
+    end
+    object TB_CompraIDFORNECEDOR: TIntegerField
+      FieldName = 'IDFORNECEDOR'
+      Origin = '"COMPRA"."IDFORNECEDOR"'
+      Required = True
+    end
+    object TB_CompraDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Origin = '"COMPRA"."DESCRICAO"'
+      Size = 45
+    end
+    object TB_CompraDATACOMPRA: TDateField
+      FieldName = 'DATACOMPRA'
+      Origin = '"COMPRA"."DATACOMPRA"'
+    end
+    object TB_CompraHORACOMPRA: TTimeField
+      FieldName = 'HORACOMPRA'
+      Origin = '"COMPRA"."HORACOMPRA"'
+    end
+    object TB_CompraVALORTOTAL: TIBBCDField
+      FieldName = 'VALORTOTAL'
+      Origin = '"COMPRA"."VALORTOTAL"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_CompraTIPO: TIBStringField
+      FieldName = 'TIPO'
+      Origin = '"COMPRA"."TIPO"'
+    end
+    object TB_CompraSTATUSCOMPRA: TIBStringField
+      FieldName = 'STATUSCOMPRA'
+      Origin = '"COMPRA"."STATUSCOMPRA"'
+      FixedChar = True
+      Size = 1
+    end
   end
   object IBQuery8: TIBQuery
     BufferChunks = 1000
@@ -659,9 +769,42 @@ object DM: TDM
       'where'
       '  IDVENDA = :OLD_IDVENDA')
     Left = 432
-    Top = 272
+    Top = 264
   end
-  object IBUpdateSQL5: TIBUpdateSQL
+  object SQL_ItemVenda: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDITEMVENDA,'
+      '  IDVENDA,'
+      '  IDPRODUTO,'
+      '  QUANTIDADE,'
+      '  VALOR,'
+      '  TOTAL'
+      'from ITEMVENDA '
+      'where'
+      '  IDITEMVENDA = :IDITEMVENDA')
+    ModifySQL.Strings = (
+      'update ITEMVENDA'
+      'set'
+      '  IDITEMVENDA = :IDITEMVENDA,'
+      '  IDVENDA = :IDVENDA,'
+      '  IDPRODUTO = :IDPRODUTO,'
+      '  QUANTIDADE = :QUANTIDADE,'
+      '  VALOR = :VALOR,'
+      '  TOTAL = :TOTAL'
+      'where'
+      '  IDITEMVENDA = :OLD_IDITEMVENDA')
+    InsertSQL.Strings = (
+      'insert into ITEMVENDA'
+      '  (IDITEMVENDA, IDVENDA, IDPRODUTO, QUANTIDADE, VALOR, TOTAL)'
+      'values'
+      
+        '  (:IDITEMVENDA, :IDVENDA, :IDPRODUTO, :QUANTIDADE, :VALOR, :TOT' +
+        'AL)')
+    DeleteSQL.Strings = (
+      'delete from ITEMVENDA'
+      'where'
+      '  IDITEMVENDA = :OLD_IDITEMVENDA')
     Left = 520
     Top = 264
   end
@@ -669,7 +812,50 @@ object DM: TDM
     Left = 264
     Top = 448
   end
-  object IBUpdateSQL7: TIBUpdateSQL
+  object SQL_Compra: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDCOMPRA,'
+      '  IDFUNCIONARIO,'
+      '  IDFORNECEDOR,'
+      '  DESCRICAO,'
+      '  DATACOMPRA,'
+      '  HORACOMPRA,'
+      '  VALORTOTAL,'
+      '  TIPO,'
+      '  STATUSCOMPRA'
+      'from COMPRA '
+      'where'
+      '  IDCOMPRA = :IDCOMPRA')
+    ModifySQL.Strings = (
+      'update COMPRA'
+      'set'
+      '  IDCOMPRA = :IDCOMPRA,'
+      '  IDFUNCIONARIO = :IDFUNCIONARIO,'
+      '  IDFORNECEDOR = :IDFORNECEDOR,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  DATACOMPRA = :DATACOMPRA,'
+      '  HORACOMPRA = :HORACOMPRA,'
+      '  VALORTOTAL = :VALORTOTAL,'
+      '  TIPO = :TIPO,'
+      '  STATUSCOMPRA = :STATUSCOMPRA'
+      'where'
+      '  IDCOMPRA = :OLD_IDCOMPRA')
+    InsertSQL.Strings = (
+      'insert into COMPRA'
+      
+        '  (IDCOMPRA, IDFUNCIONARIO, IDFORNECEDOR, DESCRICAO, DATACOMPRA,' +
+        ' HORACOMPRA, '
+      '   VALORTOTAL, TIPO, STATUSCOMPRA)'
+      'values'
+      
+        '  (:IDCOMPRA, :IDFUNCIONARIO, :IDFORNECEDOR, :DESCRICAO, :DATACO' +
+        'MPRA, :HORACOMPRA, '
+      '   :VALORTOTAL, :TIPO, :STATUSCOMPRA)')
+    DeleteSQL.Strings = (
+      'delete from COMPRA'
+      'where'
+      '  IDCOMPRA = :OLD_IDCOMPRA')
     Left = 608
     Top = 264
   end
@@ -734,7 +920,8 @@ object DM: TDM
     Left = 432
     Top = 320
   end
-  object DataSource5: TDataSource
+  object DS_ItemVenda: TDataSource
+    DataSet = TB_ItemVenda
     Left = 520
     Top = 320
   end
@@ -754,7 +941,8 @@ object DM: TDM
     Left = 24
     Top = 504
   end
-  object DataSource10: TDataSource
+  object DS_Compra: TDataSource
+    DataSet = TB_Compra
     Left = 608
     Top = 320
   end
@@ -783,18 +971,92 @@ object DM: TDM
     Left = 344
     Top = 104
   end
-  object IBQuery17: TIBQuery
+  object TB_ItemCompra: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
+    SQL.Strings = (
+      'select * from ITEMCOMPRA')
+    UpdateObject = SQL_ItemCompra
+    GeneratorField.Field = 'IDITEMCOMPRA'
+    GeneratorField.Generator = 'GEN_ITEMCOMPRA_ID'
     Left = 696
     Top = 208
+    object TB_ItemCompraIDITEMCOMPRA: TIntegerField
+      FieldName = 'IDITEMCOMPRA'
+      Origin = '"ITEMCOMPRA"."IDITEMCOMPRA"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_ItemCompraIDPRODUTO: TIntegerField
+      FieldName = 'IDPRODUTO'
+      Origin = '"ITEMCOMPRA"."IDPRODUTO"'
+      Required = True
+    end
+    object TB_ItemCompraIDCOMPRA: TIntegerField
+      FieldName = 'IDCOMPRA'
+      Origin = '"ITEMCOMPRA"."IDCOMPRA"'
+      Required = True
+    end
+    object TB_ItemCompraQUANTIDADE: TIntegerField
+      FieldName = 'QUANTIDADE'
+      Origin = '"ITEMCOMPRA"."QUANTIDADE"'
+    end
+    object TB_ItemCompraVALOR: TIBBCDField
+      FieldName = 'VALOR'
+      Origin = '"ITEMCOMPRA"."VALOR"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ItemCompraTOTAL: TIBBCDField
+      FieldName = 'TOTAL'
+      Origin = '"ITEMCOMPRA"."TOTAL"'
+      Precision = 9
+      Size = 2
+    end
   end
-  object IBUpdateSQL16: TIBUpdateSQL
+  object SQL_ItemCompra: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDITEMCOMPRA,'
+      '  IDPRODUTO,'
+      '  IDCOMPRA,'
+      '  QUANTIDADE,'
+      '  VALOR,'
+      '  TOTAL'
+      'from ITEMCOMPRA '
+      'where'
+      '  IDITEMCOMPRA = :IDITEMCOMPRA')
+    ModifySQL.Strings = (
+      'update ITEMCOMPRA'
+      'set'
+      '  IDITEMCOMPRA = :IDITEMCOMPRA,'
+      '  IDPRODUTO = :IDPRODUTO,'
+      '  IDCOMPRA = :IDCOMPRA,'
+      '  QUANTIDADE = :QUANTIDADE,'
+      '  VALOR = :VALOR,'
+      '  TOTAL = :TOTAL'
+      'where'
+      '  IDITEMCOMPRA = :OLD_IDITEMCOMPRA')
+    InsertSQL.Strings = (
+      'insert into ITEMCOMPRA'
+      '  (IDITEMCOMPRA, IDPRODUTO, IDCOMPRA, QUANTIDADE, VALOR, TOTAL)'
+      'values'
+      
+        '  (:IDITEMCOMPRA, :IDPRODUTO, :IDCOMPRA, :QUANTIDADE, :VALOR, :T' +
+        'OTAL)')
+    DeleteSQL.Strings = (
+      'delete from ITEMCOMPRA'
+      'where'
+      '  IDITEMCOMPRA = :OLD_IDITEMCOMPRA')
     Left = 696
     Top = 264
   end
-  object DataSource17: TDataSource
+  object DS_ItemCompra: TDataSource
+    DataSet = TB_ItemCompra
     Left = 696
     Top = 320
   end
