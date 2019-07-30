@@ -107,14 +107,12 @@ type
     TB_VendaSTATUSVENDA: TIBStringField;
     TB_VendatotalVenda: TFloatField;
     TB_VendaqtdProduto: TIntegerField;
-    TB_VendaqtdItemVenda: TIntegerField;
     TB_CompraIDCOMPRA: TIntegerField;
     TB_CompraIDFUNCIONARIO: TIntegerField;
     TB_CompraIDFORNECEDOR: TIntegerField;
     TB_CompraDESCRICAO: TIBStringField;
     TB_CompraDATACOMPRA: TDateField;
     TB_CompraHORACOMPRA: TTimeField;
-    TB_CompraVALORTOTAL: TIBBCDField;
     TB_CompraTIPO: TIBStringField;
     TB_CompraSTATUSCOMPRA: TIBStringField;
     TB_ItemVendaIDITEMVENDA: TIntegerField;
@@ -129,11 +127,16 @@ type
     TB_ItemCompraQUANTIDADE: TIntegerField;
     TB_ItemCompraVALOR: TIBBCDField;
     TB_ItemCompraTOTAL: TIBBCDField;
+    TB_CompratotalCompra: TFloatField;
+    TB_CompraqtdProduto: TIntegerField;
+    TB_CompraqtdItemCompra: TFloatField;
+    TB_VendaqtdItemVenda: TFloatField;
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);
     procedure TB_CidadeNewRecord(DataSet: TDataSet);
     procedure TB_FuncionarioNewRecord(DataSet: TDataSet);
+    procedure TB_VendaNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -150,28 +153,36 @@ implementation
 
 procedure TDM.TB_CidadeNewRecord(DataSet: TDataSet);
 begin
-  DM.TB_CidadeSTATUSCIDADE.AsString := 'A';
+  TB_CidadeSTATUSCIDADE.AsString := 'A';
 end;
 
 procedure TDM.TB_ClienteNewRecord(DataSet: TDataSet);
 begin
-  DM.TB_ClienteSTATUSCLIENTE.AsString := 'A';
-  DM.TB_ClienteSEXO.AsString := 'M';
+  TB_ClienteSTATUSCLIENTE.AsString := 'A';
+  TB_ClienteSEXO.AsString := 'M';
 end;
 
 procedure TDM.TB_FornecedorNewRecord(DataSet: TDataSet);
 begin
-  DM.TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
+  TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
 end;
 
 procedure TDM.TB_FuncionarioNewRecord(DataSet: TDataSet);
 begin
-  DM.TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
+  TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
 end;
 
 procedure TDM.TB_ProdutoNewRecord(DataSet: TDataSet);
 begin
-  DM.TB_ProdutoSTATUSPRODUTO.AsString := 'A';
+  TB_ProdutoSTATUSPRODUTO.AsString := 'A';
+end;
+
+procedure TDM.TB_VendaNewRecord(DataSet: TDataSet);
+begin
+  TB_VendaDATAVENDA.AsDateTime := Date;
+  TB_VendaHORAVENDA.AsDateTime := Time;
+  TB_VendaTIPO.AsString := 'À VISTA';
+  TB_VendaSTATUSVENDA.AsString := 'A';
 end;
 
 end.

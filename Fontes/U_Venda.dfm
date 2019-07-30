@@ -4,8 +4,8 @@ object F_Venda: TF_Venda
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Venda'
-  ClientHeight = 552
-  ClientWidth = 670
+  ClientHeight = 490
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,20 +19,50 @@ object F_Venda: TF_Venda
   inline Frame_Button1: TFrame_Button
     Left = 0
     Top = 0
-    Width = 670
+    Width = 610
     Height = 32
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 660
+    ExplicitWidth = 670
+    inherited btnNovo: TBitBtn
+      OnClick = Frame_Button1btnNovoClick
+    end
+    inherited btnEditar: TBitBtn
+      OnClick = Frame_Button1btnEditarClick
+    end
+    inherited btnExcluir: TBitBtn
+      OnClick = Frame_Button1btnExcluirClick
+    end
+    inherited btnCancelar: TBitBtn
+      OnClick = Frame_Button1btnCancelarClick
+    end
+    inherited btnSalvar: TBitBtn
+      OnClick = Frame_Button1btnSalvarClick
+    end
+    inherited btnFechar: TBitBtn
+      OnClick = Frame_Button1btnFecharClick
+    end
+    inherited btnLast: TBitBtn
+      OnClick = Frame_Button1btnLastClick
+    end
+    inherited btnNext: TBitBtn
+      OnClick = Frame_Button1btnNextClick
+    end
+    inherited btnPrevious: TBitBtn
+      OnClick = Frame_Button1btnPreviousClick
+    end
+    inherited btnFirst: TBitBtn
+      OnClick = Frame_Button1btnFirstClick
+    end
   end
   object pVenda: TPanel
     Left = 0
     Top = 32
-    Width = 670
+    Width = 610
     Height = 153
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 660
+    ExplicitWidth = 670
     object Label1: TLabel
       Left = 8
       Top = 8
@@ -56,35 +86,35 @@ object F_Venda: TF_Venda
       Caption = 'Cliente'
     end
     object Label4: TLabel
-      Left = 4
-      Top = 64
+      Left = 8
+      Top = 51
       Width = 46
       Height = 13
       Caption = 'Descri'#231#227'o'
       FocusControl = DBEdit4
     end
     object Label5: TLabel
-      Left = 4
-      Top = 104
-      Width = 60
+      Left = 8
+      Top = 96
+      Width = 71
       Height = 13
-      Caption = 'DATAVENDA'
+      Caption = 'Data da Venda'
       FocusControl = DBEdit5
     end
     object Label6: TLabel
-      Left = 144
-      Top = 104
-      Width = 62
+      Left = 148
+      Top = 96
+      Width = 71
       Height = 13
-      Caption = 'HORAVENDA'
+      Caption = 'Hora da Venda'
       FocusControl = DBEdit6
     end
     object Label7: TLabel
-      Left = 289
-      Top = 104
-      Width = 24
+      Left = 288
+      Top = 94
+      Width = 20
       Height = 13
-      Caption = 'TIPO'
+      Caption = 'Tipo'
     end
     object DBEdit1: TDBEdit
       Left = 8
@@ -96,17 +126,17 @@ object F_Venda: TF_Venda
       TabOrder = 0
     end
     object DBEdit4: TDBEdit
-      Left = 4
-      Top = 80
-      Width = 589
+      Left = 8
+      Top = 67
+      Width = 585
       Height = 21
       DataField = 'DESCRICAO'
       DataSource = DM.DS_Venda
       TabOrder = 1
     end
     object DBEdit5: TDBEdit
-      Left = 4
-      Top = 120
+      Left = 8
+      Top = 112
       Width = 134
       Height = 21
       DataField = 'DATAVENDA'
@@ -114,8 +144,8 @@ object F_Venda: TF_Venda
       TabOrder = 2
     end
     object DBEdit6: TDBEdit
-      Left = 144
-      Top = 120
+      Left = 148
+      Top = 112
       Width = 134
       Height = 21
       DataField = 'HORAVENDA'
@@ -123,8 +153,8 @@ object F_Venda: TF_Venda
       TabOrder = 3
     end
     object DBComboBox1: TDBComboBox
-      Left = 284
-      Top = 120
+      Left = 288
+      Top = 112
       Width = 145
       Height = 21
       DataField = 'TIPO'
@@ -136,7 +166,7 @@ object F_Venda: TF_Venda
     end
     object DBLookupComboBox1: TDBLookupComboBox
       Left = 148
-      Top = 27
+      Top = 24
       Width = 145
       Height = 21
       DataField = 'IDFUNCIONARIO'
@@ -145,7 +175,7 @@ object F_Venda: TF_Venda
     end
     object DBLookupComboBox2: TDBLookupComboBox
       Left = 299
-      Top = 27
+      Top = 24
       Width = 145
       Height = 21
       DataField = 'IDCLIENTE'
@@ -153,21 +183,20 @@ object F_Venda: TF_Venda
       TabOrder = 6
     end
     object BitBtn1: TBitBtn
-      Left = 456
+      Left = 449
       Top = 24
-      Width = 28
-      Height = 25
+      Width = 25
+      Height = 21
       TabOrder = 7
     end
   end
   object pItVenda: TPanel
     Left = 0
     Top = 185
-    Width = 670
-    Height = 297
+    Width = 610
+    Height = 245
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 660
     object Label8: TLabel
       Left = 16
       Top = 8
@@ -206,10 +235,11 @@ object F_Venda: TF_Venda
       TabOrder = 2
     end
     object DBGrid1: TDBGrid
-      Left = 2
-      Top = 37
+      Left = 8
+      Top = 39
       Width = 596
-      Height = 217
+      Height = 186
+      DataSource = DM.DS_Venda
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -220,19 +250,19 @@ object F_Venda: TF_Venda
   end
   object pResultado: TPanel
     Left = 0
-    Top = 490
-    Width = 670
+    Top = 428
+    Width = 610
     Height = 62
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 480
-    ExplicitWidth = 660
+    ExplicitTop = 490
+    ExplicitWidth = 670
     object Label9: TLabel
-      Left = 199
+      Left = 167
       Top = 8
-      Width = 123
+      Width = 157
       Height = 19
-      Caption = 'STATUSVENDA'
+      Caption = 'STATUS DA VENDA'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
@@ -280,10 +310,11 @@ object F_Venda: TF_Venda
       ParentFont = False
     end
     object DBText1: TDBText
-      Left = 238
+      Left = 206
       Top = 33
       Width = 65
       Height = 17
+      DataField = 'STATUSVENDA'
       DataSource = DM.DS_Venda
     end
     object DBText2: TDBText
@@ -291,6 +322,7 @@ object F_Venda: TF_Venda
       Top = 11
       Width = 65
       Height = 17
+      DataField = 'qtdProduto'
       DataSource = DM.DS_Venda
     end
     object DBText3: TDBText
@@ -298,6 +330,7 @@ object F_Venda: TF_Venda
       Top = 24
       Width = 65
       Height = 17
+      DataField = 'totalVenda'
       DataSource = DM.DS_Venda
     end
     object DBText4: TDBText
@@ -305,17 +338,18 @@ object F_Venda: TF_Venda
       Top = 39
       Width = 65
       Height = 17
+      DataField = 'qtdItemVenda'
       DataSource = DM.DS_Venda
     end
     object btFinalizar: TBitBtn
       Left = 8
-      Top = 0
-      Width = 185
-      Height = 57
+      Top = 8
+      Width = 153
+      Height = 49
       Caption = 'Finalizar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -37
+      Font.Height = -29
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False

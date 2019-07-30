@@ -369,6 +369,7 @@ object DM: TDM
   object TB_Venda: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_VendaNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -435,7 +436,7 @@ object DM: TDM
       FieldName = 'qtdProduto'
       Calculated = True
     end
-    object TB_VendaqtdItemVenda: TIntegerField
+    object TB_VendaqtdItemVenda: TFloatField
       FieldKind = fkCalculated
       FieldName = 'qtdItemVenda'
       Calculated = True
@@ -498,7 +499,6 @@ object DM: TDM
   object TB_Compra: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -538,12 +538,6 @@ object DM: TDM
       FieldName = 'HORACOMPRA'
       Origin = '"COMPRA"."HORACOMPRA"'
     end
-    object TB_CompraVALORTOTAL: TIBBCDField
-      FieldName = 'VALORTOTAL'
-      Origin = '"COMPRA"."VALORTOTAL"'
-      Precision = 9
-      Size = 2
-    end
     object TB_CompraTIPO: TIBStringField
       FieldName = 'TIPO'
       Origin = '"COMPRA"."TIPO"'
@@ -553,6 +547,21 @@ object DM: TDM
       Origin = '"COMPRA"."STATUSCOMPRA"'
       FixedChar = True
       Size = 1
+    end
+    object TB_CompratotalCompra: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'totalCompra'
+      Calculated = True
+    end
+    object TB_CompraqtdProduto: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'qtdProduto'
+      Calculated = True
+    end
+    object TB_CompraqtdItemCompra: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'qtdItemCompra'
+      Calculated = True
     end
   end
   object IBQuery8: TIBQuery

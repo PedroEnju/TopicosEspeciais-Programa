@@ -3,7 +3,8 @@ unit U_Venda;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, U_FrameButton, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.Buttons, Data.DB, Vcl.Grids,
   Vcl.DBGrids;
@@ -43,6 +44,16 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     DBLookupComboBox2: TDBLookupComboBox;
     BitBtn1: TBitBtn;
+    procedure Frame_Button1btnNovoClick(Sender: TObject);
+    procedure Frame_Button1btnEditarClick(Sender: TObject);
+    procedure Frame_Button1btnSalvarClick(Sender: TObject);
+    procedure Frame_Button1btnExcluirClick(Sender: TObject);
+    procedure Frame_Button1btnCancelarClick(Sender: TObject);
+    procedure Frame_Button1btnFecharClick(Sender: TObject);
+    procedure Frame_Button1btnFirstClick(Sender: TObject);
+    procedure Frame_Button1btnPreviousClick(Sender: TObject);
+    procedure Frame_Button1btnNextClick(Sender: TObject);
+    procedure Frame_Button1btnLastClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,7 +67,60 @@ implementation
 
 {$R *.dfm}
 
-uses U_Cidade, U_Cliente, U_DM, U_Fornecedor, U_Funcionario, U_Menu,
-  U_PesquisaCidade, U_PesquisaCliente, U_PesquisaFornecedor, U_Produto;
+uses U_DM;
+
+procedure TF_Venda.Frame_Button1btnCancelarClick(Sender: TObject);
+begin
+  Frame_Button1.btnCancelarClick(Sender);
+  DM.TB_Venda.Cancel;
+end;
+
+procedure TF_Venda.Frame_Button1btnEditarClick(Sender: TObject);
+begin
+  Frame_Button1.btnEditarClick(Sender);
+  DM.TB_Venda.Edit;
+end;
+
+procedure TF_Venda.Frame_Button1btnExcluirClick(Sender: TObject);
+begin
+  Frame_Button1.btnExcluirClick(Sender);
+end;
+
+procedure TF_Venda.Frame_Button1btnFecharClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TF_Venda.Frame_Button1btnFirstClick(Sender: TObject);
+begin
+  DM.TB_Venda.First;
+end;
+
+procedure TF_Venda.Frame_Button1btnLastClick(Sender: TObject);
+begin
+  DM.TB_Venda.Last;
+end;
+
+procedure TF_Venda.Frame_Button1btnNextClick(Sender: TObject);
+begin
+  DM.TB_Venda.Next;
+end;
+
+procedure TF_Venda.Frame_Button1btnNovoClick(Sender: TObject);
+begin
+  Frame_Button1.btnNovoClick(Sender);
+  DM.TB_Venda.Insert;
+end;
+
+procedure TF_Venda.Frame_Button1btnPreviousClick(Sender: TObject);
+begin
+  DM.TB_Venda.Prior;
+end;
+
+procedure TF_Venda.Frame_Button1btnSalvarClick(Sender: TObject);
+begin
+  Frame_Button1.btnSalvarClick(Sender);
+  DM.TB_Venda.Post;
+end;
 
 end.
