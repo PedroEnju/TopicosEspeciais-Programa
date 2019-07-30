@@ -12,8 +12,8 @@ object DM: TDM
     LoginPrompt = False
     DefaultTransaction = DB_Transaction
     ServerType = 'IBServer'
-    Left = 24
-    Top = 8
+    Left = 32
+    Top = 24
   end
   object DB_Transaction: TIBTransaction
     Active = True
@@ -319,7 +319,6 @@ object DM: TDM
     Database = DB_Principal
     Transaction = DB_Transaction
     OnNewRecord = TB_ProdutoNewRecord
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -366,12 +365,64 @@ object DM: TDM
       Size = 1
     end
   end
-  object IBQuery4: TIBQuery
+  object TB_Venda: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
+    SQL.Strings = (
+      'select * from VENDA')
+    UpdateObject = SQL_Venda
+    GeneratorField.Field = 'IDVENDA'
+    GeneratorField.Generator = 'GEN_VENDA_ID'
     Left = 432
     Top = 208
+    object TB_VendaIDVENDA: TIntegerField
+      FieldName = 'IDVENDA'
+      Origin = '"VENDA"."IDVENDA"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_VendaIDFUNCIONARIO: TIntegerField
+      FieldName = 'IDFUNCIONARIO'
+      Origin = '"VENDA"."IDFUNCIONARIO"'
+      Required = True
+    end
+    object TB_VendaIDCLIENTE: TIntegerField
+      FieldName = 'IDCLIENTE'
+      Origin = '"VENDA"."IDCLIENTE"'
+      Required = True
+    end
+    object TB_VendaDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Origin = '"VENDA"."DESCRICAO"'
+      Size = 45
+    end
+    object TB_VendaDATAVENDA: TDateField
+      FieldName = 'DATAVENDA'
+      Origin = '"VENDA"."DATAVENDA"'
+    end
+    object TB_VendaHORAVENDA: TTimeField
+      FieldName = 'HORAVENDA'
+      Origin = '"VENDA"."HORAVENDA"'
+    end
+    object TB_VendaVALORTOTAL: TIBBCDField
+      FieldName = 'VALORTOTAL'
+      Origin = '"VENDA"."VALORTOTAL"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_VendaTIPO: TIBStringField
+      FieldName = 'TIPO'
+      Origin = '"VENDA"."TIPO"'
+    end
+    object TB_VendaSTATUSVENDA: TIBStringField
+      FieldName = 'STATUSVENDA'
+      Origin = '"VENDA"."STATUSVENDA"'
+      FixedChar = True
+      Size = 1
+    end
   end
   object IBQuery5: TIBQuery
     BufferChunks = 1000
@@ -563,9 +614,52 @@ object DM: TDM
     Left = 344
     Top = 264
   end
-  object IBUpdateSQL4: TIBUpdateSQL
+  object SQL_Venda: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDVENDA,'
+      '  IDFUNCIONARIO,'
+      '  IDCLIENTE,'
+      '  DESCRICAO,'
+      '  DATAVENDA,'
+      '  HORAVENDA,'
+      '  VALORTOTAL,'
+      '  TIPO,'
+      '  STATUSVENDA'
+      'from VENDA '
+      'where'
+      '  IDVENDA = :IDVENDA')
+    ModifySQL.Strings = (
+      'update VENDA'
+      'set'
+      '  IDVENDA = :IDVENDA,'
+      '  IDFUNCIONARIO = :IDFUNCIONARIO,'
+      '  IDCLIENTE = :IDCLIENTE,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  DATAVENDA = :DATAVENDA,'
+      '  HORAVENDA = :HORAVENDA,'
+      '  VALORTOTAL = :VALORTOTAL,'
+      '  TIPO = :TIPO,'
+      '  STATUSVENDA = :STATUSVENDA'
+      'where'
+      '  IDVENDA = :OLD_IDVENDA')
+    InsertSQL.Strings = (
+      'insert into VENDA'
+      
+        '  (IDVENDA, IDFUNCIONARIO, IDCLIENTE, DESCRICAO, DATAVENDA, HORA' +
+        'VENDA, '
+      '   VALORTOTAL, TIPO, STATUSVENDA)'
+      'values'
+      
+        '  (:IDVENDA, :IDFUNCIONARIO, :IDCLIENTE, :DESCRICAO, :DATAVENDA,' +
+        ' :HORAVENDA, '
+      '   :VALORTOTAL, :TIPO, :STATUSVENDA)')
+    DeleteSQL.Strings = (
+      'delete from VENDA'
+      'where'
+      '  IDVENDA = :OLD_IDVENDA')
     Left = 432
-    Top = 264
+    Top = 272
   end
   object IBUpdateSQL5: TIBUpdateSQL
     Left = 520
@@ -635,7 +729,8 @@ object DM: TDM
     Left = 344
     Top = 320
   end
-  object DataSource4: TDataSource
+  object DS_Venda: TDataSource
+    DataSet = TB_Venda
     Left = 432
     Top = 320
   end

@@ -16,7 +16,8 @@ uses
   U_PesquisaCliente in 'U_PesquisaCliente.pas' {F_PesquisaCliente},
   U_PesquisaFornecedor in 'U_PesquisaFornecedor.pas' {F_PesquisarFornecedor},
   U_PesquisaFuncionario in 'U_PesquisaFuncionario.pas' {F_PesquisaFuncionario},
-  U_PesquisaProduto in 'U_PesquisaProduto.pas' {F_PesquisaProduto};
+  U_PesquisaProduto in 'U_PesquisaProduto.pas' {F_PesquisaProduto},
+  U_Venda in 'U_Venda.pas' {F_Venda};
 
 {$R *.res}
 
@@ -24,17 +25,18 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Onyx Blue');
+  Application.CreateForm(TDM, DM);
   Application.CreateForm(TF_Menu, F_Menu);
   Application.CreateForm(TF_PesquisaCliente, F_PesquisaCliente);
   Application.CreateForm(TF_Cidade, F_Cidade);
   Application.CreateForm(TF_Cliente, F_Cliente);
   Application.CreateForm(TF_PesquisaCidade, F_PesquisaCidade);
-  Application.CreateForm(TDM, DM);
   Application.CreateForm(TF_Fornecedor, F_Fornecedor);
   Application.CreateForm(TF_Funcionario, F_Funcionario);
   Application.CreateForm(TF_Produto, F_Produto);
   Application.CreateForm(TF_PesquisarFornecedor, F_PesquisarFornecedor);
   Application.CreateForm(TF_PesquisaFuncionario, F_PesquisaFuncionario);
   Application.CreateForm(TF_PesquisaProduto, F_PesquisaProduto);
+  Application.CreateForm(TF_Venda, F_Venda);
   Application.Run;
 end.

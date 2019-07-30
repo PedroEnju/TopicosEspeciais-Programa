@@ -36,6 +36,7 @@ type
     Fornecedor2: TMenuItem;
     Funcionrio2: TMenuItem;
     Produto2: TMenuItem;
+    Venda1: TMenuItem;
     procedure Cidade1Click(Sender: TObject);
     procedure Cliente1Click(Sender: TObject);
     procedure Fornecedor1Click(Sender: TObject);
@@ -51,6 +52,7 @@ type
     procedure Fornecedor2Click(Sender: TObject);
     procedure Funcionrio2Click(Sender: TObject);
     procedure Produto2Click(Sender: TObject);
+    procedure Venda1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -66,7 +68,7 @@ implementation
 
 uses U_Cidade, U_Cliente, U_Fornecedor, U_Funcionario, U_Produto,
   U_PesquisaCidade, U_PesquisaCliente, U_PesquisaFornecedor,
-  U_PesquisaFuncionario, U_PesquisaProduto;
+  U_PesquisaFuncionario, U_PesquisaProduto, U_Venda;
 
 procedure TF_Menu.Cidade1Click(Sender: TObject);
 begin
@@ -141,6 +143,11 @@ end;
 procedure TF_Menu.ToolButton9Click(Sender: TObject);
 begin
   F_Produto.ShowModal;
+end;
+
+procedure TF_Menu.Venda1Click(Sender: TObject);
+begin
+  F_Venda.ShowModal;
 end;
 
 end.

@@ -31,7 +31,7 @@ type
     TB_Fornecedor: TIBQuery;
     TB_Funcionario: TIBQuery;
     TB_Produto: TIBQuery;
-    IBQuery4: TIBQuery;
+    TB_Venda: TIBQuery;
     IBQuery5: TIBQuery;
     IBQuery6: TIBQuery;
     IBQuery7: TIBQuery;
@@ -46,7 +46,7 @@ type
     SQL_Fornecedor: TIBUpdateSQL;
     SQL_Funcionario: TIBUpdateSQL;
     SQL_Produto: TIBUpdateSQL;
-    IBUpdateSQL4: TIBUpdateSQL;
+    SQL_Venda: TIBUpdateSQL;
     IBUpdateSQL5: TIBUpdateSQL;
     IBUpdateSQL6: TIBUpdateSQL;
     IBUpdateSQL7: TIBUpdateSQL;
@@ -62,7 +62,7 @@ type
     DS_Fornecedor: TDataSource;
     DS_Funcionario: TDataSource;
     DS_Produto: TDataSource;
-    DataSource4: TDataSource;
+    DS_Venda: TDataSource;
     DataSource5: TDataSource;
     DataSource6: TDataSource;
     DataSource7: TDataSource;
@@ -96,6 +96,15 @@ type
     TB_ProdutoPRECOCUSTO: TIBBCDField;
     TB_ProdutoPRECOVENDA: TIBBCDField;
     TB_ProdutoSTATUSPRODUTO: TIBStringField;
+    TB_VendaIDVENDA: TIntegerField;
+    TB_VendaIDFUNCIONARIO: TIntegerField;
+    TB_VendaIDCLIENTE: TIntegerField;
+    TB_VendaDESCRICAO: TIBStringField;
+    TB_VendaDATAVENDA: TDateField;
+    TB_VendaHORAVENDA: TTimeField;
+    TB_VendaVALORTOTAL: TIBBCDField;
+    TB_VendaTIPO: TIBStringField;
+    TB_VendaSTATUSVENDA: TIBStringField;
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);

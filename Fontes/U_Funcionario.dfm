@@ -70,7 +70,7 @@ object F_Funcionario: TF_Funcionario
     Height = 33
     Align = alTop
     TabOrder = 5
-    ExplicitWidth = 600
+    ExplicitWidth = 610
     ExplicitHeight = 33
     inherited btnNovo: TBitBtn
       OnClick = Frame_Button1btnNovoClick
@@ -140,7 +140,7 @@ object F_Funcionario: TF_Funcionario
   object DBLookupComboBox1: TDBLookupComboBox
     Left = 128
     Top = 57
-    Width = 175
+    Width = 173
     Height = 21
     DataField = 'IDCIDADE'
     DataSource = DM.DS_Funcionario
