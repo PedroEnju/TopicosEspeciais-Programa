@@ -131,12 +131,20 @@ type
     TB_CompraqtdProduto: TIntegerField;
     TB_CompraqtdItemCompra: TFloatField;
     TB_VendaqtdItemVenda: TFloatField;
+    Query_Calcular: TIBQuery;
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);
     procedure TB_CidadeNewRecord(DataSet: TDataSet);
     procedure TB_FuncionarioNewRecord(DataSet: TDataSet);
     procedure TB_VendaNewRecord(DataSet: TDataSet);
+    procedure TB_ItemVendaNewRecord(DataSet: TDataSet);
+    procedure TB_ItemCompraNewRecord(DataSet: TDataSet);
+    procedure TB_VendaAfterScroll(DataSet: TDataSet);
+    procedure TB_VendaCalcFields(DataSet: TDataSet);
+    procedure TB_CompraAfterScroll(DataSet: TDataSet);
+    procedure TB_CompraCalcFields(DataSet: TDataSet);
+    procedure TB_CompraNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -162,6 +170,51 @@ begin
   TB_ClienteSEXO.AsString := 'M';
 end;
 
+procedure TDM.TB_CompraAfterScroll(DataSet: TDataSet);
+begin
+  with TB_ItemCompra do
+  begin
+    if (TB_CompraIDCOMPRA.AsString.IsEmpty) then
+      exit;
+
+    Close;
+    SQL.Clear;
+    SQL.Add('select * from itemcompra');
+    SQL.Add('where idCompra = :idCompra');
+    ParamByName('idCompra').AsInteger := TB_CompraIDCOMPRA.AsInteger;
+    Open;
+
+  end;
+end;
+
+procedure TDM.TB_CompraCalcFields(DataSet: TDataSet);
+begin
+  if (TB_CompraIDCOMPRA.AsString = EmptyStr) then
+    exit;
+
+  with Query_Calcular do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT SUM(quantidade * valor), SUM(quantidade), COUNT(quantidade) FROM ItemCompra');
+    SQL.Add('WHERE idCompra = :idCompra');
+    ParamByName('idCompra').AsInteger := TB_CompraIDCOMPRA.AsInteger;
+    Open;
+    TB_CompratotalCompra.AsFloat := Fields[0].AsFloat;
+    TB_CompraqtdProduto.AsFloat := Fields[1].AsFloat;
+    TB_CompraqtdItemCompra.AsFloat := Fields[2].AsFloat;
+    Close;
+  end;
+end;
+
+procedure TDM.TB_CompraNewRecord(DataSet: TDataSet);
+begin
+  TB_CompraDATACOMPRA.AsDateTime := Date;
+  TB_CompraHORACOMPRA.AsDateTime := Time;
+  TB_CompraTIPO.AsString := 'À VISTA';
+  TB_CompraSTATUSCOMPRA.AsString := 'A';
+end;
+
 procedure TDM.TB_FornecedorNewRecord(DataSet: TDataSet);
 begin
   TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
@@ -172,9 +225,58 @@ begin
   TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
 end;
 
+procedure TDM.TB_ItemCompraNewRecord(DataSet: TDataSet);
+begin
+  TB_ItemCompraIDCOMPRA.AsInteger := TB_CompraIDCOMPRA.AsInteger;
+end;
+
+procedure TDM.TB_ItemVendaNewRecord(DataSet: TDataSet);
+begin
+  TB_ItemVendaIDVENDA.AsInteger := TB_VendaIDVENDA.AsInteger;
+  TB_ItemVendaQUANTIDADE.AsInteger := 1;
+end;
+
 procedure TDM.TB_ProdutoNewRecord(DataSet: TDataSet);
 begin
   TB_ProdutoSTATUSPRODUTO.AsString := 'A';
+end;
+
+procedure TDM.TB_VendaAfterScroll(DataSet: TDataSet);
+begin
+  with TB_ItemVenda do
+  begin
+    if (TB_VendaIDVENDA.AsString.IsEmpty) then
+      exit;
+
+    Close;
+    SQL.Clear;
+    SQL.Add('select * from itemvenda');
+    SQL.Add('where idVenda = :idVenda');
+    ParamByName('idVenda').AsInteger := TB_VendaIDVENDA.AsInteger;
+    Open;
+
+  end;
+end;
+
+procedure TDM.TB_VendaCalcFields(DataSet: TDataSet);
+begin
+  if (TB_VendaIDVENDA.AsString = EmptyStr) then
+    exit;
+
+  with Query_Calcular do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT SUM(quantidade * valor), SUM(quantidade), COUNT(quantidade) FROM ItemVenda');
+    SQL.Add('WHERE idVenda = :idVenda');
+    ParamByName('idVenda').AsInteger := TB_VendaIDVENDA.AsInteger;
+    Open;
+    TB_VendatotalVenda.AsFloat := Fields[0].AsFloat;
+    TB_VendaqtdProduto.AsFloat := Fields[1].AsFloat;
+    TB_VendaqtdItemVenda.AsFloat := Fields[2].AsFloat;
+    Close;
+  end;
+
 end;
 
 procedure TDM.TB_VendaNewRecord(DataSet: TDataSet);

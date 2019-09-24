@@ -10,7 +10,6 @@ uses
 
 type
   TF_Funcionario = class(TForm)
-    Frame_Button1: TFrame_Button;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -23,6 +22,7 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     DBGrid1: TDBGrid;
     btnCidade: TBitBtn;
+    Frame_Button1: TFrame_Button;
     procedure Frame_Button1btnNovoClick(Sender: TObject);
     procedure Frame_Button1btnEditarClick(Sender: TObject);
     procedure Frame_Button1btnSalvarClick(Sender: TObject);

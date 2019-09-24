@@ -4,7 +4,7 @@ object F_Menu: TF_Menu
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Menu'
-  ClientHeight = 390
+  ClientHeight = 370
   ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object F_Menu: TF_Menu
     Left = 3
     Top = 32
     Width = 604
-    Height = 336
+    Height = 316
     Align = alClient
     ParentShowHint = False
     Picture.Data = {
@@ -5199,7 +5199,7 @@ object F_Menu: TF_Menu
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 371
+    Top = 351
     Width = 610
     Height = 19
     Hint = 'Programa Version 1.0 by Pedro Enju'
@@ -5254,6 +5254,10 @@ object F_Menu: TF_Menu
         ImageIndex = 7
         OnClick = Venda1Click
       end
+      object Compra1: TMenuItem
+        Caption = 'Compra'
+        OnClick = Compra1Click
+      end
     end
     object Consultas1: TMenuItem
       Caption = 'Consultas'
@@ -5289,7 +5293,7 @@ object F_Menu: TF_Menu
     Left = 544
     Top = 80
     Bitmap = {
-      494C010108001800640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108001800680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -1,9 +1,9 @@
-object F_ItemVenda: TF_ItemVenda
+object F_ItemCompra: TF_ItemCompra
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Item Venda'
+  Caption = 'Item Compra'
   ClientHeight = 220
   ClientWidth = 300
   Color = clBtnFace
@@ -16,6 +16,28 @@ object F_ItemVenda: TF_ItemVenda
   Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
+  object DBText1: TDBText
+    Left = 65
+    Top = 120
+    Width = 225
+    Height = 19
+    DataField = 'TOTAL'
+    DataSource = DM.DS_ItemCompra
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object DBText3: TDBText
+    Left = 42
+    Top = 160
+    Width = 96
+    Height = 17
+    DataField = 'PRECOCUSTO'
+    DataSource = DM.DS_Produto
+  end
   object Label1: TLabel
     Left = 8
     Top = 13
@@ -61,20 +83,6 @@ object F_ItemVenda: TF_ItemVenda
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object DBText1: TDBText
-    Left = 65
-    Top = 120
-    Width = 225
-    Height = 19
-    DataField = 'TOTAL'
-    DataSource = DM.DS_ItemVenda
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
   object Label6: TLabel
     Left = 8
     Top = 160
@@ -82,64 +90,33 @@ object F_ItemVenda: TF_ItemVenda
     Height = 13
     Caption = 'Custo'
   end
-  object DBText3: TDBText
-    Left = 42
-    Top = 160
-    Width = 96
-    Height = 17
-    DataField = 'PRECOCUSTO'
-    DataSource = DM.DS_Produto
-  end
-  object DBEdit1: TDBEdit
-    Left = 8
-    Top = 29
-    Width = 134
-    Height = 21
-    DataField = 'IDITEMVENDA'
-    DataSource = DM.DS_ItemVenda
-    Enabled = False
-    TabOrder = 0
-  end
-  object DBEdit3: TDBEdit
-    Left = 8
-    Top = 77
-    Width = 134
-    Height = 21
-    DataField = 'QUANTIDADE'
-    DataSource = DM.DS_ItemVenda
-    TabOrder = 1
-    OnExit = DBEdit3Exit
-  end
-  object btn_inserir: TBitBtn
-    Left = 160
-    Top = 188
-    Width = 130
-    Height = 25
-    Caption = 'Inserir'
-    TabOrder = 2
-    OnClick = btn_inserirClick
-  end
   object btn_cancelar: TBitBtn
     Left = 8
     Top = 187
     Width = 130
     Height = 25
     Caption = 'Cancelar'
-    TabOrder = 3
+    TabOrder = 0
     OnClick = btn_cancelarClick
   end
-  object DBLookupComboBox1: TDBLookupComboBox
-    Left = 156
+  object btn_inserir: TBitBtn
+    Left = 160
+    Top = 187
+    Width = 130
+    Height = 25
+    Caption = 'Inserir'
+    TabOrder = 1
+    OnClick = btn_inserirClick
+  end
+  object DBEdit1: TDBEdit
+    Left = 8
     Top = 29
     Width = 134
     Height = 21
-    DataField = 'IDPRODUTO'
-    DataSource = DM.DS_ItemVenda
-    KeyField = 'IDPRODUTO'
-    ListField = 'NOMEPRODUTO'
-    ListSource = DM.DS_Produto
-    TabOrder = 4
-    OnExit = DBLookupComboBox1Exit
+    DataField = 'IDITEMCOMPRA'
+    DataSource = DM.DS_ItemCompra
+    Enabled = False
+    TabOrder = 2
   end
   object DBEdit2: TDBEdit
     Left = 156
@@ -147,7 +124,30 @@ object F_ItemVenda: TF_ItemVenda
     Width = 134
     Height = 21
     DataField = 'VALOR'
-    DataSource = DM.DS_ItemVenda
+    DataSource = DM.DS_ItemCompra
+    TabOrder = 3
+  end
+  object DBEdit3: TDBEdit
+    Left = 8
+    Top = 77
+    Width = 134
+    Height = 21
+    DataField = 'QUANTIDADE'
+    DataSource = DM.DS_ItemCompra
+    TabOrder = 4
+    OnExit = DBEdit3Exit
+  end
+  object DBLookupComboBox1: TDBLookupComboBox
+    Left = 156
+    Top = 29
+    Width = 134
+    Height = 21
+    DataField = 'IDPRODUTO'
+    DataSource = DM.DS_ItemCompra
+    KeyField = 'IDPRODUTO'
+    ListField = 'NOMEPRODUTO'
+    ListSource = DM.DS_Produto
     TabOrder = 5
+    OnExit = DBLookupComboBox1Exit
   end
 end

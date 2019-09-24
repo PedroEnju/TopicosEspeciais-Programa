@@ -20,10 +20,14 @@ type
     btn_inserir: TBitBtn;
     btn_cancelar: TBitBtn;
     DBText1: TDBText;
-    DBText2: TDBText;
     DBLookupComboBox1: TDBLookupComboBox;
+    Label6: TLabel;
+    DBText3: TDBText;
+    DBEdit2: TDBEdit;
     procedure DBLookupComboBox1Exit(Sender: TObject);
     procedure DBEdit3Exit(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_inserirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,8 +43,27 @@ implementation
 
 uses U_DM;
 
+procedure TF_ItemVenda.btn_cancelarClick(Sender: TObject);
+begin
+  DM.TB_ItemVenda.Cancel;
+  Close;
+end;
+
+procedure TF_ItemVenda.btn_inserirClick(Sender: TObject);
+begin
+  DM.TB_ItemVenda.Post;
+  DM.TB_ItemVenda.Refresh;
+  Close;
+end;
+
 procedure TF_ItemVenda.DBEdit3Exit(Sender: TObject);
 begin
+
+  if (DM.TB_ItemVendaQUANTIDADE.AsInteger > DM.TB_ProdutoQUANTIDADE.AsInteger)
+  then
+    ShowMessage
+      ('Quantidade de produto da Venda é maior que a Quantidade em Estoque!');
+
   DM.TB_ItemVendaTOTAL.AsFloat := DM.TB_ItemVendaQUANTIDADE.AsInteger *
     DM.TB_ItemVendaVALOR.AsFloat;
 end;

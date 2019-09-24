@@ -63,51 +63,6 @@ object F_Funcionario: TF_Funcionario
     DataField = 'IDFUNCIONARIO'
     DataSource = DM.DS_Funcionario
   end
-  inline Frame_Button1: TFrame_Button
-    Left = 0
-    Top = 0
-    Width = 610
-    Height = 33
-    Align = alTop
-    TabOrder = 5
-    ExplicitWidth = 610
-    ExplicitHeight = 33
-    inherited btnNovo: TBitBtn
-      OnClick = Frame_Button1btnNovoClick
-    end
-    inherited btnEditar: TBitBtn
-      OnClick = Frame_Button1btnEditarClick
-    end
-    inherited btnExcluir: TBitBtn
-      OnClick = Frame_Button1btnExcluirClick
-    end
-    inherited btnCancelar: TBitBtn
-      OnClick = Frame_Button1btnCancelarClick
-    end
-    inherited btnSalvar: TBitBtn
-      Top = -301
-      OnClick = Frame_Button1btnSalvarClick
-      ExplicitTop = -301
-    end
-    inherited btnFechar: TBitBtn
-      OnClick = Frame_Button1btnFecharClick
-    end
-    inherited btnLast: TBitBtn
-      OnClick = Frame_Button1btnLastClick
-    end
-    inherited btnNext: TBitBtn
-      OnClick = Frame_Button1btnNextClick
-    end
-    inherited btnPrevious: TBitBtn
-      OnClick = Frame_Button1btnPreviousClick
-    end
-    inherited btnFirst: TBitBtn
-      OnClick = Frame_Button1btnFirstClick
-    end
-    inherited btn_pesquisar: TBitBtn
-      OnClick = Frame_Button1btn_pesquisarClick
-    end
-  end
   object DBEdit3: TDBEdit
     Left = 8
     Top = 112
@@ -200,7 +155,24 @@ object F_Funcionario: TF_Funcionario
     Width = 17
     Height = 21
     Caption = '+'
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btnCidadeClick
+  end
+  inline Frame_Button1: TFrame_Button
+    Left = 7
+    Top = 0
+    Width = 596
+    Height = 32
+    TabOrder = 6
+    ExplicitLeft = 7
+    inherited btnNovo: TBitBtn
+      OnClick = Frame_Button1btnNovoClick
+    end
+    inherited btnSalvar: TBitBtn
+      OnClick = Frame_Button1btnSalvarClick
+    end
+    inherited btnFechar: TBitBtn
+      OnClick = Frame_Button1btnFecharClick
+    end
   end
 end

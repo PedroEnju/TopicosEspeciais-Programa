@@ -1,9 +1,9 @@
-object F_Venda: TF_Venda
+object F_Compra: TF_Compra
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Venda'
+  Caption = 'Compra'
   ClientHeight = 490
   ClientWidth = 610
   Color = clBtnFace
@@ -55,152 +55,13 @@ object F_Venda: TF_Venda
       OnClick = Frame_Button1btnFirstClick
     end
   end
-  object pVenda: TPanel
-    Left = 0
-    Top = 32
-    Width = 610
-    Height = 153
-    Align = alTop
-    TabOrder = 1
-    object Label1: TLabel
-      Left = 8
-      Top = 8
-      Width = 85
-      Height = 13
-      Caption = 'N'#250'mero da Venda'
-    end
-    object Label2: TLabel
-      Left = 148
-      Top = 8
-      Width = 55
-      Height = 13
-      Caption = 'Funcion'#225'rio'
-    end
-    object Label3: TLabel
-      Left = 299
-      Top = 9
-      Width = 33
-      Height = 13
-      Caption = 'Cliente'
-    end
-    object Label4: TLabel
-      Left = 8
-      Top = 51
-      Width = 46
-      Height = 13
-      Caption = 'Descri'#231#227'o'
-      FocusControl = DBEdit4
-    end
-    object Label5: TLabel
-      Left = 8
-      Top = 96
-      Width = 71
-      Height = 13
-      Caption = 'Data da Venda'
-      FocusControl = DBEdit5
-    end
-    object Label6: TLabel
-      Left = 148
-      Top = 96
-      Width = 71
-      Height = 13
-      Caption = 'Hora da Venda'
-      FocusControl = DBEdit6
-    end
-    object Label7: TLabel
-      Left = 288
-      Top = 94
-      Width = 20
-      Height = 13
-      Caption = 'Tipo'
-    end
-    object DBText5: TDBText
-      Left = 8
-      Top = 28
-      Width = 134
-      Height = 17
-      Alignment = taRightJustify
-      DataField = 'IDVENDA'
-      DataSource = DM.DS_Venda
-    end
-    object DBEdit4: TDBEdit
-      Left = 8
-      Top = 67
-      Width = 585
-      Height = 21
-      DataField = 'DESCRICAO'
-      DataSource = DM.DS_Venda
-      TabOrder = 0
-    end
-    object DBEdit5: TDBEdit
-      Left = 8
-      Top = 112
-      Width = 134
-      Height = 21
-      DataField = 'DATAVENDA'
-      DataSource = DM.DS_Venda
-      TabOrder = 1
-    end
-    object DBEdit6: TDBEdit
-      Left = 148
-      Top = 112
-      Width = 134
-      Height = 21
-      DataField = 'HORAVENDA'
-      DataSource = DM.DS_Venda
-      TabOrder = 2
-    end
-    object DBComboBox1: TDBComboBox
-      Left = 288
-      Top = 112
-      Width = 145
-      Height = 21
-      DataField = 'TIPO'
-      DataSource = DM.DS_Venda
-      Items.Strings = (
-        #192' Vista'
-        #192' Prazo')
-      TabOrder = 3
-    end
-    object DBLookupComboBox1: TDBLookupComboBox
-      Left = 148
-      Top = 24
-      Width = 145
-      Height = 21
-      DataField = 'IDFUNCIONARIO'
-      DataSource = DM.DS_Venda
-      KeyField = 'IDFUNCIONARIO'
-      ListField = 'NOMEFUNCIONARIO'
-      ListSource = DM.DS_Funcionario
-      TabOrder = 4
-    end
-    object DBLookupComboBox2: TDBLookupComboBox
-      Left = 299
-      Top = 24
-      Width = 145
-      Height = 21
-      DataField = 'IDCLIENTE'
-      DataSource = DM.DS_Venda
-      KeyField = 'IDCLIENTE'
-      ListField = 'NOMECLIENTE'
-      ListSource = DM.DS_Cliente
-      TabOrder = 5
-    end
-    object btn_cliente: TBitBtn
-      Left = 449
-      Top = 24
-      Width = 25
-      Height = 21
-      TabOrder = 6
-    end
-  end
-  object pItVenda: TPanel
+  object pItCompra: TPanel
     Left = 0
     Top = 185
     Width = 610
     Height = 245
     Align = alTop
-    TabOrder = 2
+    TabOrder = 1
     object Label8: TLabel
       Left = 16
       Top = 8
@@ -249,7 +110,7 @@ object F_Venda: TF_Venda
       Top = 39
       Width = 596
       Height = 186
-      DataSource = DM.DS_ItemVenda
+      DataSource = DM.DS_ItemCompra
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -264,13 +125,13 @@ object F_Venda: TF_Venda
     Width = 610
     Height = 62
     Align = alBottom
-    TabOrder = 3
+    TabOrder = 2
     object Label9: TLabel
       Left = 167
       Top = 8
-      Width = 157
+      Width = 172
       Height = 19
-      Caption = 'STATUS DA VENDA'
+      Caption = 'STATUS DA COMPRA'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
@@ -322,8 +183,8 @@ object F_Venda: TF_Venda
       Top = 33
       Width = 65
       Height = 17
-      DataField = 'STATUSVENDA'
-      DataSource = DM.DS_Venda
+      DataField = 'STATUSCOMPRA'
+      DataSource = DM.DS_Compra
     end
     object DBText2: TDBText
       Left = 540
@@ -331,23 +192,23 @@ object F_Venda: TF_Venda
       Width = 65
       Height = 17
       DataField = 'qtdProduto'
-      DataSource = DM.DS_Venda
+      DataSource = DM.DS_Compra
     end
     object DBText3: TDBText
       Left = 540
       Top = 24
       Width = 65
       Height = 17
-      DataField = 'totalVenda'
-      DataSource = DM.DS_Venda
+      DataField = 'totalCompra'
+      DataSource = DM.DS_Compra
     end
     object DBText4: TDBText
       Left = 540
       Top = 39
       Width = 65
       Height = 17
-      DataField = 'qtdItemVenda'
-      DataSource = DM.DS_Venda
+      DataField = 'qtdItemCompra'
+      DataSource = DM.DS_Compra
     end
     object btn_finalizar: TBitBtn
       Left = 8
@@ -364,6 +225,145 @@ object F_Venda: TF_Venda
       ParentFont = False
       TabOrder = 0
       OnClick = btn_finalizarClick
+    end
+  end
+  object pCompra: TPanel
+    Left = 0
+    Top = 32
+    Width = 610
+    Height = 153
+    Align = alTop
+    TabOrder = 3
+    object Label1: TLabel
+      Left = 8
+      Top = 8
+      Width = 92
+      Height = 13
+      Caption = 'N'#250'mero da Compra'
+    end
+    object Label2: TLabel
+      Left = 148
+      Top = 8
+      Width = 55
+      Height = 13
+      Caption = 'Funcion'#225'rio'
+    end
+    object Label3: TLabel
+      Left = 299
+      Top = 9
+      Width = 55
+      Height = 13
+      Caption = 'Fornecedor'
+    end
+    object Label4: TLabel
+      Left = 8
+      Top = 51
+      Width = 46
+      Height = 13
+      Caption = 'Descri'#231#227'o'
+      FocusControl = DBEdit4
+    end
+    object Label5: TLabel
+      Left = 8
+      Top = 96
+      Width = 78
+      Height = 13
+      Caption = 'Data da Compra'
+      FocusControl = DBEdit5
+    end
+    object Label6: TLabel
+      Left = 148
+      Top = 96
+      Width = 78
+      Height = 13
+      Caption = 'Hora da Compra'
+      FocusControl = DBEdit6
+    end
+    object Label7: TLabel
+      Left = 288
+      Top = 94
+      Width = 20
+      Height = 13
+      Caption = 'Tipo'
+    end
+    object DBText5: TDBText
+      Left = 8
+      Top = 28
+      Width = 134
+      Height = 17
+      Alignment = taRightJustify
+      DataField = 'IDCOMPRA'
+      DataSource = DM.DS_Compra
+    end
+    object DBEdit4: TDBEdit
+      Left = 8
+      Top = 67
+      Width = 585
+      Height = 21
+      DataField = 'DESCRICAO'
+      DataSource = DM.DS_Venda
+      TabOrder = 0
+    end
+    object DBEdit5: TDBEdit
+      Left = 8
+      Top = 112
+      Width = 134
+      Height = 21
+      DataField = 'DATACOMPRA'
+      DataSource = DM.DS_Compra
+      TabOrder = 1
+    end
+    object DBEdit6: TDBEdit
+      Left = 148
+      Top = 112
+      Width = 134
+      Height = 21
+      DataField = 'HORACOMPRA'
+      DataSource = DM.DS_Compra
+      TabOrder = 2
+    end
+    object DBComboBox1: TDBComboBox
+      Left = 288
+      Top = 112
+      Width = 145
+      Height = 21
+      DataField = 'TIPO'
+      DataSource = DM.DS_Venda
+      Items.Strings = (
+        #192' Vista'
+        #192' Prazo')
+      TabOrder = 3
+    end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 148
+      Top = 24
+      Width = 145
+      Height = 21
+      DataField = 'IDFUNCIONARIO'
+      DataSource = DM.DS_Compra
+      KeyField = 'IDFUNCIONARIO'
+      ListField = 'NOMEFUNCIONARIO'
+      ListSource = DM.DS_Funcionario
+      TabOrder = 4
+    end
+    object DBLookupComboBox2: TDBLookupComboBox
+      Left = 299
+      Top = 24
+      Width = 145
+      Height = 21
+      DataField = 'IDFORNECEDOR'
+      DataSource = DM.DS_Compra
+      KeyField = 'IDFORNECEDOR'
+      ListField = 'NOMEFORNECEDOR'
+      ListSource = DM.DS_Fornecedor
+      TabOrder = 5
+    end
+    object btn_cliente: TBitBtn
+      Left = 449
+      Top = 24
+      Width = 25
+      Height = 21
+      TabOrder = 6
     end
   end
 end

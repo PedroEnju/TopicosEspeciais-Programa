@@ -369,6 +369,8 @@ object DM: TDM
   object TB_Venda: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    AfterScroll = TB_VendaAfterScroll
+    OnCalcFields = TB_VendaCalcFields
     OnNewRecord = TB_VendaNewRecord
     Active = True
     BufferChunks = 1000
@@ -445,6 +447,7 @@ object DM: TDM
   object TB_ItemVenda: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_ItemVendaNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -499,6 +502,10 @@ object DM: TDM
   object TB_Compra: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    AfterScroll = TB_CompraAfterScroll
+    OnCalcFields = TB_CompraCalcFields
+    OnNewRecord = TB_CompraNewRecord
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -983,6 +990,7 @@ object DM: TDM
   object TB_ItemCompra: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_ItemCompraNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -1068,5 +1076,14 @@ object DM: TDM
     DataSet = TB_ItemCompra
     Left = 696
     Top = 320
+  end
+  object Query_Calcular: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 432
+    Top = 32
   end
 end

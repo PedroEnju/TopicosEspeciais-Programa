@@ -18,7 +18,11 @@ uses
   U_PesquisaFuncionario in 'U_PesquisaFuncionario.pas' {F_PesquisaFuncionario},
   U_PesquisaProduto in 'U_PesquisaProduto.pas' {F_PesquisaProduto},
   U_Venda in 'U_Venda.pas' {F_Venda},
-  U_ItemVenda in 'U_ItemVenda.pas' {F_ItemVenda};
+  U_ItemVenda in 'U_ItemVenda.pas' {F_ItemVenda},
+  U_FinalizacaoVenda in 'U_FinalizacaoVenda.pas' {F_FinalizacaoVenda},
+  U_Compra in 'U_Compra.pas' {F_Compra},
+  U_ItemCompra in 'U_ItemCompra.pas' {F_ItemCompra},
+  U_FinalizacaoCompra in 'U_FinalizacaoCompra.pas' {F_FinalizacaoCompra};
 
 {$R *.res}
 
@@ -40,5 +44,9 @@ begin
   Application.CreateForm(TF_PesquisaProduto, F_PesquisaProduto);
   Application.CreateForm(TF_Venda, F_Venda);
   Application.CreateForm(TF_ItemVenda, F_ItemVenda);
+  Application.CreateForm(TF_FinalizacaoVenda, F_FinalizacaoVenda);
+  Application.CreateForm(TF_Compra, F_Compra);
+  Application.CreateForm(TF_ItemCompra, F_ItemCompra);
+  Application.CreateForm(TF_FinalizacaoCompra, F_FinalizacaoCompra);
   Application.Run;
 end.
