@@ -22,7 +22,9 @@ uses
   U_FinalizacaoVenda in 'U_FinalizacaoVenda.pas' {F_FinalizacaoVenda},
   U_Compra in 'U_Compra.pas' {F_Compra},
   U_ItemCompra in 'U_ItemCompra.pas' {F_ItemCompra},
-  U_FinalizacaoCompra in 'U_FinalizacaoCompra.pas' {F_FinalizacaoCompra};
+  U_FinalizacaoCompra in 'U_FinalizacaoCompra.pas' {F_FinalizacaoCompra},
+  U_Funcao in 'U_Funcao.pas',
+  U_ContasReceber in 'U_ContasReceber.pas' {F_ContasReceber};
 
 {$R *.res}
 
@@ -48,5 +50,6 @@ begin
   Application.CreateForm(TF_Compra, F_Compra);
   Application.CreateForm(TF_ItemCompra, F_ItemCompra);
   Application.CreateForm(TF_FinalizacaoCompra, F_FinalizacaoCompra);
+  Application.CreateForm(TF_ContasReceber, F_ContasReceber);
   Application.Run;
 end.

@@ -5288,12 +5288,31 @@ object F_Menu: TF_Menu
         OnClick = Produto2Click
       end
     end
+    object Movimento1: TMenuItem
+      Caption = 'Movimento'
+      object Compra2: TMenuItem
+        Caption = 'Entrada'
+      end
+      object Venda2: TMenuItem
+        Caption = 'Sa'#237'da'
+      end
+    end
+    object Financeiro1: TMenuItem
+      Caption = 'Financeiro'
+      object ContasaReceber1: TMenuItem
+        Caption = 'Contas a Receber'
+        OnClick = ContasaReceber1Click
+      end
+      object ContasaPagar1: TMenuItem
+        Caption = 'Contas a Pagar'
+      end
+    end
   end
   object ImageList1: TImageList
     Left = 544
     Top = 80
     Bitmap = {
-      494C010108001800680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108001800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

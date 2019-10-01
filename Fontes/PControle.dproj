@@ -180,6 +180,11 @@
             <Form>F_FinalizacaoCompra</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="U_Funcao.pas"/>
+        <DCCReference Include="U_ContasReceber.pas">
+            <Form>F_ContasReceber</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

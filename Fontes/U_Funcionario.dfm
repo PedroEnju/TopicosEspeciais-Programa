@@ -159,10 +159,11 @@ object F_Funcionario: TF_Funcionario
     OnClick = btnCidadeClick
   end
   inline Frame_Button1: TFrame_Button
-    Left = 7
+    Left = 0
     Top = 0
-    Width = 596
+    Width = 610
     Height = 32
+    Align = alTop
     TabOrder = 6
     ExplicitLeft = 7
     inherited btnNovo: TBitBtn

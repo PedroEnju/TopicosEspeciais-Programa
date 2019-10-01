@@ -54,7 +54,7 @@ object F_Cidade: TF_Cidade
     Height = 34
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 600
+    ExplicitWidth = 610
     ExplicitHeight = 34
     inherited btnNovo: TBitBtn
       OnClick = Frame_Button1btnNovoClick

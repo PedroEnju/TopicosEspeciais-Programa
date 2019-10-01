@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Height = 565
-  Width = 762
+  Height = 558
+  Width = 908
   object DB_Principal: TIBDatabase
     Connected = True
     DatabaseName = 'C:\Documentos\Topicos Especiais\Aula-1103\BD\BANCO.FDB'
@@ -129,7 +129,7 @@ object DM: TDM
       'delete from CLIENTE'
       'where'
       '  IDCLIENTE = :OLD_IDCLIENTE')
-    Left = 104
+    Left = 144
     Top = 264
   end
   object TB_Cliente: TIBQuery
@@ -145,7 +145,7 @@ object DM: TDM
     UpdateObject = SQL_Cliente
     GeneratorField.Field = 'IDCLIENTE'
     GeneratorField.Generator = 'GEN_CLIENTE_ID'
-    Left = 104
+    Left = 144
     Top = 208
     object TB_ClienteIDCLIENTE: TIntegerField
       FieldName = 'IDCLIENTE'
@@ -204,7 +204,7 @@ object DM: TDM
   end
   object DS_Cliente: TDataSource
     DataSet = TB_Cliente
-    Left = 104
+    Left = 144
     Top = 320
   end
   object TB_Fornecedor: TIBQuery
@@ -220,7 +220,7 @@ object DM: TDM
     UpdateObject = SQL_Fornecedor
     GeneratorField.Field = 'IDFORNECEDOR'
     GeneratorField.Generator = 'GEN_FORNECEDOR_ID'
-    Left = 184
+    Left = 232
     Top = 208
     object TB_FornecedorIDFORNECEDOR: TIntegerField
       FieldName = 'IDFORNECEDOR'
@@ -273,7 +273,7 @@ object DM: TDM
     UpdateObject = SQL_Funcionario
     GeneratorField.Field = 'IDFUNCIONARIO'
     GeneratorField.Generator = 'GEN_FUNCIONARIO_ID'
-    Left = 264
+    Left = 320
     Top = 208
     object TB_FuncionarioIDFUNCIONARIO: TIntegerField
       FieldName = 'IDFUNCIONARIO'
@@ -328,7 +328,7 @@ object DM: TDM
     UpdateObject = SQL_Produto
     GeneratorField.Field = 'IDPRODUTO'
     GeneratorField.Generator = 'GEN_PRODUTO_ID'
-    Left = 344
+    Left = 448
     Top = 208
     object TB_ProdutoIDPRODUTO: TIntegerField
       FieldName = 'IDPRODUTO'
@@ -381,7 +381,7 @@ object DM: TDM
     UpdateObject = SQL_Venda
     GeneratorField.Field = 'IDVENDA'
     GeneratorField.Generator = 'GEN_VENDA_ID'
-    Left = 432
+    Left = 592
     Top = 208
     object TB_VendaIDVENDA: TIntegerField
       FieldName = 'IDVENDA'
@@ -457,7 +457,7 @@ object DM: TDM
     UpdateObject = SQL_ItemVenda
     GeneratorField.Field = 'IDITEMVENDA'
     GeneratorField.Generator = 'GEN_ITEMVENDA_ID'
-    Left = 520
+    Left = 672
     Top = 208
     object TB_ItemVendaIDITEMVENDA: TIntegerField
       FieldName = 'IDITEMVENDA'
@@ -492,12 +492,60 @@ object DM: TDM
       Size = 2
     end
   end
-  object IBQuery6: TIBQuery
+  object TB_ContasPagar: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
-    Left = 264
+    SQL.Strings = (
+      'select * from CONTASPAGAR')
+    UpdateObject = SQL_ContasPagar
+    GeneratorField.Field = 'IDCONTASPAGAR'
+    GeneratorField.Generator = 'GEN_CONTASPAGAR_ID'
+    Left = 392
     Top = 392
+    object TB_ContasPagarIDCONTASPAGAR: TIntegerField
+      FieldName = 'IDCONTASPAGAR'
+      Origin = '"CONTASPAGAR"."IDCONTASPAGAR"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_ContasPagarIDFORNECEDOR: TIntegerField
+      FieldName = 'IDFORNECEDOR'
+      Origin = '"CONTASPAGAR"."IDFORNECEDOR"'
+    end
+    object TB_ContasPagarIDCOMPRA: TIntegerField
+      FieldName = 'IDCOMPRA'
+      Origin = '"CONTASPAGAR"."IDCOMPRA"'
+    end
+    object TB_ContasPagarTIPO: TIBStringField
+      FieldName = 'TIPO'
+      Origin = '"CONTASPAGAR"."TIPO"'
+      FixedChar = True
+      Size = 1
+    end
+    object TB_ContasPagarQUANTIDADEPARCELA: TIntegerField
+      FieldName = 'QUANTIDADEPARCELA'
+      Origin = '"CONTASPAGAR"."QUANTIDADEPARCELA"'
+    end
+    object TB_ContasPagarDATACONTA: TDateField
+      FieldName = 'DATACONTA'
+      Origin = '"CONTASPAGAR"."DATACONTA"'
+    end
+    object TB_ContasPagarVALORTOTAL: TIBBCDField
+      FieldName = 'VALORTOTAL'
+      Origin = '"CONTASPAGAR"."VALORTOTAL"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ContasPagarSTATUSCONTA: TIBStringField
+      FieldName = 'STATUSCONTA'
+      Origin = '"CONTASPAGAR"."STATUSCONTA"'
+      FixedChar = True
+      Size = 1
+    end
   end
   object TB_Compra: TIBQuery
     Database = DB_Principal
@@ -514,7 +562,7 @@ object DM: TDM
     UpdateObject = SQL_Compra
     GeneratorField.Field = 'IDCOMPRA'
     GeneratorField.Generator = 'GEN_COMPRA_ID'
-    Left = 608
+    Left = 752
     Top = 208
     object TB_CompraIDCOMPRA: TIntegerField
       FieldName = 'IDCOMPRA'
@@ -571,61 +619,295 @@ object DM: TDM
       Calculated = True
     end
   end
-  object IBQuery8: TIBQuery
+  object TB_ContasReceber: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    AfterScroll = TB_ContasReceberAfterScroll
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
-    Left = 24
+    SQL.Strings = (
+      'select * from CONTASRECEBER')
+    UpdateObject = SQL_ContasReceber
+    GeneratorField.Field = 'IDCONTASRECEBER'
+    GeneratorField.Generator = 'GEN_CONTASRECEBER_ID'
+    Left = 48
     Top = 392
+    object TB_ContasReceberIDCONTASRECEBER: TIntegerField
+      FieldName = 'IDCONTASRECEBER'
+      Origin = '"CONTASRECEBER"."IDCONTASRECEBER"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_ContasReceberIDVENDA: TIntegerField
+      FieldName = 'IDVENDA'
+      Origin = '"CONTASRECEBER"."IDVENDA"'
+    end
+    object TB_ContasReceberIDCLIENTE: TIntegerField
+      FieldName = 'IDCLIENTE'
+      Origin = '"CONTASRECEBER"."IDCLIENTE"'
+    end
+    object TB_ContasReceberTIPO: TIBStringField
+      FieldName = 'TIPO'
+      Origin = '"CONTASRECEBER"."TIPO"'
+      FixedChar = True
+      Size = 1
+    end
+    object TB_ContasReceberQUANTIDADEPARCELA: TIntegerField
+      FieldName = 'QUANTIDADEPARCELA'
+      Origin = '"CONTASRECEBER"."QUANTIDADEPARCELA"'
+    end
+    object TB_ContasReceberDATACONTA: TDateField
+      FieldName = 'DATACONTA'
+      Origin = '"CONTASRECEBER"."DATACONTA"'
+    end
+    object TB_ContasReceberVALORTOTAL: TIBBCDField
+      FieldName = 'VALORTOTAL'
+      Origin = '"CONTASRECEBER"."VALORTOTAL"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ContasReceberSTATUSCONTA: TIBStringField
+      FieldName = 'STATUSCONTA'
+      Origin = '"CONTASRECEBER"."STATUSCONTA"'
+      FixedChar = True
+      Size = 1
+    end
+    object TB_ContasRecebervalorReceber: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorReceber'
+      Calculated = True
+    end
+    object TB_ContasRecebervalorDiferenca: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorDiferenca'
+      Calculated = True
+    end
+    object TB_ContasReceberdiasVencidos: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'diasVencidos'
+      Calculated = True
+    end
+    object TB_ContasRecebervalorRecebido: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorRecebido'
+      Calculated = True
+    end
   end
-  object IBQuery9: TIBQuery
+  object TB_ParcelaContasReceber: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
-    Left = 104
+    SQL.Strings = (
+      'select * from PARCELACONTASRECEBER')
+    UpdateObject = SQL_ParcelaContasReceber
+    GeneratorField.Field = 'IDPARCELACONTASRECEBER'
+    GeneratorField.Generator = 'GEN_PARCELACONTASRECEBER_ID'
+    Left = 176
     Top = 392
+    object TB_ParcelaContasReceberIDPARCELACONTASRECEBER: TIntegerField
+      FieldName = 'IDPARCELACONTASRECEBER'
+      Origin = '"PARCELACONTASRECEBER"."IDPARCELACONTASRECEBER"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_ParcelaContasReceberIDCONTASRECEBER: TIntegerField
+      FieldName = 'IDCONTASRECEBER'
+      Origin = '"PARCELACONTASRECEBER"."IDCONTASRECEBER"'
+      Required = True
+    end
+    object TB_ParcelaContasReceberDATAVENCIMENTO: TDateField
+      FieldName = 'DATAVENCIMENTO'
+      Origin = '"PARCELACONTASRECEBER"."DATAVENCIMENTO"'
+    end
+    object TB_ParcelaContasReceberDATARECEBIMENTO: TDateField
+      FieldName = 'DATARECEBIMENTO'
+      Origin = '"PARCELACONTASRECEBER"."DATARECEBIMENTO"'
+    end
+    object TB_ParcelaContasReceberNUMEROPARCELA: TIntegerField
+      FieldName = 'NUMEROPARCELA'
+      Origin = '"PARCELACONTASRECEBER"."NUMEROPARCELA"'
+    end
+    object TB_ParcelaContasReceberVALORPARCELA: TIBBCDField
+      FieldName = 'VALORPARCELA'
+      Origin = '"PARCELACONTASRECEBER"."VALORPARCELA"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasReceberJUROS: TIBBCDField
+      FieldName = 'JUROS'
+      Origin = '"PARCELACONTASRECEBER"."JUROS"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasReceberDESCONTO: TIBBCDField
+      FieldName = 'DESCONTO'
+      Origin = '"PARCELACONTASRECEBER"."DESCONTO"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasReceberMULTA: TIBBCDField
+      FieldName = 'MULTA'
+      Origin = '"PARCELACONTASRECEBER"."MULTA"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasReceberVALORFINAL: TIBBCDField
+      FieldName = 'VALORFINAL'
+      Origin = '"PARCELACONTASRECEBER"."VALORFINAL"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasReceberSTATUSPARCELA: TIBStringField
+      FieldName = 'STATUSPARCELA'
+      Origin = '"PARCELACONTASRECEBER"."STATUSPARCELA"'
+      FixedChar = True
+      Size = 1
+    end
   end
-  object IBQuery10: TIBQuery
+  object TB_Recebimento: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
-    Left = 184
+    SQL.Strings = (
+      'select * from RECEBIMENTO')
+    UpdateObject = SQL_Recebimento
+    GeneratorField.Field = 'IDRECEBIMENTO'
+    GeneratorField.Generator = 'GEN_RECEBIMENTO_ID'
+    Left = 296
     Top = 392
+    object TB_RecebimentoIDRECEBIMENTO: TIntegerField
+      FieldName = 'IDRECEBIMENTO'
+      Origin = '"RECEBIMENTO"."IDRECEBIMENTO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_RecebimentoIDPARCELACONTASRECEBER: TIntegerField
+      FieldName = 'IDPARCELACONTASRECEBER'
+      Origin = '"RECEBIMENTO"."IDPARCELACONTASRECEBER"'
+      Required = True
+    end
+    object TB_RecebimentoDATARECEBIMENTO: TDateField
+      FieldName = 'DATARECEBIMENTO'
+      Origin = '"RECEBIMENTO"."DATARECEBIMENTO"'
+    end
+    object TB_RecebimentoHORARECEBIMENTO: TTimeField
+      FieldName = 'HORARECEBIMENTO'
+      Origin = '"RECEBIMENTO"."HORARECEBIMENTO"'
+    end
+    object TB_RecebimentoVALORRECEBIDO: TIBBCDField
+      FieldName = 'VALORRECEBIDO'
+      Origin = '"RECEBIMENTO"."VALORRECEBIDO"'
+      Precision = 9
+      Size = 2
+    end
   end
   object IBQuery11: TIBQuery
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
-    Left = 696
+    Left = 840
     Top = 392
   end
-  object IBQuery12: TIBQuery
+  object TB_ParcelaContasPagar: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
-    Left = 344
+    SQL.Strings = (
+      'select * from PARCELACONTASPAGAR')
+    UpdateObject = SQL_ParcelaContasPagar
+    GeneratorField.Field = 'IDPARCELACONTASPAGAR'
+    GeneratorField.Generator = 'GEN_PARCELACONTASRECEBER_ID'
+    Left = 504
     Top = 392
   end
-  object IBQuery13: TIBQuery
+  object TB_Pagamento: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
-    Left = 432
-    Top = 392
-  end
-  object IBQuery14: TIBQuery
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    Left = 520
-    Top = 392
-  end
-  object IBQuery15: TIBQuery
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+    SQL.Strings = (
+      'select * from PAGAMENTO')
+    UpdateObject = SQL_Pagamento
+    GeneratorField.Field = 'IDPAGAMENTO'
+    GeneratorField.Generator = 'GEN_PAGAMENTO_ID'
     Left = 608
     Top = 392
+    object TB_PagamentoIDPAGAMENTO: TIntegerField
+      FieldName = 'IDPAGAMENTO'
+      Origin = '"PAGAMENTO"."IDPAGAMENTO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_PagamentoIDPARCELACONTASPAGAR: TIntegerField
+      FieldName = 'IDPARCELACONTASPAGAR'
+      Origin = '"PAGAMENTO"."IDPARCELACONTASPAGAR"'
+      Required = True
+    end
+    object TB_PagamentoVALORPARCELA: TIBBCDField
+      FieldName = 'VALORPARCELA'
+      Origin = '"PAGAMENTO"."VALORPARCELA"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_PagamentoVALORPAGO: TIBBCDField
+      FieldName = 'VALORPAGO'
+      Origin = '"PAGAMENTO"."VALORPAGO"'
+      Precision = 9
+      Size = 2
+    end
+  end
+  object TB_MovimentoCaixa: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'select * from MOVIMENTOCAIXA')
+    UpdateObject = SQL_MovimentoCaixa
+    GeneratorField.Field = 'IDMOVIMENTOCAIXA'
+    GeneratorField.Generator = 'GEN_MOVIMENTOCAIXA_ID'
+    Left = 704
+    Top = 392
+    object TB_MovimentoCaixaIDMOVIMENTOCAIXA: TIntegerField
+      FieldName = 'IDMOVIMENTOCAIXA'
+      Origin = '"MOVIMENTOCAIXA"."IDMOVIMENTOCAIXA"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_MovimentoCaixaCAIXA_IDCAIXA: TIntegerField
+      FieldName = 'CAIXA_IDCAIXA'
+      Origin = '"MOVIMENTOCAIXA"."CAIXA_IDCAIXA"'
+      Required = True
+    end
+    object TB_MovimentoCaixaIDRECEBIMENTO: TIntegerField
+      FieldName = 'IDRECEBIMENTO'
+      Origin = '"MOVIMENTOCAIXA"."IDRECEBIMENTO"'
+    end
+    object TB_MovimentoCaixaIDPAGAMENTO: TIntegerField
+      FieldName = 'IDPAGAMENTO'
+      Origin = '"MOVIMENTOCAIXA"."IDPAGAMENTO"'
+    end
+    object TB_MovimentoCaixaVALOR: TIBBCDField
+      FieldName = 'VALOR'
+      Origin = '"MOVIMENTOCAIXA"."VALOR"'
+      Precision = 9
+      Size = 2
+    end
   end
   object SQL_Fornecedor: TIBUpdateSQL
     RefreshSQL.Strings = (
@@ -661,7 +943,7 @@ object DM: TDM
       'delete from FORNECEDOR'
       'where'
       '  IDFORNECEDOR = :OLD_IDFORNECEDOR')
-    Left = 184
+    Left = 232
     Top = 264
   end
   object SQL_Funcionario: TIBUpdateSQL
@@ -698,7 +980,7 @@ object DM: TDM
       'delete from FUNCIONARIO'
       'where'
       '  IDFUNCIONARIO = :OLD_IDFUNCIONARIO')
-    Left = 264
+    Left = 320
     Top = 264
   end
   object SQL_Produto: TIBUpdateSQL
@@ -737,7 +1019,7 @@ object DM: TDM
       'delete from PRODUTO'
       'where'
       '  IDPRODUTO = :OLD_IDPRODUTO')
-    Left = 344
+    Left = 448
     Top = 264
   end
   object SQL_Venda: TIBUpdateSQL
@@ -784,7 +1066,7 @@ object DM: TDM
       'delete from VENDA'
       'where'
       '  IDVENDA = :OLD_IDVENDA')
-    Left = 432
+    Left = 592
     Top = 264
   end
   object SQL_ItemVenda: TIBUpdateSQL
@@ -821,11 +1103,52 @@ object DM: TDM
       'delete from ITEMVENDA'
       'where'
       '  IDITEMVENDA = :OLD_IDITEMVENDA')
-    Left = 520
+    Left = 672
     Top = 264
   end
-  object IBUpdateSQL6: TIBUpdateSQL
-    Left = 264
+  object SQL_ContasPagar: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDCONTASPAGAR,'
+      '  IDFORNECEDOR,'
+      '  IDCOMPRA,'
+      '  TIPO,'
+      '  QUANTIDADEPARCELA,'
+      '  DATACONTA,'
+      '  VALORTOTAL,'
+      '  STATUSCONTA'
+      'from CONTASPAGAR '
+      'where'
+      '  IDCONTASPAGAR = :IDCONTASPAGAR')
+    ModifySQL.Strings = (
+      'update CONTASPAGAR'
+      'set'
+      '  IDCONTASPAGAR = :IDCONTASPAGAR,'
+      '  IDFORNECEDOR = :IDFORNECEDOR,'
+      '  IDCOMPRA = :IDCOMPRA,'
+      '  TIPO = :TIPO,'
+      '  QUANTIDADEPARCELA = :QUANTIDADEPARCELA,'
+      '  DATACONTA = :DATACONTA,'
+      '  VALORTOTAL = :VALORTOTAL,'
+      '  STATUSCONTA = :STATUSCONTA'
+      'where'
+      '  IDCONTASPAGAR = :OLD_IDCONTASPAGAR')
+    InsertSQL.Strings = (
+      'insert into CONTASPAGAR'
+      
+        '  (IDCONTASPAGAR, IDFORNECEDOR, IDCOMPRA, TIPO, QUANTIDADEPARCEL' +
+        'A, DATACONTA, '
+      '   VALORTOTAL, STATUSCONTA)'
+      'values'
+      
+        '  (:IDCONTASPAGAR, :IDFORNECEDOR, :IDCOMPRA, :TIPO, :QUANTIDADEP' +
+        'ARCELA, '
+      '   :DATACONTA, :VALORTOTAL, :STATUSCONTA)')
+    DeleteSQL.Strings = (
+      'delete from CONTASPAGAR'
+      'where'
+      '  IDCONTASPAGAR = :OLD_IDCONTASPAGAR')
+    Left = 392
     Top = 448
   end
   object SQL_Compra: TIBUpdateSQL
@@ -872,39 +1195,270 @@ object DM: TDM
       'delete from COMPRA'
       'where'
       '  IDCOMPRA = :OLD_IDCOMPRA')
-    Left = 608
+    Left = 752
     Top = 264
   end
-  object IBUpdateSQL8: TIBUpdateSQL
-    Left = 24
+  object SQL_ContasReceber: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDCONTASRECEBER,'
+      '  IDVENDA,'
+      '  IDCLIENTE,'
+      '  TIPO,'
+      '  QUANTIDADEPARCELA,'
+      '  DATACONTA,'
+      '  VALORTOTAL,'
+      '  STATUSCONTA'
+      'from CONTASRECEBER '
+      'where'
+      '  IDCONTASRECEBER = :IDCONTASRECEBER')
+    ModifySQL.Strings = (
+      'update CONTASRECEBER'
+      'set'
+      '  IDCONTASRECEBER = :IDCONTASRECEBER,'
+      '  IDVENDA = :IDVENDA,'
+      '  IDCLIENTE = :IDCLIENTE,'
+      '  TIPO = :TIPO,'
+      '  QUANTIDADEPARCELA = :QUANTIDADEPARCELA,'
+      '  DATACONTA = :DATACONTA,'
+      '  VALORTOTAL = :VALORTOTAL,'
+      '  STATUSCONTA = :STATUSCONTA'
+      'where'
+      '  IDCONTASRECEBER = :OLD_IDCONTASRECEBER')
+    InsertSQL.Strings = (
+      'insert into CONTASRECEBER'
+      
+        '  (IDCONTASRECEBER, IDVENDA, IDCLIENTE, TIPO, QUANTIDADEPARCELA,' +
+        ' DATACONTA, '
+      '   VALORTOTAL, STATUSCONTA)'
+      'values'
+      
+        '  (:IDCONTASRECEBER, :IDVENDA, :IDCLIENTE, :TIPO, :QUANTIDADEPAR' +
+        'CELA, :DATACONTA, '
+      '   :VALORTOTAL, :STATUSCONTA)')
+    DeleteSQL.Strings = (
+      'delete from CONTASRECEBER'
+      'where'
+      '  IDCONTASRECEBER = :OLD_IDCONTASRECEBER')
+    Left = 48
     Top = 448
   end
-  object IBUpdateSQL9: TIBUpdateSQL
-    Left = 104
+  object SQL_ParcelaContasReceber: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDPARCELACONTASRECEBER,'
+      '  IDCONTASRECEBER,'
+      '  DATAVENCIMENTO,'
+      '  DATARECEBIMENTO,'
+      '  NUMEROPARCELA,'
+      '  VALORPARCELA,'
+      '  JUROS,'
+      '  DESCONTO,'
+      '  MULTA,'
+      '  VALORFINAL,'
+      '  STATUSPARCELA'
+      'from PARCELACONTASRECEBER '
+      'where'
+      '  IDPARCELACONTASRECEBER = :IDPARCELACONTASRECEBER')
+    ModifySQL.Strings = (
+      'update PARCELACONTASRECEBER'
+      'set'
+      '  IDPARCELACONTASRECEBER = :IDPARCELACONTASRECEBER,'
+      '  IDCONTASRECEBER = :IDCONTASRECEBER,'
+      '  DATAVENCIMENTO = :DATAVENCIMENTO,'
+      '  DATARECEBIMENTO = :DATARECEBIMENTO,'
+      '  NUMEROPARCELA = :NUMEROPARCELA,'
+      '  VALORPARCELA = :VALORPARCELA,'
+      '  JUROS = :JUROS,'
+      '  DESCONTO = :DESCONTO,'
+      '  MULTA = :MULTA,'
+      '  VALORFINAL = :VALORFINAL,'
+      '  STATUSPARCELA = :STATUSPARCELA'
+      'where'
+      '  IDPARCELACONTASRECEBER = :OLD_IDPARCELACONTASRECEBER')
+    InsertSQL.Strings = (
+      'insert into PARCELACONTASRECEBER'
+      
+        '  (IDPARCELACONTASRECEBER, IDCONTASRECEBER, DATAVENCIMENTO, DATA' +
+        'RECEBIMENTO, '
+      
+        '   NUMEROPARCELA, VALORPARCELA, JUROS, DESCONTO, MULTA, VALORFIN' +
+        'AL, STATUSPARCELA)'
+      'values'
+      
+        '  (:IDPARCELACONTASRECEBER, :IDCONTASRECEBER, :DATAVENCIMENTO, :' +
+        'DATARECEBIMENTO, '
+      
+        '   :NUMEROPARCELA, :VALORPARCELA, :JUROS, :DESCONTO, :MULTA, :VA' +
+        'LORFINAL, '
+      '   :STATUSPARCELA)')
+    DeleteSQL.Strings = (
+      'delete from PARCELACONTASRECEBER'
+      'where'
+      '  IDPARCELACONTASRECEBER = :OLD_IDPARCELACONTASRECEBER')
+    Left = 176
     Top = 448
   end
-  object IBUpdateSQL10: TIBUpdateSQL
-    Left = 184
+  object SQL_Recebimento: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDRECEBIMENTO,'
+      '  IDPARCELACONTASRECEBER,'
+      '  DATARECEBIMENTO,'
+      '  HORARECEBIMENTO,'
+      '  VALORRECEBIDO'
+      'from RECEBIMENTO '
+      'where'
+      '  IDRECEBIMENTO = :IDRECEBIMENTO')
+    ModifySQL.Strings = (
+      'update RECEBIMENTO'
+      'set'
+      '  IDRECEBIMENTO = :IDRECEBIMENTO,'
+      '  IDPARCELACONTASRECEBER = :IDPARCELACONTASRECEBER,'
+      '  DATARECEBIMENTO = :DATARECEBIMENTO,'
+      '  HORARECEBIMENTO = :HORARECEBIMENTO,'
+      '  VALORRECEBIDO = :VALORRECEBIDO'
+      'where'
+      '  IDRECEBIMENTO = :OLD_IDRECEBIMENTO')
+    InsertSQL.Strings = (
+      'insert into RECEBIMENTO'
+      
+        '  (IDRECEBIMENTO, IDPARCELACONTASRECEBER, DATARECEBIMENTO, HORAR' +
+        'ECEBIMENTO, '
+      '   VALORRECEBIDO)'
+      'values'
+      
+        '  (:IDRECEBIMENTO, :IDPARCELACONTASRECEBER, :DATARECEBIMENTO, :H' +
+        'ORARECEBIMENTO, '
+      '   :VALORRECEBIDO)')
+    DeleteSQL.Strings = (
+      'delete from RECEBIMENTO'
+      'where'
+      '  IDRECEBIMENTO = :OLD_IDRECEBIMENTO')
+    Left = 296
     Top = 448
   end
   object IBUpdateSQL11: TIBUpdateSQL
-    Left = 696
+    Left = 840
     Top = 448
   end
-  object IBUpdateSQL12: TIBUpdateSQL
-    Left = 344
+  object SQL_ParcelaContasPagar: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDPARCELACONTASPAGAR,'
+      '  IDCONTASPAGAR,'
+      '  DATAVENCIMENTO,'
+      '  NUMEROPARCELA,'
+      '  VALORPARCELA,'
+      '  JUROS,'
+      '  DESCONTO,'
+      '  VALORFINAL,'
+      '  STATUSPARCELA'
+      'from PARCELACONTASPAGAR '
+      'where'
+      '  IDPARCELACONTASPAGAR = :IDPARCELACONTASPAGAR')
+    ModifySQL.Strings = (
+      'update PARCELACONTASPAGAR'
+      'set'
+      '  IDPARCELACONTASPAGAR = :IDPARCELACONTASPAGAR,'
+      '  IDCONTASPAGAR = :IDCONTASPAGAR,'
+      '  DATAVENCIMENTO = :DATAVENCIMENTO,'
+      '  NUMEROPARCELA = :NUMEROPARCELA,'
+      '  VALORPARCELA = :VALORPARCELA,'
+      '  JUROS = :JUROS,'
+      '  DESCONTO = :DESCONTO,'
+      '  VALORFINAL = :VALORFINAL,'
+      '  STATUSPARCELA = :STATUSPARCELA'
+      'where'
+      '  IDPARCELACONTASPAGAR = :OLD_IDPARCELACONTASPAGAR')
+    InsertSQL.Strings = (
+      'insert into PARCELACONTASPAGAR'
+      
+        '  (IDPARCELACONTASPAGAR, IDCONTASPAGAR, DATAVENCIMENTO, NUMEROPA' +
+        'RCELA, '
+      '   VALORPARCELA, JUROS, DESCONTO, VALORFINAL, STATUSPARCELA)'
+      'values'
+      
+        '  (:IDPARCELACONTASPAGAR, :IDCONTASPAGAR, :DATAVENCIMENTO, :NUME' +
+        'ROPARCELA, '
+      
+        '   :VALORPARCELA, :JUROS, :DESCONTO, :VALORFINAL, :STATUSPARCELA' +
+        ')')
+    DeleteSQL.Strings = (
+      'delete from PARCELACONTASPAGAR'
+      'where'
+      '  IDPARCELACONTASPAGAR = :OLD_IDPARCELACONTASPAGAR')
+    Left = 504
     Top = 448
   end
-  object IBUpdateSQL13: TIBUpdateSQL
-    Left = 432
-    Top = 448
-  end
-  object IBUpdateSQL14: TIBUpdateSQL
-    Left = 520
-    Top = 448
-  end
-  object IBUpdateSQL15: TIBUpdateSQL
+  object SQL_Pagamento: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDPAGAMENTO,'
+      '  IDPARCELACONTASPAGAR,'
+      '  VALORPARCELA,'
+      '  VALORPAGO'
+      'from PAGAMENTO '
+      'where'
+      '  IDPAGAMENTO = :IDPAGAMENTO')
+    ModifySQL.Strings = (
+      'update PAGAMENTO'
+      'set'
+      '  IDPAGAMENTO = :IDPAGAMENTO,'
+      '  IDPARCELACONTASPAGAR = :IDPARCELACONTASPAGAR,'
+      '  VALORPARCELA = :VALORPARCELA,'
+      '  VALORPAGO = :VALORPAGO'
+      'where'
+      '  IDPAGAMENTO = :OLD_IDPAGAMENTO')
+    InsertSQL.Strings = (
+      'insert into PAGAMENTO'
+      '  (IDPAGAMENTO, IDPARCELACONTASPAGAR, VALORPARCELA, VALORPAGO)'
+      'values'
+      
+        '  (:IDPAGAMENTO, :IDPARCELACONTASPAGAR, :VALORPARCELA, :VALORPAG' +
+        'O)')
+    DeleteSQL.Strings = (
+      'delete from PAGAMENTO'
+      'where'
+      '  IDPAGAMENTO = :OLD_IDPAGAMENTO')
     Left = 608
+    Top = 448
+  end
+  object SQL_MovimentoCaixa: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  IDMOVIMENTOCAIXA,'
+      '  CAIXA_IDCAIXA,'
+      '  IDRECEBIMENTO,'
+      '  IDPAGAMENTO,'
+      '  VALOR'
+      'from MOVIMENTOCAIXA '
+      'where'
+      '  IDMOVIMENTOCAIXA = :IDMOVIMENTOCAIXA')
+    ModifySQL.Strings = (
+      'update MOVIMENTOCAIXA'
+      'set'
+      '  IDMOVIMENTOCAIXA = :IDMOVIMENTOCAIXA,'
+      '  CAIXA_IDCAIXA = :CAIXA_IDCAIXA,'
+      '  IDRECEBIMENTO = :IDRECEBIMENTO,'
+      '  IDPAGAMENTO = :IDPAGAMENTO,'
+      '  VALOR = :VALOR'
+      'where'
+      '  IDMOVIMENTOCAIXA = :OLD_IDMOVIMENTOCAIXA')
+    InsertSQL.Strings = (
+      'insert into MOVIMENTOCAIXA'
+      
+        '  (IDMOVIMENTOCAIXA, CAIXA_IDCAIXA, IDRECEBIMENTO, IDPAGAMENTO, ' +
+        'VALOR)'
+      'values'
+      
+        '  (:IDMOVIMENTOCAIXA, :CAIXA_IDCAIXA, :IDRECEBIMENTO, :IDPAGAMEN' +
+        'TO, :VALOR)')
+    DeleteSQL.Strings = (
+      'delete from MOVIMENTOCAIXA'
+      'where'
+      '  IDMOVIMENTOCAIXA = :OLD_IDMOVIMENTOCAIXA')
+    Left = 704
     Top = 448
   end
   object Query_Pesquisa: TIBQuery
@@ -918,68 +1472,71 @@ object DM: TDM
   end
   object DS_Fornecedor: TDataSource
     DataSet = TB_Fornecedor
-    Left = 184
+    Left = 232
     Top = 320
   end
   object DS_Funcionario: TDataSource
     DataSet = TB_Funcionario
-    Left = 264
+    Left = 320
     Top = 320
   end
   object DS_Produto: TDataSource
     DataSet = TB_Produto
-    Left = 344
+    Left = 448
     Top = 320
   end
   object DS_Venda: TDataSource
     DataSet = TB_Venda
-    Left = 432
+    Left = 592
     Top = 320
   end
   object DS_ItemVenda: TDataSource
     DataSet = TB_ItemVenda
-    Left = 520
+    Left = 672
     Top = 320
   end
-  object DataSource6: TDataSource
-    Left = 264
+  object DS_ContasPagar: TDataSource
+    DataSet = TB_ContasPagar
+    Left = 392
     Top = 504
   end
-  object DataSource7: TDataSource
-    Left = 184
+  object DS_Recebimento: TDataSource
+    DataSet = TB_Recebimento
+    Left = 296
     Top = 504
   end
-  object DataSource8: TDataSource
-    Left = 104
+  object DS_ParcelaContasReceber: TDataSource
+    DataSet = TB_ParcelaContasReceber
+    Left = 176
     Top = 504
   end
-  object DataSource9: TDataSource
-    Left = 24
+  object DS_ContasReceber: TDataSource
+    DataSet = TB_ContasReceber
+    Left = 48
     Top = 504
   end
   object DS_Compra: TDataSource
     DataSet = TB_Compra
-    Left = 608
+    Left = 752
     Top = 320
   end
-  object DataSource11: TDataSource
-    Left = 344
+  object DS_ParcelaContasPagar: TDataSource
+    DataSet = TB_ParcelaContasPagar
+    Left = 504
     Top = 504
   end
   object DataSource12: TDataSource
-    Left = 696
+    Left = 840
     Top = 504
   end
-  object DataSource13: TDataSource
+  object DS_MovimentoCaixa: TDataSource
+    DataSet = TB_MovimentoCaixa
+    Left = 704
+    Top = 504
+  end
+  object DS_Pagamento: TDataSource
+    DataSet = TB_Pagamento
     Left = 608
-    Top = 504
-  end
-  object DataSource14: TDataSource
-    Left = 520
-    Top = 504
-  end
-  object DataSource15: TDataSource
-    Left = 432
     Top = 504
   end
   object DS_Pesquisa: TDataSource
@@ -1000,7 +1557,7 @@ object DM: TDM
     UpdateObject = SQL_ItemCompra
     GeneratorField.Field = 'IDITEMCOMPRA'
     GeneratorField.Generator = 'GEN_ITEMCOMPRA_ID'
-    Left = 696
+    Left = 840
     Top = 208
     object TB_ItemCompraIDITEMCOMPRA: TIntegerField
       FieldName = 'IDITEMCOMPRA'
@@ -1069,12 +1626,12 @@ object DM: TDM
       'delete from ITEMCOMPRA'
       'where'
       '  IDITEMCOMPRA = :OLD_IDITEMCOMPRA')
-    Left = 696
+    Left = 840
     Top = 264
   end
   object DS_ItemCompra: TDataSource
     DataSet = TB_ItemCompra
-    Left = 696
+    Left = 840
     Top = 320
   end
   object Query_Calcular: TIBQuery
