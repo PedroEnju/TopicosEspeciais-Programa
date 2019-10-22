@@ -623,6 +623,7 @@ object DM: TDM
     Database = DB_Principal
     Transaction = DB_Transaction
     AfterScroll = TB_ContasReceberAfterScroll
+    OnNewRecord = TB_ContasReceberNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -674,30 +675,20 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
-    object TB_ContasRecebervalorReceber: TFloatField
-      FieldKind = fkCalculated
-      FieldName = 'valorReceber'
-      Calculated = True
-    end
-    object TB_ContasRecebervalorDiferenca: TFloatField
-      FieldKind = fkCalculated
-      FieldName = 'valorDiferenca'
-      Calculated = True
-    end
-    object TB_ContasReceberdiasVencidos: TIntegerField
-      FieldKind = fkCalculated
-      FieldName = 'diasVencidos'
-      Calculated = True
-    end
-    object TB_ContasRecebervalorRecebido: TFloatField
-      FieldKind = fkCalculated
-      FieldName = 'valorRecebido'
-      Calculated = True
+    object TB_ContasRecebernomeCliente: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nomeCliente'
+      LookupDataSet = TB_Cliente
+      LookupKeyFields = 'IDCLIENTE'
+      LookupResultField = 'NOMECLIENTE'
+      KeyFields = 'IDCLIENTE'
+      Lookup = True
     end
   end
   object TB_ParcelaContasReceber: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_ParcelaContasReceberNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -767,6 +758,26 @@ object DM: TDM
       Origin = '"PARCELACONTASRECEBER"."STATUSPARCELA"'
       FixedChar = True
       Size = 1
+    end
+    object TB_ParcelaContasRecebervalorReceber: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorReceber'
+      Calculated = True
+    end
+    object TB_ParcelaContasRecebervalorDiferenca: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorDiferenca'
+      Calculated = True
+    end
+    object TB_ParcelaContasReceberdiasVencidos: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'diasVencidos'
+      Calculated = True
+    end
+    object TB_ParcelaContasRecebervalorRecebido: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorRecebido'
+      Calculated = True
     end
   end
   object TB_Recebimento: TIBQuery

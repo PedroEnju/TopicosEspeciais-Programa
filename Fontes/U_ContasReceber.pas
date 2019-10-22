@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, U_FrameButton, Vcl.DBCtrls,
-  Vcl.StdCtrls, Vcl.Mask, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Vcl.StdCtrls, Vcl.Mask, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.Menus;
 
 type
   TF_ContasReceber = class(TForm)
@@ -26,6 +26,10 @@ type
     DBText2: TDBText;
     DBText3: TDBText;
     DBEdit1: TDBEdit;
+    PopupMenu1: TPopupMenu;
+    ReceberParcela1: TMenuItem;
+    RecalcularParcela1: TMenuItem;
+    Sair1: TMenuItem;
     procedure Frame_Button1btnFecharClick(Sender: TObject);
     procedure Frame_Button1btnFirstClick(Sender: TObject);
     procedure Frame_Button1btnPreviousClick(Sender: TObject);
@@ -40,6 +44,13 @@ type
     { Private declarations }
   public
     { Public declarations }
+    contParc: Integer;
+    valorParcela: Real;
+    respMsg, strValue: String;
+    codVendaNovo: Integer;
+    valorTotalParcela: Real;
+    procedure GerarParcelas(Automatico: String);
+    function PegarDiferenca(idContasReceber: String): Real;
   end;
 
 var
@@ -49,7 +60,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM;
+uses U_DM, U_Funcao, U_ParcelaContasReceber;
 
 procedure TF_ContasReceber.Frame_Button1btnCancelarClick(Sender: TObject);
 begin
@@ -99,10 +110,100 @@ begin
   DM.TB_ContasReceber.Prior;
 end;
 
-procedure TF_ContasReceber.Frame_Button1btnSalvarClick(Sender: TObject);
+procedure TF_ContasReceber.GerarParcelas(Automatico: String);
+begin // criaçao das parcelas
+
+  while contParc <= DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger do
+  begin
+    With DM.TB_ParcelaContasReceber do
+    begin
+      Append;
+      FieldByName('DataVencimento').AsDateTime := IncMonth(Date, contParc);
+      FieldByName('NumeroParcela').AsInteger := contParc;
+      FieldByName('ValorParcela').AsFloat := valorParcela;
+      if Automatico = 'Não' then
+      begin
+        CriarForm(F_ParcelaContasReceber, TF_ParcelaContasReceber, '');
+        AbrirDestruirForm(F_ParcelaContasReceber);
+      end
+      else // quando for automático
+        Post;
+      vlrTotalParcela := vlrTotalParcela + FieldByName('ValorParcela').AsFloat;
+    end;
+    if contParc <> DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger Then
+      valorParcela := PegarDiferenca
+        (DM.TB_ContasReceberIDCONTASRECEBER.AsString) /
+        (DM.TB_ContasReceberQUANTIDADEPARCELA.AsFloat - contParc);
+    valorParcela := ArredondaValor(valorParcela, 2);
+    contParc := contParc + 1;
+  end;
+end;
+
+function TF_ContasReceber.PegarDiferenca(idContasReceber: String): Real;
+var
+  Retorno: Real;
 begin
+  With DM.Query_Calcular do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('select sum(valorParcela) from ParcelaContasReceber');
+    SQL.Add('where idContasReceber = :idContasReceber');
+    ParamByName('idContasReceber').AsString := idContasReceber;
+    Open;
+    Result := DM.TB_ContasReceberVALORTOTAL.AsFloat - DM.Query_Calcular.Fields
+      [0].AsFloat;
+    Close;
+  end;
+end;
+
+procedure TF_ContasReceber.Frame_Button1btnSalvarClick(Sender: TObject);
+var
+  respMsg: String;
+begin
+
+  if (DM.TB_ContasReceberVALORTOTAL.AsFloat <= 0) then
+  begin
+    ShowMessage('O Valor Total deve ser superior a 0');
+    if (DBEdit7.Enabled) then
+      DBEdit7.SetFocus;
+    Exit;
+  end;
+
+  if (DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger <= 0) then
+  begin
+    ShowMessage('Número de Parcelas deve ser superior a 0');
+    DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger := 1;
+    DBEdit1.SetFocus;
+    Exit;
+  end;
+
+  if (DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger * 0.01 >
+    DM.TB_ContasReceberVALORTOTAL.AsFloat) then
+  begin
+    ShowMessage('Valor do Contas a Receber inválido!');
+    if (DBEdit7.Enabled) then
+      DBEdit7.SetFocus;
+    Exit;
+  end;
+
   Frame_Button1.btnSalvarClick(Sender);
   DM.TB_ContasReceber.Post;
+
+  contParc := 1;
+  valorTotalParcela := 0;
+  valorParcela := DM.TB_ContasReceberVALORTOTAL.AsFloat /
+    DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger;
+  valorParcela := ArredondaValor(valorParcela, 2);
+
+  if (MessageDLG('Deseja gerar as parcelas automaticamente?', mtConfirmation,
+    [mbYes, mbNo], 0) = mrYes) then
+    respMsg := 'Sim'
+  else
+    respMsg := 'Não';
+
+  GerarParcelas(respMsg);
+  ShowMessage('Todas as parcelas foram geradas com sucesso!');
 end;
 
 end.

@@ -100,8 +100,7 @@ object F_ContasReceber: TF_ContasReceber
     Height = 32
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = 40
-    ExplicitTop = 136
+    ExplicitWidth = 610
     inherited btnNovo: TBitBtn
       OnClick = Frame_Button1btnNovoClick
     end
@@ -185,5 +184,18 @@ object F_ContasReceber: TF_ContasReceber
     DataField = 'QUANTIDADEPARCELA'
     DataSource = DM.DS_ContasReceber
     TabOrder = 5
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 512
+    Top = 216
+    object ReceberParcela1: TMenuItem
+      Caption = 'Receber Parcela'
+    end
+    object RecalcularParcela1: TMenuItem
+      Caption = 'Recalcular Parcela'
+    end
+    object Sair1: TMenuItem
+      Caption = 'Sair'
+    end
   end
 end

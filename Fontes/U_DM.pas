@@ -170,10 +170,11 @@ type
     TB_MovimentoCaixaIDRECEBIMENTO: TIntegerField;
     TB_MovimentoCaixaIDPAGAMENTO: TIntegerField;
     TB_MovimentoCaixaVALOR: TIBBCDField;
-    TB_ContasRecebervalorReceber: TFloatField;
-    TB_ContasRecebervalorDiferenca: TFloatField;
-    TB_ContasReceberdiasVencidos: TIntegerField;
-    TB_ContasRecebervalorRecebido: TFloatField;
+    TB_ParcelaContasRecebervalorReceber: TFloatField;
+    TB_ParcelaContasRecebervalorDiferenca: TFloatField;
+    TB_ParcelaContasReceberdiasVencidos: TIntegerField;
+    TB_ParcelaContasRecebervalorRecebido: TFloatField;
+    TB_ContasRecebernomeCliente: TStringField;
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);
@@ -188,6 +189,8 @@ type
     procedure TB_CompraCalcFields(DataSet: TDataSet);
     procedure TB_CompraNewRecord(DataSet: TDataSet);
     procedure TB_ContasReceberAfterScroll(DataSet: TDataSet);
+    procedure TB_ContasReceberNewRecord(DataSet: TDataSet);
+    procedure TB_ParcelaContasReceberNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -273,6 +276,18 @@ begin
   end;
 end;
 
+procedure TDM.TB_ContasReceberNewRecord(DataSet: TDataSet);
+begin
+  With DataSet do
+  begin
+    FieldByName('QUANTIDADEPARCELA').AsInteger := 1;
+    FieldByName('DATACONTA').AsDateTime := Date;
+    FieldByName('TIPO').AsString := 'M';
+    FieldByName('STATUSCONTA').AsString := 'N';
+    FieldByName('VALORTOTAL').AsFloat := 0;
+  end;
+end;
+
 procedure TDM.TB_FornecedorNewRecord(DataSet: TDataSet);
 begin
   TB_FornecedorSTATUSFORNECEDOR.AsString := 'A';
@@ -292,6 +307,15 @@ procedure TDM.TB_ItemVendaNewRecord(DataSet: TDataSet);
 begin
   TB_ItemVendaIDVENDA.AsInteger := TB_VendaIDVENDA.AsInteger;
   TB_ItemVendaQUANTIDADE.AsInteger := 1;
+end;
+
+procedure TDM.TB_ParcelaContasReceberNewRecord(DataSet: TDataSet);
+begin
+  TB_ParcelaContasReceberIDCONTASRECEBER.AsInteger :=
+    TB_ContasReceberIDCONTASRECEBER.AsInteger;
+  TB_ParcelaContasReceberVALORPARCELA.AsFloat := 0;
+  TB_ParcelaContasRecebervalorRecebido.AsFloat := 0;
+  TB_ParcelaContasReceberSTATUSPARCELA.AsString := 'N';
 end;
 
 procedure TDM.TB_ProdutoNewRecord(DataSet: TDataSet);
