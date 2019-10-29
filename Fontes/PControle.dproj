@@ -193,6 +193,10 @@
             <Form>F_ReceberParcela</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="U_ValorParcelaReceber.pas">
+            <Form>F_ValorParcelaReceber</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

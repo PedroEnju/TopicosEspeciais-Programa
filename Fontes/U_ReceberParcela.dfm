@@ -1,9 +1,11 @@
 object F_ReceberParcela: TF_ReceberParcela
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Receber Parcela'
-  ClientHeight = 498
-  ClientWidth = 474
+  ClientHeight = 508
+  ClientWidth = 484
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,26 +13,29 @@ object F_ReceberParcela: TF_ReceberParcela
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object TPanel
     Left = 0
     Top = 0
-    Width = 474
+    Width = 484
     Height = 121
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 474
     object Label4: TLabel
       Left = 16
       Top = 8
-      Width = 103
+      Width = 96
       Height = 13
-      Caption = 'Data de Recebimento'
+      Caption = 'Data de Vencimento'
       FocusControl = DBEdit1
     end
     object Label5: TLabel
-      Left = 174
-      Top = 10
+      Left = 333
+      Top = 8
       Width = 71
       Height = 13
       Caption = 'Valor Recebido'
@@ -60,22 +65,31 @@ object F_ReceberParcela: TF_ReceberParcela
       Caption = 'Valor a Receber'
       FocusControl = DBEdit5
     end
+    object Label9: TLabel
+      Left = 174
+      Top = 8
+      Width = 77
+      Height = 13
+      Caption = 'Valor da Parcela'
+    end
     object DBEdit1: TDBEdit
       Left = 16
       Top = 24
       Width = 134
       Height = 21
-      DataField = 'DATARECEBIMENTO'
+      DataField = 'DATAVENCIMENTO'
       DataSource = DM.DS_ParcelaContasReceber
+      Enabled = False
       TabOrder = 0
     end
     object DBEdit2: TDBEdit
-      Left = 174
-      Top = 26
+      Left = 333
+      Top = 24
       Width = 134
       Height = 21
       DataField = 'valorRecebido'
       DataSource = DM.DS_ParcelaContasReceber
+      Enabled = False
       TabOrder = 1
     end
     object DBEdit3: TDBEdit
@@ -103,18 +117,31 @@ object F_ReceberParcela: TF_ReceberParcela
       Height = 21
       DataField = 'valorReceber'
       DataSource = DM.DS_ParcelaContasReceber
+      Enabled = False
       TabOrder = 4
+    end
+    object DBEdit6: TDBEdit
+      Left = 174
+      Top = 24
+      Width = 134
+      Height = 21
+      DataField = 'VALORPARCELA'
+      DataSource = DM.DS_ParcelaContasReceber
+      Enabled = False
+      TabOrder = 5
     end
   end
   object TPanel
     Left = 0
-    Top = 336
-    Width = 474
+    Top = 346
+    Width = 484
     Height = 120
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 336
+    ExplicitWidth = 474
     object Label1: TLabel
-      Left = 8
+      Left = 15
       Top = 16
       Width = 76
       Height = 13
@@ -128,28 +155,46 @@ object F_ReceberParcela: TF_ReceberParcela
       Caption = 'Valor j'#225' Recebido'
     end
     object Label3: TLabel
-      Left = 8
+      Left = 45
       Top = 86
       Width = 46
       Height = 13
       Caption = 'Diferen'#231'a'
     end
     object DBText1: TDBText
-      Left = 90
+      Left = 106
       Top = 16
       Width = 65
       Height = 17
+      DataField = 'valorReceber'
+      DataSource = DM.DS_ParcelaContasReceber
+    end
+    object DBText2: TDBText
+      Left = 106
+      Top = 48
+      Width = 65
+      Height = 17
+      DataField = 'valorRecebido'
+      DataSource = DM.DS_ParcelaContasReceber
+    end
+    object DBText3: TDBText
+      Left = 106
+      Top = 88
+      Width = 65
+      Height = 17
+      DataField = 'valorDiferenca'
+      DataSource = DM.DS_ParcelaContasReceber
     end
   end
   object TPanel
     Left = 0
     Top = 121
-    Width = 474
-    Height = 215
+    Width = 484
+    Height = 225
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 89
-    ExplicitHeight = 208
+    ExplicitWidth = 474
+    ExplicitHeight = 215
     object DBGrid1: TDBGrid
       Left = 8
       Top = 6
@@ -162,6 +207,22 @@ object F_ReceberParcela: TF_ReceberParcela
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'nomeTipoDocumento'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALORRECEBIDO'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'STATUSRECEBIMENTO'
+          Visible = True
+        end>
     end
     object btn_novoItem: TBitBtn
       Left = 407
@@ -170,6 +231,7 @@ object F_ReceberParcela: TF_ReceberParcela
       Height = 25
       Caption = 'Novo'
       TabOrder = 1
+      OnClick = btn_novoItemClick
     end
     object btn_salvarItem: TBitBtn
       Left = 407
@@ -182,11 +244,13 @@ object F_ReceberParcela: TF_ReceberParcela
   end
   object Panel4: TPanel
     Left = 0
-    Top = 456
-    Width = 474
+    Top = 466
+    Width = 484
     Height = 42
     Align = alBottom
     TabOrder = 3
+    ExplicitTop = 456
+    ExplicitWidth = 474
     object btn_salvar: TBitBtn
       Left = 392
       Top = 6
@@ -194,6 +258,7 @@ object F_ReceberParcela: TF_ReceberParcela
       Height = 25
       Caption = 'Salvar'
       TabOrder = 0
+      OnClick = btn_salvarClick
     end
     object btn_cancelar: TBitBtn
       Left = 311
@@ -202,6 +267,7 @@ object F_ReceberParcela: TF_ReceberParcela
       Height = 25
       Caption = 'Cancelar'
       TabOrder = 1
+      OnClick = btn_cancelarClick
     end
   end
 end

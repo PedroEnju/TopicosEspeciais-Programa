@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, IBX.IBDatabase, Data.DB, IBX.IBCustomDataSet,
-  IBX.IBUpdateSQL, IBX.IBQuery;
+  IBX.IBUpdateSQL, IBX.IBQuery, DateUtils;
 
 type
   TDM = class(TDataModule)
@@ -38,7 +38,7 @@ type
     TB_ContasReceber: TIBQuery;
     TB_ParcelaContasReceber: TIBQuery;
     TB_Recebimento: TIBQuery;
-    IBQuery11: TIBQuery;
+    TB_TipoDocumento: TIBQuery;
     TB_ParcelaContasPagar: TIBQuery;
     TB_Pagamento: TIBQuery;
     TB_MovimentoCaixa: TIBQuery;
@@ -52,7 +52,7 @@ type
     SQL_ContasReceber: TIBUpdateSQL;
     SQL_ParcelaContasReceber: TIBUpdateSQL;
     SQL_Recebimento: TIBUpdateSQL;
-    IBUpdateSQL11: TIBUpdateSQL;
+    SQL_TipoDocumento: TIBUpdateSQL;
     SQL_ParcelaContasPagar: TIBUpdateSQL;
     SQL_Pagamento: TIBUpdateSQL;
     SQL_MovimentoCaixa: TIBUpdateSQL;
@@ -68,7 +68,7 @@ type
     DS_ContasReceber: TDataSource;
     DS_Compra: TDataSource;
     DS_ParcelaContasPagar: TDataSource;
-    DataSource12: TDataSource;
+    DS_TipoDocumento: TDataSource;
     DS_MovimentoCaixa: TDataSource;
     DS_Pagamento: TDataSource;
     DS_Pesquisa: TDataSource;
@@ -175,6 +175,9 @@ type
     TB_ParcelaContasReceberdiasVencidos: TIntegerField;
     TB_ParcelaContasRecebervalorRecebido: TFloatField;
     TB_ContasRecebernomeCliente: TStringField;
+    TB_RecebimentoIDTIPODOCUMENTO: TIntegerField;
+    TB_RecebimentonomeTipoDocumento: TStringField;
+    TB_RecebimentoSTATUSRECEBIMENTO: TIBStringField;
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);
@@ -191,6 +194,8 @@ type
     procedure TB_ContasReceberAfterScroll(DataSet: TDataSet);
     procedure TB_ContasReceberNewRecord(DataSet: TDataSet);
     procedure TB_ParcelaContasReceberNewRecord(DataSet: TDataSet);
+    procedure TB_RecebimentoNewRecord(DataSet: TDataSet);
+    procedure TB_ParcelaContasReceberCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -225,8 +230,8 @@ begin
 
     Close;
     SQL.Clear;
-    SQL.Add('select * from itemcompra');
-    SQL.Add('where idCompra = :idCompra');
+    SQL.Add('SELECT * FROM itemcompra');
+    SQL.Add('WHERE idCompra = :idCompra');
     ParamByName('idCompra').AsInteger := TB_CompraIDCOMPRA.AsInteger;
     Open;
 
@@ -309,6 +314,38 @@ begin
   TB_ItemVendaQUANTIDADE.AsInteger := 1;
 end;
 
+procedure TDM.TB_ParcelaContasReceberCalcFields(DataSet: TDataSet);
+begin
+  With Query_Calcular do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT SUM(ValorRecebido) FROM recebimento');
+    SQL.Add('WHERE idParcelaContasReceber = :idParcelaContasReceber');
+    ParamByName('idParcelaContasReceber').AsInteger :=
+      TB_ParcelaContasReceberIDPARCELACONTASRECEBER.AsInteger;
+    Open;
+    TB_ParcelaContasRecebervalorRecebido.AsFloat :=
+
+      Fields[0].AsFloat;
+    Close;
+  end;
+
+  TB_ParcelaContasRecebervalorReceber.AsFloat :=
+    TB_ParcelaContasReceberVALORPARCELA.AsFloat +
+    TB_ParcelaContasReceberMULTA.AsFloat + TB_ParcelaContasReceberJUROS.AsFloat;
+
+  TB_ParcelaContasRecebervalorDiferenca.AsFloat :=
+    TB_ParcelaContasRecebervalorReceber.AsFloat -
+    TB_ParcelaContasRecebervalorRecebido.AsFloat;
+
+  if TB_ParcelaContasReceberDATAVENCIMENTO.AsDateTime < Date Then
+    TB_ParcelaContasReceberdiasVencidos.AsInteger :=
+      DaysBetween(Date, TB_ParcelaContasReceberDATAVENCIMENTO.AsDateTime)
+  else
+    TB_ParcelaContasReceberdiasVencidos.AsInteger := 0;
+end;
+
 procedure TDM.TB_ParcelaContasReceberNewRecord(DataSet: TDataSet);
 begin
   TB_ParcelaContasReceberIDCONTASRECEBER.AsInteger :=
@@ -323,6 +360,14 @@ begin
   TB_ProdutoSTATUSPRODUTO.AsString := 'A';
 end;
 
+procedure TDM.TB_RecebimentoNewRecord(DataSet: TDataSet);
+begin
+  TB_RecebimentoIDPARCELACONTASRECEBER.AsInteger :=
+    TB_ParcelaContasReceberIDPARCELACONTASRECEBER.AsInteger;
+  TB_RecebimentoDATARECEBIMENTO.AsDateTime := Date;
+  TB_RecebimentoSTATUSRECEBIMENTO.AsString := 'N';
+end;
+
 procedure TDM.TB_VendaAfterScroll(DataSet: TDataSet);
 begin
   with TB_ItemVenda do
@@ -332,8 +377,8 @@ begin
 
     Close;
     SQL.Clear;
-    SQL.Add('select * from itemvenda');
-    SQL.Add('where idVenda = :idVenda');
+    SQL.Add('SELECT * FROM itemvenda');
+    SQL.Add('WHERE idVenda = :idVenda');
     ParamByName('idVenda').AsInteger := TB_VendaIDVENDA.AsInteger;
     Open;
 

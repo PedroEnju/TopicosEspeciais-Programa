@@ -1,6 +1,6 @@
 object DM: TDM
   OldCreateOrder = False
-  Height = 558
+  Height = 570
   Width = 908
   object DB_Principal: TIBDatabase
     Connected = True
@@ -688,6 +688,7 @@ object DM: TDM
   object TB_ParcelaContasReceber: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnCalcFields = TB_ParcelaContasReceberCalcFields
     OnNewRecord = TB_ParcelaContasReceberNewRecord
     Active = True
     BufferChunks = 1000
@@ -783,6 +784,7 @@ object DM: TDM
   object TB_Recebimento: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_RecebimentoNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -799,6 +801,10 @@ object DM: TDM
       Origin = '"RECEBIMENTO"."IDRECEBIMENTO"'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
+    end
+    object TB_RecebimentoIDTIPODOCUMENTO: TIntegerField
+      FieldName = 'IDTIPODOCUMENTO'
+      Origin = '"RECEBIMENTO"."IDTIPODOCUMENTO"'
     end
     object TB_RecebimentoIDPARCELACONTASRECEBER: TIntegerField
       FieldName = 'IDPARCELACONTASRECEBER'
@@ -819,11 +825,32 @@ object DM: TDM
       Precision = 9
       Size = 2
     end
+    object TB_RecebimentoSTATUSRECEBIMENTO: TIBStringField
+      FieldName = 'STATUSRECEBIMENTO'
+      Origin = '"RECEBIMENTO"."STATUSRECEBIMENTO"'
+      FixedChar = True
+      Size = 1
+    end
+    object TB_RecebimentonomeTipoDocumento: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nomeTipoDocumento'
+      LookupDataSet = TB_TipoDocumento
+      LookupKeyFields = 'IDTIPODOCUMENTO'
+      LookupResultField = 'NOMETIPODOCUMENTO'
+      KeyFields = 'IDTIPODOCUMENTO'
+      Lookup = True
+    end
   end
-  object IBQuery11: TIBQuery
+  object TB_TipoDocumento: TIBQuery
+    Database = DB_Principal
+    Transaction = DB_Transaction
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
+    SQL.Strings = (
+      'select * from TIPODOCUMENTO')
+    UpdateObject = SQL_TipoDocumento
     Left = 840
     Top = 392
   end
@@ -1349,7 +1376,7 @@ object DM: TDM
     Left = 296
     Top = 448
   end
-  object IBUpdateSQL11: TIBUpdateSQL
+  object SQL_TipoDocumento: TIBUpdateSQL
     Left = 840
     Top = 448
   end
@@ -1536,7 +1563,8 @@ object DM: TDM
     Left = 504
     Top = 504
   end
-  object DataSource12: TDataSource
+  object DS_TipoDocumento: TDataSource
+    DataSet = TB_TipoDocumento
     Left = 840
     Top = 504
   end

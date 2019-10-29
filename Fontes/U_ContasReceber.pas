@@ -40,6 +40,7 @@ type
     procedure Frame_Button1btnSalvarClick(Sender: TObject);
     procedure Frame_Button1btnCancelarClick(Sender: TObject);
     procedure Frame_Button1btnExcluirClick(Sender: TObject);
+    procedure ReceberParcela1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,7 +61,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM, U_Funcao, U_ParcelaContasReceber;
+uses U_DM, U_Funcao, U_ParcelaContasReceber, U_ReceberParcela;
 
 procedure TF_ContasReceber.Frame_Button1btnCancelarClick(Sender: TObject);
 begin
@@ -157,6 +158,33 @@ begin
   end;
 end;
 
+procedure TF_ContasReceber.ReceberParcela1Click(Sender: TObject);
+begin
+  { if StatusCaixa=False Then
+    begin
+    showMessage('Caixa Fechado');
+    Exit;
+    end; }
+
+  RecalcularParcelaRec;
+  if DM.TB_ParcelaContasReceber.RecordCount = 0 then
+    exit;
+  if DM.TB_ContasReceberSTATUSCONTA.AsString = 'S' Then
+  begin
+    ShowMessage('Não existem parcelas a receber');
+    exit;
+  end;
+  if DM.TB_ParcelaContasReceberSTATUSPARCELA.AsString = 'S' Then
+  begin
+    ShowMessage('Parcela já recebida');
+    exit;
+  end;
+  DM.TB_ParcelaContasReceber.Edit;
+  DM.TB_ParcelaContasReceberDATAVENCIMENTO.AsDateTime := Date;
+  CriarForm(F_ReceberParcela, TF_ReceberParcela, '');
+  AbrirDestruirForm(F_ReceberParcela);
+end;
+
 procedure TF_ContasReceber.Frame_Button1btnSalvarClick(Sender: TObject);
 var
   respMsg: String;
@@ -167,7 +195,7 @@ begin
     ShowMessage('O Valor Total deve ser superior a 0');
     if (DBEdit7.Enabled) then
       DBEdit7.SetFocus;
-    Exit;
+    exit;
   end;
 
   if (DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger <= 0) then
@@ -175,7 +203,7 @@ begin
     ShowMessage('Número de Parcelas deve ser superior a 0');
     DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger := 1;
     DBEdit1.SetFocus;
-    Exit;
+    exit;
   end;
 
   if (DM.TB_ContasReceberQUANTIDADEPARCELA.AsInteger * 0.01 >
@@ -184,7 +212,7 @@ begin
     ShowMessage('Valor do Contas a Receber inválido!');
     if (DBEdit7.Enabled) then
       DBEdit7.SetFocus;
-    Exit;
+    exit;
   end;
 
   Frame_Button1.btnSalvarClick(Sender);

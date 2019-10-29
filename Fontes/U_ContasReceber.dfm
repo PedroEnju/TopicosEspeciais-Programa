@@ -169,12 +169,79 @@ object F_ContasReceber: TF_ContasReceber
     Width = 594
     Height = 350
     DataSource = DM.DS_ParcelaContasReceber
+    PopupMenu = PopupMenu1
     TabOrder = 4
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'NUMEROPARCELA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VALORPARCELA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATAVENCIMENTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STATUSPARCELA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATARECEBIMENTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'JUROS'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DESCONTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MULTA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VALORFINAL'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'valorReceber'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'valorDiferenca'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'diasVencidos'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'valorRecebido'
+        Visible = True
+      end>
   end
   object DBEdit1: TDBEdit
     Left = 362
@@ -190,6 +257,7 @@ object F_ContasReceber: TF_ContasReceber
     Top = 216
     object ReceberParcela1: TMenuItem
       Caption = 'Receber Parcela'
+      OnClick = ReceberParcela1Click
     end
     object RecalcularParcela1: TMenuItem
       Caption = 'Recalcular Parcela'
