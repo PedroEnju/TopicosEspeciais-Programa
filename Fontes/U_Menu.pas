@@ -62,6 +62,7 @@ type
     procedure Venda1Click(Sender: TObject);
     procedure Compra1Click(Sender: TObject);
     procedure ContasaReceber1Click(Sender: TObject);
+    procedure ContasaPagar1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -102,6 +103,11 @@ end;
 procedure TF_Menu.Compra1Click(Sender: TObject);
 begin
   F_Compra.ShowModal;
+end;
+
+procedure TF_Menu.ContasaPagar1Click(Sender: TObject);
+begin
+  F_ContasPagar.ShowModal;
 end;
 
 procedure TF_Menu.ContasaReceber1Click(Sender: TObject);

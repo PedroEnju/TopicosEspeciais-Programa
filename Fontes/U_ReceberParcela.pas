@@ -86,7 +86,7 @@ var
 begin
   if DM.TB_Recebimento.RecordCount = 0 Then
   begin
-    showMessage('É necessário ao menos um documento para continuar');
+    ShowMessage('É necessário ao menos um documento para continuar');
     btn_salvar.SetFocus;
     Exit;
   end;
@@ -113,7 +113,7 @@ begin
     While not EOF do
     begin
       Edit;
-      FieldByName('Status').AsString := 's';
+      FieldByName('StatusRecebimento').AsString := 's';
       Post;
       if DM.TB_ParcelaContasRecebervalorDiferenca.AsFloat = 0 Then
         Historico := 'Recebimento total da parcela ao cliente: ' +

@@ -24,7 +24,6 @@ object F_ReceberParcela: TF_ReceberParcela
     Height = 121
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 474
     object Label4: TLabel
       Left = 16
       Top = 8
@@ -138,8 +137,6 @@ object F_ReceberParcela: TF_ReceberParcela
     Height = 120
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 336
-    ExplicitWidth = 474
     object Label1: TLabel
       Left = 15
       Top = 16
@@ -193,8 +190,6 @@ object F_ReceberParcela: TF_ReceberParcela
     Height = 225
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 474
-    ExplicitHeight = 215
     object DBGrid1: TDBGrid
       Left = 8
       Top = 6
@@ -211,16 +206,21 @@ object F_ReceberParcela: TF_ReceberParcela
         item
           Expanded = False
           FieldName = 'nomeTipoDocumento'
+          Width = 100
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'VALORRECEBIDO'
+          Title.Caption = 'Valor Recebido'
+          Width = 120
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'STATUSRECEBIMENTO'
+          Title.Caption = 'Status'
+          Width = 100
           Visible = True
         end>
     end
@@ -249,13 +249,11 @@ object F_ReceberParcela: TF_ReceberParcela
     Height = 42
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 456
-    ExplicitWidth = 474
     object btn_salvar: TBitBtn
       Left = 392
       Top = 6
       Width = 75
-      Height = 25
+      Height = 27
       Caption = 'Salvar'
       TabOrder = 0
       OnClick = btn_salvarClick
@@ -264,7 +262,7 @@ object F_ReceberParcela: TF_ReceberParcela
       Left = 311
       Top = 6
       Width = 75
-      Height = 25
+      Height = 27
       Caption = 'Cancelar'
       TabOrder = 1
       OnClick = btn_cancelarClick

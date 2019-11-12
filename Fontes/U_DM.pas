@@ -161,10 +161,6 @@ type
     TB_ContasPagarDATACONTA: TDateField;
     TB_ContasPagarVALORTOTAL: TIBBCDField;
     TB_ContasPagarSTATUSCONTA: TIBStringField;
-    TB_PagamentoIDPAGAMENTO: TIntegerField;
-    TB_PagamentoIDPARCELACONTASPAGAR: TIntegerField;
-    TB_PagamentoVALORPARCELA: TIBBCDField;
-    TB_PagamentoVALORPAGO: TIBBCDField;
     TB_MovimentoCaixaIDMOVIMENTOCAIXA: TIntegerField;
     TB_MovimentoCaixaCAIXA_IDCAIXA: TIntegerField;
     TB_MovimentoCaixaIDRECEBIMENTO: TIntegerField;
@@ -178,6 +174,28 @@ type
     TB_RecebimentoIDTIPODOCUMENTO: TIntegerField;
     TB_RecebimentonomeTipoDocumento: TStringField;
     TB_RecebimentoSTATUSRECEBIMENTO: TIBStringField;
+    TB_ParcelaContasPagarIDPARCELACONTASPAGAR: TIntegerField;
+    TB_ParcelaContasPagarIDCONTASPAGAR: TIntegerField;
+    TB_ParcelaContasPagarDATAVENCIMENTO: TDateField;
+    TB_ParcelaContasPagarNUMEROPARCELA: TIntegerField;
+    TB_ParcelaContasPagarVALORPARCELA: TIBBCDField;
+    TB_ParcelaContasPagarJUROS: TIBBCDField;
+    TB_ParcelaContasPagarDESCONTO: TIBBCDField;
+    TB_ParcelaContasPagarMULTA: TIBBCDField;
+    TB_ParcelaContasPagarVALORFINAL: TIBBCDField;
+    TB_ParcelaContasPagarSTATUSPARCELA: TIBStringField;
+    TB_ParcelaContasPagarvalorPagar: TFloatField;
+    TB_ParcelaContasPagarvalorPago: TFloatField;
+    TB_ParcelaContasPagarDATAPAGAMENTO: TDateField;
+    TB_ParcelaContasPagarvalorDiferenca: TFloatField;
+    TB_PagamentoIDPAGAMENTO: TIntegerField;
+    TB_PagamentoIDPARCELACONTASPAGAR: TIntegerField;
+    TB_PagamentoIDTIPODOCUMENTO: TIntegerField;
+    TB_PagamentoDATAPAGAMENTO: TDateField;
+    TB_PagamentoHORAPAGAMENTO: TTimeField;
+    TB_PagamentoVALORPAGO: TIBBCDField;
+    TB_PagamentoSTATUSPAGAMENTO: TIBStringField;
+    TB_PagamentonomeTipoDocumento: TStringField;
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);
@@ -353,6 +371,8 @@ begin
   TB_ParcelaContasReceberVALORPARCELA.AsFloat := 0;
   TB_ParcelaContasRecebervalorRecebido.AsFloat := 0;
   TB_ParcelaContasReceberSTATUSPARCELA.AsString := 'N';
+  TB_ParcelaContasReceberMULTA.AsFloat := 0;
+  TB_ParcelaContasReceberJUROS.AsFloat := 0;
 end;
 
 procedure TDM.TB_ProdutoNewRecord(DataSet: TDataSet);

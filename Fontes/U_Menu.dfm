@@ -5305,6 +5305,7 @@ object F_Menu: TF_Menu
       end
       object ContasaPagar1: TMenuItem
         Caption = 'Contas a Pagar'
+        OnClick = ContasaPagar1Click
       end
     end
   end

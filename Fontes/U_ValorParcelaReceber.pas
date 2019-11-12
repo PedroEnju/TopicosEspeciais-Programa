@@ -17,6 +17,7 @@ type
     btn_salvar: TButton;
     procedure FormShow(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,6 +35,36 @@ uses U_DM;
 
 procedure TF_ValorParcelaReceber.btn_cancelarClick(Sender: TObject);
 begin
+  DM.TB_Recebimento.Close;
+  Close;
+end;
+
+procedure TF_ValorParcelaReceber.btn_salvarClick(Sender: TObject);
+var
+  valor: Real;
+begin
+  if DM.TB_RecebimentoVALORRECEBIDO.AsFloat <= 0 Then
+  begin
+    ShowMessage('Valor deve ser superior a zero');
+    DBEdit1.SetFocus;
+    Exit;
+  end;
+
+  if DM.TB_RecebimentoIDTIPODOCUMENTO.AsString = '' Then
+  begin
+    ShowMessage('Escolha o tipo de documento');
+    DBLookupComboBox1.SetFocus;
+    Exit;
+  end;
+
+  if DM.TB_RecebimentoVALORRECEBIDO.AsFloat >
+    DM.TB_ParcelaContasRecebervalorreceber.AsFloat Then
+  begin
+    ShowMessage('Valor a receber não deve ser maior que o valor da parcela');
+    DBEdit1.SetFocus;
+    Exit;
+  end;
+  DM.TB_Recebimento.Post;
   Close;
 end;
 

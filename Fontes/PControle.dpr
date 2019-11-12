@@ -27,7 +27,9 @@ uses
   U_ContasReceber in 'U_ContasReceber.pas' {F_ContasReceber},
   U_ParcelaContasReceber in 'U_ParcelaContasReceber.pas' {F_ParcelaContasReceber},
   U_ReceberParcela in 'U_ReceberParcela.pas' {F_ReceberParcela},
-  U_ValorParcelaReceber in 'U_ValorParcelaReceber.pas' {F_ValorParcelaReceber};
+  U_ValorParcelaReceber in 'U_ValorParcelaReceber.pas' {F_ValorParcelaReceber},
+  U_ContasPagar in 'U_ContasPagar.pas' {F_ContasPagar},
+  U_PagarParcela in 'U_PagarParcela.pas' {Form1};
 
 {$R *.res}
 
@@ -54,5 +56,7 @@ begin
   Application.CreateForm(TF_ItemCompra, F_ItemCompra);
   Application.CreateForm(TF_FinalizacaoCompra, F_FinalizacaoCompra);
   Application.CreateForm(TF_ContasReceber, F_ContasReceber);
+  Application.CreateForm(TF_ContasPagar, F_ContasPagar);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

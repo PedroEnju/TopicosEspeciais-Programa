@@ -832,6 +832,7 @@ object DM: TDM
       Size = 1
     end
     object TB_RecebimentonomeTipoDocumento: TStringField
+      DisplayLabel = 'Tipo Documento'
       FieldKind = fkLookup
       FieldName = 'nomeTipoDocumento'
       LookupDataSet = TB_TipoDocumento
@@ -868,6 +869,82 @@ object DM: TDM
     GeneratorField.Generator = 'GEN_PARCELACONTASRECEBER_ID'
     Left = 504
     Top = 392
+    object TB_ParcelaContasPagarIDPARCELACONTASPAGAR: TIntegerField
+      FieldName = 'IDPARCELACONTASPAGAR'
+      Origin = '"PARCELACONTASPAGAR"."IDPARCELACONTASPAGAR"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object TB_ParcelaContasPagarIDCONTASPAGAR: TIntegerField
+      FieldName = 'IDCONTASPAGAR'
+      Origin = '"PARCELACONTASPAGAR"."IDCONTASPAGAR"'
+      Required = True
+    end
+    object TB_ParcelaContasPagarDATAVENCIMENTO: TDateField
+      FieldName = 'DATAVENCIMENTO'
+      Origin = '"PARCELACONTASPAGAR"."DATAVENCIMENTO"'
+      Required = True
+    end
+    object TB_ParcelaContasPagarDATAPAGAMENTO: TDateField
+      FieldName = 'DATAPAGAMENTO'
+      Origin = '"PARCELACONTASPAGAR"."DATAPAGAMENTO"'
+    end
+    object TB_ParcelaContasPagarNUMEROPARCELA: TIntegerField
+      FieldName = 'NUMEROPARCELA'
+      Origin = '"PARCELACONTASPAGAR"."NUMEROPARCELA"'
+    end
+    object TB_ParcelaContasPagarVALORPARCELA: TIBBCDField
+      FieldName = 'VALORPARCELA'
+      Origin = '"PARCELACONTASPAGAR"."VALORPARCELA"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasPagarJUROS: TIBBCDField
+      FieldName = 'JUROS'
+      Origin = '"PARCELACONTASPAGAR"."JUROS"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasPagarDESCONTO: TIBBCDField
+      FieldName = 'DESCONTO'
+      Origin = '"PARCELACONTASPAGAR"."DESCONTO"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasPagarMULTA: TIBBCDField
+      FieldName = 'MULTA'
+      Origin = '"PARCELACONTASPAGAR"."MULTA"'
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasPagarVALORFINAL: TIBBCDField
+      FieldName = 'VALORFINAL'
+      Origin = '"PARCELACONTASPAGAR"."VALORFINAL"'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object TB_ParcelaContasPagarSTATUSPARCELA: TIBStringField
+      FieldName = 'STATUSPARCELA'
+      Origin = '"PARCELACONTASPAGAR"."STATUSPARCELA"'
+      FixedChar = True
+      Size = 1
+    end
+    object TB_ParcelaContasPagarvalorPagar: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorPagar'
+      Calculated = True
+    end
+    object TB_ParcelaContasPagarvalorPago: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorPago'
+      Calculated = True
+    end
+    object TB_ParcelaContasPagarvalorDiferenca: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'valorDiferenca'
+      Calculated = True
+    end
   end
   object TB_Pagamento: TIBQuery
     Database = DB_Principal
@@ -894,17 +971,38 @@ object DM: TDM
       Origin = '"PAGAMENTO"."IDPARCELACONTASPAGAR"'
       Required = True
     end
-    object TB_PagamentoVALORPARCELA: TIBBCDField
-      FieldName = 'VALORPARCELA'
-      Origin = '"PAGAMENTO"."VALORPARCELA"'
-      Precision = 9
-      Size = 2
+    object TB_PagamentoIDTIPODOCUMENTO: TIntegerField
+      FieldName = 'IDTIPODOCUMENTO'
+      Origin = '"PAGAMENTO"."IDTIPODOCUMENTO"'
+    end
+    object TB_PagamentoDATAPAGAMENTO: TDateField
+      FieldName = 'DATAPAGAMENTO'
+      Origin = '"PAGAMENTO"."DATAPAGAMENTO"'
+    end
+    object TB_PagamentoHORAPAGAMENTO: TTimeField
+      FieldName = 'HORAPAGAMENTO'
+      Origin = '"PAGAMENTO"."HORAPAGAMENTO"'
     end
     object TB_PagamentoVALORPAGO: TIBBCDField
       FieldName = 'VALORPAGO'
       Origin = '"PAGAMENTO"."VALORPAGO"'
       Precision = 9
       Size = 2
+    end
+    object TB_PagamentoSTATUSPAGAMENTO: TIBStringField
+      FieldName = 'STATUSPAGAMENTO'
+      Origin = '"PAGAMENTO"."STATUSPAGAMENTO"'
+      FixedChar = True
+      Size = 1
+    end
+    object TB_PagamentonomeTipoDocumento: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nomeTipoDocumento'
+      LookupDataSet = TB_TipoDocumento
+      LookupKeyFields = 'IDTIPODOCUMENTO'
+      LookupResultField = 'NOMETIPODOCUMENTO'
+      KeyFields = 'IDTIPODOCUMENTO'
+      Lookup = True
     end
   end
   object TB_MovimentoCaixa: TIBQuery

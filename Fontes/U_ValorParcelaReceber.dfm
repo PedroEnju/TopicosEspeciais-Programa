@@ -68,5 +68,6 @@ object F_ValorParcelaReceber: TF_ValorParcelaReceber
     Height = 25
     Caption = 'Salvar'
     TabOrder = 3
+    OnClick = btn_salvarClick
   end
 end
