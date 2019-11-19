@@ -148,8 +148,8 @@ begin
   begin
     Close;
     SQL.Clear;
-    SQL.Add('select sum(valorParcela) from ParcelaContasReceber');
-    SQL.Add('where idContasReceber = :idContasReceber');
+    SQL.Add('SELECT SUM(valorParcela) FROM ParcelaContasReceber');
+    SQL.Add('WHERE idContasReceber = :idContasReceber');
     ParamByName('idContasReceber').AsString := idContasReceber;
     Open;
     Result := DM.TB_ContasReceberVALORTOTAL.AsFloat - DM.Query_Calcular.Fields
@@ -189,7 +189,6 @@ procedure TF_ContasReceber.Frame_Button1btnSalvarClick(Sender: TObject);
 var
   respMsg: String;
 begin
-
   if (DM.TB_ContasReceberVALORTOTAL.AsFloat <= 0) then
   begin
     ShowMessage('O Valor Total deve ser superior a 0');

@@ -1,9 +1,10 @@
 object F_ParcelaContasReceber: TF_ParcelaContasReceber
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'Parcela Contas a Receber'
-  ClientHeight = 206
-  ClientWidth = 247
+  ClientHeight = 202
+  ClientWidth = 245
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

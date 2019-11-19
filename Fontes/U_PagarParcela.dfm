@@ -1,4 +1,4 @@
-object Form1: TForm1
+object F_PagarParcela: TF_PagarParcela
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
@@ -14,6 +14,7 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -140,6 +141,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'Novo'
       TabOrder = 0
+      OnClick = btn_novoItemClick
     end
     object btn_salvarItem: TBitBtn
       Left = 407
@@ -252,6 +254,7 @@ object Form1: TForm1
       Height = 27
       Caption = 'Cancelar'
       TabOrder = 0
+      OnClick = btn_cancelarClick
     end
     object btn_salvar: TBitBtn
       Left = 392
@@ -260,6 +263,7 @@ object Form1: TForm1
       Height = 27
       Caption = 'Salvar'
       TabOrder = 1
+      OnClick = btn_salvarClick
     end
   end
 end

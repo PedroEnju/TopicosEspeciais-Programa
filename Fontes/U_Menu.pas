@@ -78,7 +78,8 @@ implementation
 
 uses U_Cidade, U_Cliente, U_Fornecedor, U_Funcionario, U_Produto,
   U_PesquisaCidade, U_PesquisaCliente, U_PesquisaFornecedor,
-  U_PesquisaFuncionario, U_PesquisaProduto, U_Venda, U_Compra, U_ContasReceber;
+  U_PesquisaFuncionario, U_PesquisaProduto, U_Venda, U_Compra, U_ContasReceber,
+  U_ContasPagar;
 
 procedure TF_Menu.Cidade1Click(Sender: TObject);
 begin

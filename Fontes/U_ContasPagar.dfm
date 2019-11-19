@@ -100,9 +100,38 @@ object F_ContasPagar: TF_ContasPagar
     Height = 32
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = 320
-    ExplicitTop = 64
-    ExplicitWidth = 9
+    ExplicitWidth = 610
+    inherited btnNovo: TBitBtn
+      OnClick = Frame_Button1btnNovoClick
+    end
+    inherited btnEditar: TBitBtn
+      OnClick = Frame_Button1btnEditarClick
+    end
+    inherited btnExcluir: TBitBtn
+      Enabled = False
+      Visible = False
+    end
+    inherited btnCancelar: TBitBtn
+      OnClick = Frame_Button1btnCancelarClick
+    end
+    inherited btnSalvar: TBitBtn
+      OnClick = Frame_Button1btnSalvarClick
+    end
+    inherited btnFechar: TBitBtn
+      OnClick = Frame_Button1btnFecharClick
+    end
+    inherited btnLast: TBitBtn
+      OnClick = Frame_Button1btnLastClick
+    end
+    inherited btnNext: TBitBtn
+      OnClick = Frame_Button1btnNextClick
+    end
+    inherited btnPrevious: TBitBtn
+      OnClick = Frame_Button1btnPreviousClick
+    end
+    inherited btnFirst: TBitBtn
+      OnClick = Frame_Button1btnFirstClick
+    end
   end
   object DBEdit4: TDBEdit
     Left = 335

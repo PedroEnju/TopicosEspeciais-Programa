@@ -495,6 +495,8 @@ object DM: TDM
   object TB_ContasPagar: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    AfterScroll = TB_ContasPagarAfterScroll
+    OnNewRecord = TB_ContasPagarNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -545,6 +547,15 @@ object DM: TDM
       Origin = '"CONTASPAGAR"."STATUSCONTA"'
       FixedChar = True
       Size = 1
+    end
+    object TB_ContasPagarnomefornecedor: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nomefornecedor'
+      LookupDataSet = TB_Fornecedor
+      LookupKeyFields = 'IDFORNECEDOR'
+      LookupResultField = 'NOMEFORNECEDOR'
+      KeyFields = 'IDFORNECEDOR'
+      Lookup = True
     end
   end
   object TB_Compra: TIBQuery
@@ -858,6 +869,7 @@ object DM: TDM
   object TB_ParcelaContasPagar: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnCalcFields = TB_ParcelaContasPagarCalcFields
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -945,10 +957,16 @@ object DM: TDM
       FieldName = 'valorDiferenca'
       Calculated = True
     end
+    object TB_ParcelaContasPagardiasVencidos: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'diasVencidos'
+      Calculated = True
+    end
   end
   object TB_Pagamento: TIBQuery
     Database = DB_Principal
     Transaction = DB_Transaction
+    OnNewRecord = TB_PagamentoNewRecord
     Active = True
     BufferChunks = 1000
     CachedUpdates = False

@@ -202,7 +202,15 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="U_PagarParcela.pas">
-            <Form>Form1</Form>
+            <Form>F_PagarParcela</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="U_ParcelaContasPagar.pas">
+            <Form>F_ParcelaContasPagar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="U_ValorParcelaPagar.pas">
+            <Form>F_ValorParcelaPagar</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

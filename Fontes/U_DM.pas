@@ -196,6 +196,8 @@ type
     TB_PagamentoVALORPAGO: TIBBCDField;
     TB_PagamentoSTATUSPAGAMENTO: TIBStringField;
     TB_PagamentonomeTipoDocumento: TStringField;
+    TB_ParcelaContasPagardiasVencidos: TIntegerField;
+    TB_ContasPagarnomefornecedor: TStringField;
     procedure TB_FornecedorNewRecord(DataSet: TDataSet);
     procedure TB_ClienteNewRecord(DataSet: TDataSet);
     procedure TB_ProdutoNewRecord(DataSet: TDataSet);
@@ -214,6 +216,10 @@ type
     procedure TB_ParcelaContasReceberNewRecord(DataSet: TDataSet);
     procedure TB_RecebimentoNewRecord(DataSet: TDataSet);
     procedure TB_ParcelaContasReceberCalcFields(DataSet: TDataSet);
+    procedure TB_ContasPagarNewRecord(DataSet: TDataSet);
+    procedure TB_ContasPagarAfterScroll(DataSet: TDataSet);
+    procedure TB_ParcelaContasPagarCalcFields(DataSet: TDataSet);
+    procedure TB_PagamentoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -284,6 +290,33 @@ begin
   TB_CompraSTATUSCOMPRA.AsString := 'A';
 end;
 
+procedure TDM.TB_ContasPagarAfterScroll(DataSet: TDataSet);
+begin
+  With TB_ParcelaContasPagar do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT * FROM ParcelaContasPagar');
+    SQL.Add('WHERE idContasPagar = :idContasPagar');
+    SQL.Add('ORDER BY idParcelaContasPagar');
+    ParamByName('idContasPagar').AsInteger :=
+      TB_ContasPagarIDCONTASPAGAR.AsInteger;
+    Open;
+  end;
+end;
+
+procedure TDM.TB_ContasPagarNewRecord(DataSet: TDataSet);
+begin
+  With DataSet do
+  begin
+    FieldByName('QUANTIDADEPARCELA').AsInteger := 1;
+    FieldByName('DATACONTA').AsDateTime := Date;
+    FieldByName('TIPO').AsString := 'M';
+    FieldByName('STATUSCONTA').AsString := 'N';
+    FieldByName('VALORTOTAL').AsFloat := 0;
+  end;
+end;
+
 procedure TDM.TB_ContasReceberAfterScroll(DataSet: TDataSet);
 begin
   With TB_ParcelaContasReceber do
@@ -332,6 +365,44 @@ begin
   TB_ItemVendaQUANTIDADE.AsInteger := 1;
 end;
 
+procedure TDM.TB_PagamentoNewRecord(DataSet: TDataSet);
+begin
+  TB_PagamentoIDPARCELACONTASPAGAR.AsInteger :=
+    TB_ParcelaContasPagarIDPARCELACONTASPAGAR.AsInteger;
+  TB_PagamentoDATAPAGAMENTO.AsDateTime := Date;
+  TB_PagamentoSTATUSPAGAMENTO.AsString := 'N';
+end;
+
+procedure TDM.TB_ParcelaContasPagarCalcFields(DataSet: TDataSet);
+begin
+  With Query_Calcular do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT SUM(ValorPago) FROM pagamento');
+    SQL.Add('WHERE idParcelaContasPagar = :idParcelaContasPagar');
+    ParamByName('idParcelaContasPagar').AsInteger :=
+      TB_ParcelaContasPagarIDPARCELACONTASPAGAR.AsInteger;
+    Open;
+    TB_ParcelaContasPagarvalorPago.AsFloat := Fields[0].AsFloat;
+    Close;
+  end;
+
+  TB_ParcelaContasPagarvalorPagar.AsFloat :=
+    TB_ParcelaContasPagarVALORPARCELA.AsFloat +
+    TB_ParcelaContasPagarMULTA.AsFloat + TB_ParcelaContasPagarJUROS.AsFloat;
+
+  TB_ParcelaContasPagarvalorDiferenca.AsFloat :=
+    TB_ParcelaContasPagarvalorPagar.AsFloat -
+    TB_ParcelaContasPagarvalorPago.AsFloat;
+
+  if TB_ParcelaContasPagarDATAVENCIMENTO.AsDateTime < Date then
+    TB_ParcelaContasPagardiasVencidos.AsInteger :=
+      DaysBetween(Date, TB_ParcelaContasPagarDATAVENCIMENTO.AsDateTime)
+  else
+    TB_ParcelaContasPagardiasVencidos.AsInteger := 0;
+end;
+
 procedure TDM.TB_ParcelaContasReceberCalcFields(DataSet: TDataSet);
 begin
   With Query_Calcular do
@@ -343,9 +414,7 @@ begin
     ParamByName('idParcelaContasReceber').AsInteger :=
       TB_ParcelaContasReceberIDPARCELACONTASRECEBER.AsInteger;
     Open;
-    TB_ParcelaContasRecebervalorRecebido.AsFloat :=
-
-      Fields[0].AsFloat;
+    TB_ParcelaContasRecebervalorRecebido.AsFloat := Fields[0].AsFloat;
     Close;
   end;
 
